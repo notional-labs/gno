@@ -23,7 +23,7 @@ func Test_listApp(t *testing.T) {
 	// initialize test keybase.
 	kb, err := keys.NewKeyBaseFromDir(kbHome2)
 	assert.NoError(t, err)
-	_, err = kb.CreateAccount("something", testMnemonic, "", "", 0, 0)
+	_, err = kb.CreateAccountBip44("something", testMnemonic, "", "", 0, 0)
 	assert.NoError(t, err)
 
 	testData := []struct {

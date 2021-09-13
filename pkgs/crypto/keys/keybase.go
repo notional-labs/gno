@@ -7,6 +7,7 @@ import (
 
 	"github.com/gnolang/gno/pkgs/crypto"
 	"github.com/gnolang/gno/pkgs/crypto/bip39"
+	"github.com/gnolang/gno/pkgs/crypto/ed25519"
 	"github.com/gnolang/gno/pkgs/crypto/hd"
 	"github.com/gnolang/gno/pkgs/crypto/keys/armor"
 	"github.com/gnolang/gno/pkgs/crypto/keys/keyerror"
@@ -87,20 +88,31 @@ func NewInMemory() Keybase { return dbKeybase{dbm.NewMemDB()} }
 // XXX NOTE: we are not saving the derivation path.
 // XXX but this doesn't help encrypted commnuication.
 // XXX also there is no document structure.
-func (kb dbKeybase) CreateAccount(name, mnemonic, bip39Passwd, encryptPasswd string, account uint32, index uint32) (Info, error) {
+func (kb dbKeybase) CreateAccountBip44(name, mnemonic, bip39Passwd, encryptPasswd string, account uint32, index uint32) (Info, error) {
 	coinType := crypto.CoinType
 	hdPath := hd.NewFundraiserParams(account, coinType, index)
-	return kb.CreateAccountBip44(name, mnemonic, bip39Passwd, encryptPasswd, *hdPath)
+	return kb.CreateAccountCustomBip44(name, mnemonic, bip39Passwd, encryptPasswd, *hdPath)
 }
 
-func (kb dbKeybase) CreateAccountBip44(name, mnemonic, bip39Passphrase, encryptPasswd string, params hd.BIP44Params) (info Info, err error) {
+func (kb dbKeybase) CreateAccountSha256(name, mnemonic, encryptPasswd string) (info Info, err error) {
+	mnemonicByte, err := bip39.MnemonicToByteArray(mnemonic)
+	if err != nil {
+		return nil, err
+	}
+	var privKeyByte [64]byte
+	copy(privKeyByte[:], mnemonicByte[:64])
+	info, err = kb.persistDerivedEd25519Key(privKeyByte, name, encryptPasswd)
+	return info, err
+}
+
+func (kb dbKeybase) CreateAccountCustomBip44(name, mnemonic, bip39Passphrase, encryptPasswd string, params hd.BIP44Params) (info Info, err error) {
 	seed, err := bip39.NewSeedWithErrorChecking(mnemonic, bip39Passphrase)
 	if err != nil {
-		return
+		return nil, err
 	}
 
-	info, err = kb.persistDerivedKey(seed, encryptPasswd, name, params.String())
-	return
+	info, err = kb.persistDerivedSecp256k1Key(seed, encryptPasswd, name, params.String())
+	return info, err
 }
 
 // CreateLedger creates a new locally-stored reference to a Ledger keypair
@@ -134,18 +146,23 @@ func (kb dbKeybase) CreateMulti(name string, pub crypto.PubKey) (Info, error) {
 	return kb.writeMultisigKey(name, pub), nil
 }
 
-func (kb *dbKeybase) persistDerivedKey(seed []byte, passwd, name, fullHdPath string) (info Info, err error) {
+func (kb *dbKeybase) persistDerivedEd25519Key(privKey [64]byte, passwd, name string) (info Info, err error) {
+	info = kb.writeLocalKey(name, ed25519.PrivKeyEd25519(privKey), passwd)
+	return info, nil
+}
+
+func (kb *dbKeybase) persistDerivedSecp256k1Key(seed []byte, passwd, name, fullHdPath string) (info Info, err error) {
 	// create master key and derive first key:
 	masterPriv, ch := hd.ComputeMastersFromSeed(seed)
 	derivedPriv, err := hd.DerivePrivateKeyForPath(masterPriv, ch, fullHdPath)
 	if err != nil {
-		return
+		return nil, err
 	}
 
 	// use possibly blank password to encrypt the private
 	// key and store it. User must enforce good passwords.
 	info = kb.writeLocalKey(name, secp256k1.PrivKeySecp256k1(derivedPriv), passwd)
-	return
+	return info, nil
 }
 
 // List returns the keys from storage in alphabetical order.

@@ -37,7 +37,7 @@ func Test_verifyAppBasic(t *testing.T) {
 	// add test account to keybase.
 	kb, err := keys.NewKeyBaseFromDir(opts.Home)
 	assert.NoError(t, err)
-	_, err = kb.CreateAccount(fakeKeyName1, testMnemonic, "", encPassword, 0, 0)
+	_, err = kb.CreateAccountBip44(fakeKeyName1, testMnemonic, "", encPassword, 0, 0)
 	assert.NoError(t, err)
 
 	// sign test message.
