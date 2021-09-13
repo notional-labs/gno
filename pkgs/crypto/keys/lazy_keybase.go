@@ -85,24 +85,34 @@ func (lkb lazyKeybase) Verify(name string, msg, sig []byte) error {
 	return NewDBKeybase(db).Verify(name, msg, sig)
 }
 
-func (lkb lazyKeybase) CreateAccount(name, mnemonic, bip39Passwd, encryptPasswd string, account uint32, index uint32) (Info, error) {
+func (lkb lazyKeybase) CreateAccountSha256(name, mnemonic, encryptPasswd string) (Info, error) {
 	db, err := dbm.NewGoLevelDB(lkb.name, lkb.dir)
 	if err != nil {
 		return nil, err
 	}
 	defer db.Close()
 
-	return NewDBKeybase(db).CreateAccount(name, mnemonic, bip39Passwd, encryptPasswd, account, index)
+	return NewDBKeybase(db).CreateAccountSha256(name, mnemonic, encryptPasswd)
 }
 
-func (lkb lazyKeybase) CreateAccountBip44(name, mnemonic, bip39Passwd, encryptPasswd string, params hd.BIP44Params) (Info, error) {
+func (lkb lazyKeybase) CreateAccountBip44(name, mnemonic, bip39Passwd, encryptPasswd string, account uint32, index uint32) (Info, error) {
 	db, err := dbm.NewGoLevelDB(lkb.name, lkb.dir)
 	if err != nil {
 		return nil, err
 	}
 	defer db.Close()
 
-	return NewDBKeybase(db).CreateAccountBip44(name, mnemonic, bip39Passwd, encryptPasswd, params)
+	return NewDBKeybase(db).CreateAccountBip44(name, mnemonic, bip39Passwd, encryptPasswd, account, index)
+}
+
+func (lkb lazyKeybase) CreateAccountCustomBip44(name, mnemonic, bip39Passwd, encryptPasswd string, params hd.BIP44Params) (Info, error) {
+	db, err := dbm.NewGoLevelDB(lkb.name, lkb.dir)
+	if err != nil {
+		return nil, err
+	}
+	defer db.Close()
+
+	return NewDBKeybase(db).CreateAccountCustomBip44(name, mnemonic, bip39Passwd, encryptPasswd, params)
 }
 
 func (lkb lazyKeybase) CreateLedger(name string, algo SigningAlgo, hrp string, account, index uint32) (info Info, err error) {

@@ -13,7 +13,7 @@ import (
 
 func TestCreateAccountInvalidMnemonic(t *testing.T) {
 	kb := NewInMemory()
-	_, err := kb.CreateAccount(
+	_, err := kb.CreateAccountBip44(
 		"some_account",
 		"malarkey pair crucial catch public canyon evil outer stage ten gym tornado",
 		"", "", 0, 1)
@@ -83,10 +83,10 @@ func TestKeyManagement(t *testing.T) {
 	// create some keys
 	_, err = cstore.Get(n1)
 	require.Error(t, err)
-	i, err := cstore.CreateAccount(n1, mn1, bip39Passphrase, p1, 0, 0)
+	i, err := cstore.CreateAccountBip44(n1, mn1, bip39Passphrase, p1, 0, 0)
 	require.NoError(t, err)
 	require.Equal(t, n1, i.GetName())
-	_, err = cstore.CreateAccount(n2, mn2, bip39Passphrase, p2, 0, 0)
+	_, err = cstore.CreateAccountBip44(n2, mn2, bip39Passphrase, p2, 0, 0)
 	require.NoError(t, err)
 
 	// we can get these keys
@@ -157,10 +157,10 @@ func TestSignVerify(t *testing.T) {
 	bip39Passphrase := ""
 
 	// create two users and get their info
-	i1, err := cstore.CreateAccount(n1, mn1, bip39Passphrase, p1, 0, 0)
+	i1, err := cstore.CreateAccountBip44(n1, mn1, bip39Passphrase, p1, 0, 0)
 	require.Nil(t, err)
 
-	i2, err := cstore.CreateAccount(n2, mn2, bip39Passphrase, p2, 0, 0)
+	i2, err := cstore.CreateAccountBip44(n2, mn2, bip39Passphrase, p2, 0, 0)
 	require.Nil(t, err)
 
 	// Import a public key
@@ -238,7 +238,7 @@ func TestExportImport(t *testing.T) {
 	mn1 := `lounge napkin all odor tilt dove win inject sleep jazz uncover traffic hint require cargo arm rocket round scan bread report squirrel step lake`
 	bip39Passphrase := ""
 
-	info, err := cstore.CreateAccount("john", mn1, bip39Passphrase, "secretcpw", 0, 0)
+	info, err := cstore.CreateAccountBip44("john", mn1, bip39Passphrase, "secretcpw", 0, 0)
 	require.NoError(t, err)
 	require.Equal(t, info.GetName(), "john")
 
@@ -270,7 +270,7 @@ func TestExportImportPubKey(t *testing.T) {
 	mn1 := `lounge napkin all odor tilt dove win inject sleep jazz uncover traffic hint require cargo arm rocket round scan bread report squirrel step lake`
 	bip39Passphrase := ""
 	notPasswd := "n9y25ah7"
-	info, err := cstore.CreateAccount("john", mn1, bip39Passphrase, notPasswd, 0, 0)
+	info, err := cstore.CreateAccountBip44("john", mn1, bip39Passphrase, notPasswd, 0, 0)
 	require.Nil(t, err)
 	require.NotEqual(t, info, "")
 	require.Equal(t, info.GetName(), "john")
@@ -313,7 +313,7 @@ func TestAdvancedKeyManagement(t *testing.T) {
 	bip39Passphrase := ""
 
 	// make sure key works with initial password
-	_, err := cstore.CreateAccount(n1, mn1, bip39Passphrase, p1, 0, 0)
+	_, err := cstore.CreateAccountBip44(n1, mn1, bip39Passphrase, p1, 0, 0)
 	require.Nil(t, err, "%+v", err)
 	assertPassword(t, cstore, n1, p1, p2)
 
@@ -362,7 +362,7 @@ func TestSeedPhrase(t *testing.T) {
 	bip39Passphrase := ""
 
 	// make sure key works with initial password
-	info, err := cstore.CreateAccount(n1, mn1, bip39Passphrase, p1, 0, 0)
+	info, err := cstore.CreateAccountBip44(n1, mn1, bip39Passphrase, p1, 0, 0)
 	require.Nil(t, err, "%+v", err)
 	require.Equal(t, n1, info.GetName())
 
@@ -383,7 +383,7 @@ func ExampleNew() {
 	bip39Passphrase := ""
 
 	// Add keys and see they return in alphabetical order
-	bob, err := cstore.CreateAccount("Bob", mn1, bip39Passphrase, "friend", 0, 0)
+	bob, err := cstore.CreateAccountBip44("Bob", mn1, bip39Passphrase, "friend", 0, 0)
 	if err != nil {
 		// this should never happen
 		fmt.Println(err)
@@ -391,8 +391,8 @@ func ExampleNew() {
 		// return info here just like in List
 		fmt.Println(bob.GetName())
 	}
-	_, _ = cstore.CreateAccount("Alice", mn2, bip39Passphrase, "secret", 0, 0)
-	_, _ = cstore.CreateAccount("Carl", mn3, bip39Passphrase, "mitm", 0, 0)
+	_, _ = cstore.CreateAccountBip44("Alice", mn2, bip39Passphrase, "secret", 0, 0)
+	_, _ = cstore.CreateAccountBip44("Carl", mn3, bip39Passphrase, "mitm", 0, 0)
 	info, _ := cstore.List()
 	for _, i := range info {
 		fmt.Println(i.GetName())

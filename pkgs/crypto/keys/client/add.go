@@ -1,6 +1,7 @@
 package client
 
 import (
+	"crypto/sha256"
 	"fmt"
 	"sort"
 
@@ -28,6 +29,8 @@ type AddOptions struct {
 	DryRun            bool     `flag:"dryrun" help:"Perform action, but don't add key to local keystore"`
 	Account           uint32   `flag:"account" help:"Account number for HD derivation"`
 	Index             uint32   `flag:"index" description:"Address index number for HD derivation"`
+	KeyType           string   `flag:"type" description:"Type of keys (ed25519|secp256k1)"`
+	Entropy           bool     `flag:"entropy" description:"Gen nmenomic from custom entropy"`
 }
 
 var DefaultAddOptions = AddOptions{
@@ -51,6 +54,7 @@ func addApp(cmd *command.Command, args []string, iopts interface{}) error {
 	var err error
 	var encryptPassword string
 	var opts AddOptions = iopts.(AddOptions)
+	var info keys.Info
 
 	if len(args) != 1 {
 		cmd.ErrPrintfln("Usage: add <keyname>")
@@ -157,18 +161,49 @@ func addApp(cmd *command.Command, args []string, iopts interface{}) error {
 	var mnemonic string
 	const bip39Passphrase string = "" // XXX research.
 
+	if opts.Recover && opts.Entropy {
+		return errors.New("Cannot do both mnemonic generate and mnemonic recover at the same time ")
+	}
+
+	// if user want to recover keys with their mnemonic instead of generating new mnemonic
 	if opts.Recover {
 		bip39Message := "Enter your bip39 mnemonic"
 		mnemonic, err = cmd.GetString(bip39Message)
+		// Hide mnemonic from output
+		showMnemonic = false
 		if err != nil {
 			return err
 		}
-
 		if !bip39.IsMnemonicValid(mnemonic) {
 			return errors.New("invalid mnemonic")
 		}
 	}
 
+	// if user want to gen mnemonic with custom entropy
+	if opts.Entropy {
+		// prompt the user to enter some entropy
+		inputEntropy, err := cmd.GetString("WARNING: Generate at least 256-bits of entropy and enter the results here:")
+		if err != nil {
+			return err
+		}
+		if len(inputEntropy) < 43 {
+			return fmt.Errorf("256-bits is 43 characters in Base-64, and 100 in Base-6. You entered %v, and probably want more", len(inputEntropy))
+		}
+		conf, err := cmd.GetConfirmation(fmt.Sprintf("Input length: %d", len(inputEntropy)))
+		if err != nil {
+			return err
+		}
+		if !conf {
+			return nil
+		}
+
+		// hash input entropy to get entropy seed to get mnemonic
+		hashedEntropy := sha256.Sum256([]byte(inputEntropy))
+		entropySeed := hashedEntropy[:]
+		mnemonic, err = bip39.NewMnemonic(entropySeed[:])
+	}
+
+	// if user don't want to generate nmemonic using custom entropy
 	if len(mnemonic) == 0 {
 		// read entropy seed straight from crypto.Rand and convert to mnemonic
 		entropySeed, err := bip39.NewEntropy(mnemonicEntropySize)
@@ -182,16 +217,18 @@ func addApp(cmd *command.Command, args []string, iopts interface{}) error {
 		}
 	}
 
-	info, err := kb.CreateAccount(name, mnemonic, bip39Passphrase, encryptPassword, account, index)
-	if err != nil {
-		return err
-	}
-
-	// Recover key from seed passphrase
-	if opts.Recover {
-		// Hide mnemonic from output
-		showMnemonic = false
-		mnemonic = ""
+	if opts.KeyType == "secp256k1" {
+		info, err = kb.CreateAccountBip44(name, mnemonic, bip39Passphrase, encryptPassword, account, index)
+		if err != nil {
+			return err
+		}
+	} else if opts.KeyType == "ed25519" {
+		info, err = kb.CreateAccountSha256(name, mnemonic, encryptPassword)
+		if err != nil {
+			return err
+		}
+	} else {
+		return fmt.Errorf("invalid key type")
 	}
 
 	return printCreate(cmd, info, showMnemonic, mnemonic)
