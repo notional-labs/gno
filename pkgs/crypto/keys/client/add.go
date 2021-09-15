@@ -2,8 +2,10 @@ package client
 
 import (
 	"crypto/sha256"
+	"crypto/sha512"
 	"fmt"
 	"sort"
+	"strings"
 
 	"github.com/gnolang/gno/pkgs/command"
 	"github.com/gnolang/gno/pkgs/crypto"
@@ -19,18 +21,18 @@ type BaseOptions struct {
 
 type AddOptions struct {
 	BaseOptions
-	Multisig          []string `flag:"multisig" help:"Construct and store a multisig public key (implies --pubkey)"`
-	MultisigThreshold int      `flag:"threshold" help:"K out of N required signatures. For use in conjunction with --multisig"`
-	NoSort            bool     `flag:"nosort" help:"Keys passed to --multisig are taken in the order they're supplied"`
-	PublicKey         string   `flag:"pubkey" help:"Parse a public key in bech32 format and save it to disk"`
-	UseLedger         bool     `flag:"ledger" help:"Store a local reference to a private key on a Ledger device"`
-	Recover           bool     `flag:"recover" help:"Provide seed phrase to recover existing key instead of creating"`
-	NoBackup          bool     `flag:"nobackup" help:"Don't print out seed phrase (if others are watching the terminal)"`
-	DryRun            bool     `flag:"dryrun" help:"Perform action, but don't add key to local keystore"`
-	Account           uint32   `flag:"account" help:"Account number for HD derivation"`
-	Index             uint32   `flag:"index" description:"Address index number for HD derivation"`
-	KeyType           string   `flag:"type" description:"Type of keys (ed25519|secp256k1)"`
-	Entropy           bool     `flag:"entropy" description:"Gen nmenomic from custom entropy"`
+	Multisig          string `flag:"multisig" help:"Construct and store a multisig public key (implies --pubkey)"`
+	MultisigThreshold int    `flag:"threshold" help:"K out of N required signatures. For use in conjunction with --multisig"`
+	NoSort            bool   `flag:"nosort" help:"Keys passed to --multisig are taken in the order they're supplied"`
+	PublicKey         string `flag:"pubkey" help:"Parse a public key in bech32 format and save it to disk"`
+	UseLedger         bool   `flag:"ledger" help:"Store a local reference to a private key on a Ledger device"`
+	Recover           bool   `flag:"recover" help:"Provide seed phrase to recover existing key instead of creating"`
+	NoBackup          bool   `flag:"nobackup" help:"Don't print out seed phrase (if others are watching the terminal)"`
+	DryRun            bool   `flag:"dryrun" help:"Perform action, but don't add key to local keystore"`
+	Account           uint32 `flag:"account" help:"Account number for HD derivation"`
+	Index             uint32 `flag:"index" help:"Address index number for HD derivation"`
+	KeyType           string `flag:"keytype" help:"Type of keys (ed25519|secp256k1)"`
+	Entropy           bool   `flag:"entropy" help:"Gen nmenomic from custom entropy"`
 }
 
 var DefaultAddOptions = AddOptions{
@@ -87,10 +89,10 @@ func addApp(cmd *command.Command, args []string, iopts interface{}) error {
 			}
 		}
 
-		multisigKeys := opts.Multisig
-		if len(multisigKeys) != 0 {
+		multisigKeysString := opts.Multisig
+		if multisigKeysString != "" {
 			var pks []crypto.PubKey
-
+			multisigKeys := strings.Split(multisigKeysString, ",")
 			multisigThreshold := opts.MultisigThreshold
 			if err := keys.ValidateMultisigThreshold(multisigThreshold, len(multisigKeys)); err != nil {
 				return err
@@ -165,65 +167,120 @@ func addApp(cmd *command.Command, args []string, iopts interface{}) error {
 		return errors.New("Cannot do both mnemonic generate and mnemonic recover at the same time ")
 	}
 
-	// if user want to recover keys with their mnemonic instead of generating new mnemonic
-	if opts.Recover {
-		bip39Message := "Enter your bip39 mnemonic"
-		mnemonic, err = cmd.GetString(bip39Message)
-		// Hide mnemonic from output
-		showMnemonic = false
-		if err != nil {
-			return err
-		}
-		if !bip39.IsMnemonicValid(mnemonic) {
-			return errors.New("invalid mnemonic")
-		}
-	}
-
-	// if user want to gen mnemonic with custom entropy
-	if opts.Entropy {
-		// prompt the user to enter some entropy
-		inputEntropy, err := cmd.GetString("WARNING: Generate at least 256-bits of entropy and enter the results here:")
-		if err != nil {
-			return err
-		}
-		if len(inputEntropy) < 43 {
-			return fmt.Errorf("256-bits is 43 characters in Base-64, and 100 in Base-6. You entered %v, and probably want more", len(inputEntropy))
-		}
-		conf, err := cmd.GetConfirmation(fmt.Sprintf("Input length: %d", len(inputEntropy)))
-		if err != nil {
-			return err
-		}
-		if !conf {
-			return nil
-		}
-
-		// hash input entropy to get entropy seed to get mnemonic
-		hashedEntropy := sha256.Sum256([]byte(inputEntropy))
-		entropySeed := hashedEntropy[:]
-		mnemonic, err = bip39.NewMnemonic(entropySeed[:])
-	}
-
-	// if user don't want to generate nmemonic using custom entropy
-	if len(mnemonic) == 0 {
-		// read entropy seed straight from crypto.Rand and convert to mnemonic
-		entropySeed, err := bip39.NewEntropy(mnemonicEntropySize)
-		if err != nil {
-			return err
-		}
-
-		mnemonic, err = bip39.NewMnemonic(entropySeed[:])
-		if err != nil {
-			return err
-		}
-	}
-
 	if opts.KeyType == "secp256k1" {
+		// if user want to recover keys with their mnemonic instead of generating new mnemonic
+		if opts.Recover {
+			bip39Message := "Enter your bip39 mnemonic"
+			mnemonic, err = cmd.GetString(bip39Message)
+			// Hide mnemonic from output
+			showMnemonic = false
+			if err != nil {
+				return err
+			}
+			if !bip39.IsMnemonicValid(mnemonic) {
+				return errors.New("invalid mnemonic")
+			}
+		}
+
+		// if user want to gen mnemonic with custom entropy
+		if opts.Entropy {
+			// prompt the user to enter some entropy
+			inputEntropy, err := cmd.GetString("WARNING: Generate at least 256-bits of entropy and enter the results here:")
+			if err != nil {
+				return err
+			}
+			if len(inputEntropy) < 43 {
+				return fmt.Errorf("256-bits is 43 characters in Base-64, and 100 in Base-6. You entered %v, and probably want more", len(inputEntropy))
+			}
+			conf, err := cmd.GetConfirmation(fmt.Sprintf("Input length: %d", len(inputEntropy)))
+			if err != nil {
+				return err
+			}
+			if !conf {
+				return nil
+			}
+
+			// hash input entropy to get entropy seed to get mnemonic
+			hashedEntropy := sha256.Sum256([]byte(inputEntropy))
+			entropySeed := hashedEntropy[:]
+			mnemonic, err = bip39.NewMnemonic(entropySeed[:])
+		}
+
+		// if user don't want to generate nmemonic using custom entropy
+		if len(mnemonic) == 0 {
+			// read entropy seed straight from crypto.Rand and convert to mnemonic
+			entropySeed, err := bip39.NewEntropy(mnemonicEntropySize)
+			if err != nil {
+				return err
+			}
+
+			mnemonic, err = bip39.NewMnemonic(entropySeed[:])
+			if err != nil {
+				return err
+			}
+		}
 		info, err = kb.CreateAccountBip44(name, mnemonic, bip39Passphrase, encryptPassword, account, index)
 		if err != nil {
 			return err
 		}
 	} else if opts.KeyType == "ed25519" {
+		// if user want to recover keys with their mnemonic instead of generating new mnemonic
+		if opts.Recover {
+			bip39Message := "Enter your bip39 mnemonic"
+			mnemonic, err = cmd.GetString(bip39Message)
+			// Hide mnemonic from output
+			showMnemonic = false
+			if err != nil {
+				return err
+			}
+			mnemonic1, mnemonic2 := keys.Split48WordsMnemonic(mnemonic)
+			if !bip39.IsMnemonicValid(mnemonic1) {
+				return errors.New("invalid mnemonic")
+			}
+			if !bip39.IsMnemonicValid(mnemonic2) {
+				return errors.New("invalid mnemonic")
+			}
+		} else if opts.Entropy {
+			// prompt the user to enter some entropy
+			inputEntropy, err := cmd.GetString("WARNING: Generate at least 512-bits of entropy and enter the results here:")
+			if err != nil {
+				return err
+			}
+			if len(inputEntropy) < 86 {
+				return fmt.Errorf("256-bits is 43 characters in Base-64, and 100 in Base-6. You entered %v, and probably want more", len(inputEntropy))
+			}
+			conf, err := cmd.GetConfirmation(fmt.Sprintf("Input length: %d", len(inputEntropy)))
+			if err != nil {
+				return err
+			}
+			if !conf {
+				return nil
+			}
+			// hash input entropy to get entropy seed to get mnemonic
+			hashedEntropy := sha512.Sum512([]byte(inputEntropy))
+			entropySeed := hashedEntropy[:]
+			mnemonic, err = keys.Convert512BytesToMnemonic(entropySeed)
+			if err != nil {
+				return err
+			}
+		} else {
+			// read entropy seed straight from crypto.Rand and convert to mnemonic
+			entropySeed1, err := bip39.NewEntropy(mnemonicEntropySize)
+			if err != nil {
+				return err
+			}
+			entropySeed2, err := bip39.NewEntropy(mnemonicEntropySize)
+			if err != nil {
+				return err
+			}
+			entropySeed := append(entropySeed1[:], entropySeed2[:]...)
+			mnemonic, err = keys.Convert512BytesToMnemonic(entropySeed[:])
+			if err != nil {
+				return err
+			}
+		}
 		info, err = kb.CreateAccountSha256(name, mnemonic, encryptPassword)
+
 		if err != nil {
 			return err
 		}

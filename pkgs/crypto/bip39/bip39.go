@@ -42,7 +42,6 @@ func NewMnemonic(entropy []byte) (string, error) {
 	entropyBitLength := len(entropy) * 8
 	checksumBitLength := entropyBitLength / 32
 	sentenceLength := (entropyBitLength + checksumBitLength) / 11
-
 	err := validateEntropyBitSize(entropyBitLength)
 	if err != nil {
 		return "", err

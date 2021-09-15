@@ -3,6 +3,9 @@ package keys
 import (
 	"fmt"
 	"path/filepath"
+	"strings"
+
+	"github.com/gnolang/gno/pkgs/crypto/bip39"
 )
 
 const defaultKeyDBName = "keys"
@@ -24,4 +27,40 @@ func ValidateMultisigThreshold(k, nKeys int) error {
 			"threshold k of n multisignature: %d < %d", nKeys, k)
 	}
 	return nil
+}
+
+// 48 words mnemonic is for ed25519 key gen
+func Split48WordsMnemonic(mnemonic string) (string, string) {
+	wordListFromMnemonic := strings.Fields(mnemonic)
+	mnemonic1 := strings.Join(wordListFromMnemonic[:24], " ")
+	mnemonic2 := strings.Join(wordListFromMnemonic[24:], " ")
+	return mnemonic1, mnemonic2
+}
+
+func Convert48WordsMnemonicToByte(mnemonic string) ([]byte, error) {
+	mnemonic1, mnemonic2 := Split48WordsMnemonic(mnemonic)
+	bz1, err := bip39.MnemonicToByteArray(mnemonic1)
+	if err != nil {
+		return nil, err
+	}
+	bz2, err := bip39.MnemonicToByteArray(mnemonic2)
+	if err != nil {
+		return nil, err
+	}
+	return append(bz1[:], bz2[:]...), nil
+}
+
+func Convert512BytesToMnemonic(bz []byte) (string, error) {
+	entropySeed1 := bz[:32]
+	entropySeed2 := bz[32:]
+	mnemonic1, err := bip39.NewMnemonic(entropySeed1[:])
+	if err != nil {
+		return "", err
+	}
+	mnemonic2, err := bip39.NewMnemonic(entropySeed2[:])
+	if err != nil {
+		return "", err
+	}
+	mnemonic := mnemonic1 + " " + mnemonic2
+	return mnemonic, nil
 }

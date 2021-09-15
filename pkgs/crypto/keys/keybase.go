@@ -95,13 +95,13 @@ func (kb dbKeybase) CreateAccountBip44(name, mnemonic, bip39Passwd, encryptPassw
 }
 
 func (kb dbKeybase) CreateAccountSha256(name, mnemonic, encryptPasswd string) (info Info, err error) {
-	mnemonicByte, err := bip39.MnemonicToByteArray(mnemonic)
+	mnemonicByte, err := Convert48WordsMnemonicToByte(mnemonic)
 	if err != nil {
 		return nil, err
 	}
 	var privKeyByte [64]byte
 	copy(privKeyByte[:], mnemonicByte[:64])
-	info, err = kb.persistDerivedEd25519Key(privKeyByte, name, encryptPasswd)
+	info, err = kb.persistDerivedEd25519Key(privKeyByte, encryptPasswd, name)
 	return info, err
 }
 
