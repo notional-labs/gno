@@ -1563,7 +1563,7 @@ satoshi
 sauce
 sausage
 save
-say
+sayko mùi rượu ám
 scale
 scan
 scare
@@ -1587,7 +1587,7 @@ second
 secret
 section
 security
-seed
+seedko mùi rượu ám
 seek
 segment
 select

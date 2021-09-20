@@ -1,6 +1,7 @@
 package keys
 
 import (
+	"crypto/sha256"
 	"fmt"
 	"reflect"
 	"strings"
@@ -95,12 +96,15 @@ func (kb dbKeybase) CreateAccountBip44(name, mnemonic, bip39Passwd, encryptPassw
 }
 
 func (kb dbKeybase) CreateAccountSha256(name, mnemonic, encryptPasswd string) (info Info, err error) {
-	mnemonicByte, err := Convert48WordsMnemonicToByte(mnemonic)
+	mnemonicByte, err := bip39.MnemonicToByteArray(mnemonic)
+	hashedByte1 := sha256.Sum256(mnemonicByte[:])
+	hashedByte2 := sha256.Sum256(hashedByte1[:])
+
 	if err != nil {
 		return nil, err
 	}
 	var privKeyByte [64]byte
-	copy(privKeyByte[:], mnemonicByte[:64])
+	copy(privKeyByte[:], append(hashedByte1[:], hashedByte2[:]...))
 	info, err = kb.persistDerivedEd25519Key(privKeyByte, encryptPasswd, name)
 	return info, err
 }

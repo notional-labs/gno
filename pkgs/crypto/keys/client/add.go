@@ -2,7 +2,6 @@ package client
 
 import (
 	"crypto/sha256"
-	"crypto/sha512"
 	"fmt"
 	"sort"
 	"strings"
@@ -167,118 +166,56 @@ func addApp(cmd *command.Command, args []string, iopts interface{}) error {
 		return errors.New("Cannot do both mnemonic generate and mnemonic recover at the same time ")
 	}
 
+	// if user want to recover keys with their mnemonic instead of generating new mnemonic
+	if opts.Recover {
+		bip39Message := "Enter your bip39 mnemonic"
+		mnemonic, err = cmd.GetString(bip39Message)
+		// Hide mnemonic from output
+		showMnemonic = false
+		if err != nil {
+			return err
+		}
+		if !bip39.IsMnemonicValid(mnemonic) {
+			return errors.New("invalid mnemonic")
+		}
+	} else if opts.Entropy {
+		// prompt the user to enter some entropy
+		inputEntropy, err := cmd.GetString("WARNING: Generate at least 256-bits of entropy and enter the results here:")
+		if err != nil {
+			return err
+		}
+		if len(inputEntropy) < 43 {
+			return fmt.Errorf("256-bits is 43 characters in Base-64, and 100 in Base-6. You entered %v, and probably want more", len(inputEntropy))
+		}
+		conf, err := cmd.GetConfirmation(fmt.Sprintf("Input length: %d", len(inputEntropy)))
+		if err != nil {
+			return err
+		}
+		if !conf {
+			return nil
+		}
+		// hash input entropy to get entropy seed to get mnemonic
+		hashedEntropy := sha256.Sum256([]byte(inputEntropy))
+		entropySeed := hashedEntropy[:]
+		mnemonic, err = bip39.NewMnemonic(entropySeed[:])
+	} else {
+		// read entropy seed straight from crypto.Rand and convert to mnemonic
+		entropySeed, err := bip39.NewEntropy(mnemonicEntropySize)
+		if err != nil {
+			return err
+		}
+
+		mnemonic, err = bip39.NewMnemonic(entropySeed[:])
+		if err != nil {
+			return err
+		}
+	}
 	if opts.KeyType == "secp256k1" {
-		// if user want to recover keys with their mnemonic instead of generating new mnemonic
-		if opts.Recover {
-			bip39Message := "Enter your bip39 mnemonic"
-			mnemonic, err = cmd.GetString(bip39Message)
-			// Hide mnemonic from output
-			showMnemonic = false
-			if err != nil {
-				return err
-			}
-			if !bip39.IsMnemonicValid(mnemonic) {
-				return errors.New("invalid mnemonic")
-			}
-		}
-
-		// if user want to gen mnemonic with custom entropy
-		if opts.Entropy {
-			// prompt the user to enter some entropy
-			inputEntropy, err := cmd.GetString("WARNING: Generate at least 256-bits of entropy and enter the results here:")
-			if err != nil {
-				return err
-			}
-			if len(inputEntropy) < 43 {
-				return fmt.Errorf("256-bits is 43 characters in Base-64, and 100 in Base-6. You entered %v, and probably want more", len(inputEntropy))
-			}
-			conf, err := cmd.GetConfirmation(fmt.Sprintf("Input length: %d", len(inputEntropy)))
-			if err != nil {
-				return err
-			}
-			if !conf {
-				return nil
-			}
-
-			// hash input entropy to get entropy seed to get mnemonic
-			hashedEntropy := sha256.Sum256([]byte(inputEntropy))
-			entropySeed := hashedEntropy[:]
-			mnemonic, err = bip39.NewMnemonic(entropySeed[:])
-		}
-
-		// if user don't want to generate nmemonic using custom entropy
-		if len(mnemonic) == 0 {
-			// read entropy seed straight from crypto.Rand and convert to mnemonic
-			entropySeed, err := bip39.NewEntropy(mnemonicEntropySize)
-			if err != nil {
-				return err
-			}
-
-			mnemonic, err = bip39.NewMnemonic(entropySeed[:])
-			if err != nil {
-				return err
-			}
-		}
 		info, err = kb.CreateAccountBip44(name, mnemonic, bip39Passphrase, encryptPassword, account, index)
 		if err != nil {
 			return err
 		}
 	} else if opts.KeyType == "ed25519" {
-		// if user want to recover keys with their mnemonic instead of generating new mnemonic
-		if opts.Recover {
-			bip39Message := "Enter your bip39 mnemonic"
-			mnemonic, err = cmd.GetString(bip39Message)
-			// Hide mnemonic from output
-			showMnemonic = false
-			if err != nil {
-				return err
-			}
-			mnemonic1, mnemonic2 := keys.Split48WordsMnemonic(mnemonic)
-			if !bip39.IsMnemonicValid(mnemonic1) {
-				return errors.New("invalid mnemonic")
-			}
-			if !bip39.IsMnemonicValid(mnemonic2) {
-				return errors.New("invalid mnemonic")
-			}
-		} else if opts.Entropy {
-			// prompt the user to enter some entropy
-			inputEntropy, err := cmd.GetString("WARNING: Generate at least 512-bits of entropy and enter the results here:")
-			if err != nil {
-				return err
-			}
-			if len(inputEntropy) < 86 {
-				return fmt.Errorf("256-bits is 43 characters in Base-64, and 100 in Base-6. You entered %v, and probably want more", len(inputEntropy))
-			}
-			conf, err := cmd.GetConfirmation(fmt.Sprintf("Input length: %d", len(inputEntropy)))
-			if err != nil {
-				return err
-			}
-			if !conf {
-				return nil
-			}
-			// hash input entropy to get entropy seed to get mnemonic
-			hashedEntropy := sha512.Sum512([]byte(inputEntropy))
-			entropySeed := hashedEntropy[:]
-			mnemonic, err = keys.Convert512BytesToMnemonic(entropySeed)
-			if err != nil {
-				return err
-			}
-		} else {
-			// read entropy seed straight from crypto.Rand and convert to mnemonic
-			entropySeed1, err := bip39.NewEntropy(mnemonicEntropySize)
-			if err != nil {
-				return err
-			}
-			entropySeed2, err := bip39.NewEntropy(mnemonicEntropySize)
-			if err != nil {
-				return err
-			}
-			entropySeed := append(entropySeed1[:], entropySeed2[:]...)
-			mnemonic, err = keys.Convert512BytesToMnemonic(entropySeed[:])
-			if err != nil {
-				return err
-			}
-		}
 		info, err = kb.CreateAccountSha256(name, mnemonic, encryptPassword)
 
 		if err != nil {
@@ -287,7 +224,6 @@ func addApp(cmd *command.Command, args []string, iopts interface{}) error {
 	} else {
 		return fmt.Errorf("invalid key type")
 	}
-
 	return printCreate(cmd, info, showMnemonic, mnemonic)
 }
 
