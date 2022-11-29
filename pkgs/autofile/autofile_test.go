@@ -1,4 +1,4 @@
-package autofile
+package autofile_test
 
 import (
 	"io/ioutil"
