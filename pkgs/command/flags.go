@@ -3,7 +3,6 @@ package command
 import (
 	"encoding/hex"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"reflect"
 	"regexp"
@@ -60,10 +59,10 @@ func applyFlagReflect(rv reflect.Value, fname string, fvalue interface{}) (bool,
 			match, err := applyFlagReflect(frv, fname, fvalue)
 			if err != nil {
 				return false, err
-			} else if match {
+			} else if match { //nolint:staticcheck
 				// found match, done!
 				return true, nil
-			} else {
+			} else { //nolint:staticcheck
 				// continue
 			}
 		} else if ffn == "" {
@@ -331,7 +330,7 @@ func parseFlags(fargs []string) map[string]interface{} {
 			// if a --flag#file <file_location> flag, read contents.
 			if strings.HasSuffix(fname, "#file") {
 				ffile := farg
-				fargbz, err := ioutil.ReadFile(ffile)
+				fargbz, err := os.ReadFile(ffile)
 				if err != nil {
 					panic(fmt.Sprintf(
 						"error reading file: %v", err))

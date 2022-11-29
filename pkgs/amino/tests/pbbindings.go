@@ -9103,7 +9103,7 @@ func (goo Concrete1) EmptyPBMessage(cdc *amino.Codec) (msg proto.Message) {
 func (goo *Concrete1) FromPBMessage(cdc *amino.Codec, msg proto.Message) (err error) {
 	var pbo *testspb.Concrete1 = msg.(*testspb.Concrete1)
 	{
-		if pbo != nil {
+		if pbo != nil { //nolint:staticcheck
 		}
 	}
 	return

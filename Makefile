@@ -75,7 +75,7 @@ examples.build: install_gnodev examples.precompile
 
 .PHONY: fmt
 fmt:
-	go run -modfile ./misc/devdeps/go.mod mvdan.cc/gofumpt -w .
+	go run github.com/golangci/golangci-lint/cmd/golangci-lint@latest run ./... --fix --timeout 10m
 	go run -modfile ./misc/devdeps/go.mod mvdan.cc/gofumpt -w `find stdlibs examples -name "*.gno"`
 
 ########################################

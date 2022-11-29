@@ -1647,7 +1647,7 @@ func (sb *StaticBlock) GetStaticTypeOfAt(store Store, path ValuePath) Type {
 			path.Depth -= 1
 		}
 	}
-	panic("should not happen")
+	// panic("should not happen") // this line was used for debugging
 }
 
 // Implements BlockNode.

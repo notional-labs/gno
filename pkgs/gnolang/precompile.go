@@ -127,6 +127,9 @@ func Precompile(source string, tags string, filename string) (string, error) {
 		return "", fmt.Errorf("write to buffer: %w", err)
 	}
 	err = format.Node(&out, fset, transformed)
+	if err != nil {
+		return "", fmt.Errorf("couldn't format gno: %w", err)
+	}
 	return out.String(), nil
 }
 

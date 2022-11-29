@@ -50,7 +50,7 @@ func TestCreateLedger(t *testing.T) {
 	assert.Equal(t, "cosmospub1addwnpepqdszcr95mrqqs8lw099aa9h8h906zmet22pmwe9vquzcgvnm93eqygufdlv", pubs)
 
 	// Check that restoring the key gets the same results
-	restoredKey, err := kb.GetByName("some_account")
+	restoredKey, _ := kb.GetByName("some_account")
 	assert.NotNil(t, restoredKey)
 	assert.Equal(t, "some_account", restoredKey.GetName())
 	assert.Equal(t, TypeLedger, restoredKey.GetType())

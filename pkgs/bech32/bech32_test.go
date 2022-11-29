@@ -40,10 +40,10 @@ var (
 
 func TestEncode(t *testing.T) {
 	bz, err := hex.DecodeString(pubkeyBytes)
-
 	assert.NoError(t, err)
 
 	p, err := bech32.Encode(pubkeyPrefix, bz)
+	assert.NoError(t, err)
 
 	assert.Equal(t, p, pubkeyBech32)
 }

@@ -186,12 +186,12 @@ func makeImporter(out io.Writer) gno.Importer {
 				return out.Write([]byte(res))
 			})
 			pkg.DefineGoNativeValue("Sprintf", fmt.Sprintf)
-			return pkg.NewPackage(nil)
+			return pkg.NewPackage()
 		case "strings":
 			pkg := gno.NewPackageNode("strings", "strings", nil)
 			pkg.DefineGoNativeValue("SplitN", strings.SplitN)
 			pkg.DefineGoNativeValue("HasPrefix", strings.HasPrefix)
-			return pkg.NewPackage(nil)
+			return pkg.NewPackage()
 		default:
 			panic("unknown package path " + pkgPath)
 		}

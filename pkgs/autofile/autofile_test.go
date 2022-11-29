@@ -14,7 +14,7 @@ import (
 
 func TestSIGHUP(t *testing.T) {
 	// First, create an AutoFile writing to a tempfile dir
-	file, err := ioutil.TempFile("", "sighup_test")
+	file, err := os.CreateTemp("", "sighup_test")
 	require.NoError(t, err)
 	err = file.Close()
 	require.NoError(t, err)
