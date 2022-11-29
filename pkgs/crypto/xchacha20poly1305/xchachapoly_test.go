@@ -1,4 +1,4 @@
-package xchacha20poly1305
+package xchacha20poly1305_test
 
 import (
 	"bytes"

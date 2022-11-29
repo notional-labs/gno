@@ -1,4 +1,4 @@
-package press
+package press_test
 
 import (
 	"testing"
