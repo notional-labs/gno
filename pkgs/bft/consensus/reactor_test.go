@@ -732,7 +732,7 @@ func TestVoteSetMaj23MessageValidateBasic(t *testing.T) {
 }
 
 func TestVoteSetBitsMessageValidateBasic(t *testing.T) {
-	testCases := []struct { // nolint: maligned
+	testCases := []struct { //nolint: maligned
 		malleateFn func(*VoteSetBitsMessage)
 		expErr     string
 	}{

@@ -26,7 +26,6 @@ func NewDominoOp(key, input, output string) DominoOp {
 	}
 }
 
-
 func DominoOpDecoder(pop ProofOp) (ProofOperator, error) {
 	if pop.Type != ProofOpDomino {
 		panic("unexpected proof op type")

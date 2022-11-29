@@ -9,7 +9,6 @@ import (
 	dbm "github.com/gnolang/gno/pkgs/db"
 	"github.com/gnolang/gno/pkgs/iavl"
 	"github.com/gnolang/gno/pkgs/random"
-
 	"github.com/gnolang/gno/pkgs/store/types"
 	"github.com/stretchr/testify/require"
 )

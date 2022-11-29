@@ -23,7 +23,6 @@ import (
 	rpcserver "github.com/gnolang/gno/pkgs/bft/rpc/lib/server"
 	sm "github.com/gnolang/gno/pkgs/bft/state"
 	"github.com/gnolang/gno/pkgs/bft/state/txindex"
-
 	"github.com/gnolang/gno/pkgs/bft/state/txindex/null"
 	"github.com/gnolang/gno/pkgs/bft/store"
 	"github.com/gnolang/gno/pkgs/bft/types"

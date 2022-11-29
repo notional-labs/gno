@@ -59,7 +59,7 @@ func applyFlagReflect(rv reflect.Value, fname string, fvalue interface{}) (bool,
 			match, err := applyFlagReflect(frv, fname, fvalue)
 			if err != nil {
 				return false, err
-			} else if match { 
+			} else if match {
 				// found match, done!
 				return true, nil
 			} else { //nolint:staticcheck

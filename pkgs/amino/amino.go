@@ -538,7 +538,7 @@ func (cdc *Codec) UnmarshalSizedReader(r io.Reader, ptr interface{},
 	}
 	l = int64(u64)
 	if l < 0 {
-		_ = errors.New( 
+		_ = errors.New(
 			"read overflow, this implementation can't read this because, why would anyone have this much data? Hello from 2018",
 		)
 	}

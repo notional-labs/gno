@@ -1,0 +1,22 @@
+run:
+  timeout: 10m
+  tests: true
+
+linters:
+  enable-all: true
+  disable:
+    - exhaustivestruct
+    - ifshort
+    - golint
+    - nolintlint
+    - scopelint
+    - rowserrcheck
+    - sqlclosecheck
+    - wastedassign
+    - nosnakecase
+    - maligned
+      #    - fieldalignment
+    - deadcode
+    - interfacer
+    - varcheck
+    - structcheck

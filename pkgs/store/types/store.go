@@ -58,7 +58,7 @@ type Queryable interface {
 //----------------------------------------
 // MultiStore
 
-type MultiStore interface { 
+type MultiStore interface {
 	// Convenience for fetching substores.
 	// If the store does not exist, panics.
 	GetStore(StoreKey) Store
@@ -126,7 +126,7 @@ func (cid CommitID) Equals(oid CommitID) bool {
 	return cid.Version == oid.Version && bytes.Equal(cid.Hash, oid.Hash)
 }
 
-func (cid CommitID) IsZero() bool { 
+func (cid CommitID) IsZero() bool {
 	return cid.Version == 0 && len(cid.Hash) == 0
 }
 
