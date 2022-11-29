@@ -1,4 +1,4 @@
-package rpcserver
+package rpcserver_test
 
 import (
 	"encoding/json"

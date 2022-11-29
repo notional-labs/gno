@@ -1,4 +1,4 @@
-package bip39
+package bip39_test
 
 import (
 	"encoding/hex"

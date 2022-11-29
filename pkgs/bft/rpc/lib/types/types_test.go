@@ -1,4 +1,4 @@
-package rpctypes
+package rpctypes_test
 
 import (
 	"encoding/json"

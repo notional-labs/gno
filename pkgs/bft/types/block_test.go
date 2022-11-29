@@ -1,4 +1,4 @@
-package types
+package types_test
 
 import (
 	// it is ok to use math/rand here: we do not need a cryptographically secure random

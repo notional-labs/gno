@@ -1,4 +1,4 @@
-package bitarray
+package bitarray_test
 
 import (
 	"bytes"

@@ -1,4 +1,4 @@
-package hd
+package hd_test
 
 import (
 	"encoding/hex"

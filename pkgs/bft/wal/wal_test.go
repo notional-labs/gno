@@ -1,4 +1,4 @@
-package wal
+package wal_test
 
 import (
 	"bytes"

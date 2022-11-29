@@ -1,4 +1,4 @@
-package xsalsa20symmetric
+package xsalsa20symmetric_test
 
 import (
 	"testing"

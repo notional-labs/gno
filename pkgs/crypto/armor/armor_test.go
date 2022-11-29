@@ -1,4 +1,4 @@
-package armor
+package armor_test
 
 import (
 	"testing"

@@ -1,4 +1,4 @@
-package cmap
+package cmap_test
 
 import (
 	"fmt"

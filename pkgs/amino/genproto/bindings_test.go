@@ -1,4 +1,4 @@
-package genproto
+package genproto_test
 
 import (
 	"bytes"

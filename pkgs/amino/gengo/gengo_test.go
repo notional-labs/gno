@@ -1,4 +1,4 @@
-package gengo
+package gengo_test
 
 import (
 	"fmt"

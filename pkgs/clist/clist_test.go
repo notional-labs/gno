@@ -1,4 +1,4 @@
-package clist
+package clist_test
 
 import (
 	"fmt"

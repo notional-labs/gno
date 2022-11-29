@@ -1,4 +1,4 @@
-package logos
+package logos_test
 
 import (
 	"testing"
