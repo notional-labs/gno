@@ -86,7 +86,7 @@ func (tx Tx) GetSigners() []crypto.Address {
 	return signers
 }
 
-// GetMemo returns the memo
+// GetMemo returns the memo.
 func (tx Tx) GetMemo() string { return tx.Memo }
 
 // GetSignatures returns the signature of signers who signed the Msg.
@@ -103,7 +103,7 @@ func (tx Tx) GetSignBytes(chainID string, accountNumber uint64, sequence uint64)
 	return SignBytes(chainID, accountNumber, sequence, tx.Fee, tx.Msgs, tx.Memo)
 }
 
-//__________________________________________________________
+// __________________________________________________________
 
 // Fee includes the amount of coins paid in fees and the maximum
 // gas to be used by the transaction. The ratio yields an effective "gasprice",
@@ -113,7 +113,7 @@ type Fee struct {
 	GasFee    Coin  `json:"gas_fee" yaml:"gas_fee"`
 }
 
-// NewFee returns a new instance of Fee
+// NewFee returns a new instance of Fee.
 func NewFee(gasWanted int64, gasFee Coin) Fee {
 	return Fee{
 		GasWanted: gasWanted,
@@ -121,7 +121,7 @@ func NewFee(gasWanted int64, gasFee Coin) Fee {
 	}
 }
 
-// Bytes for signing later
+// Bytes for signing later.
 func (fee Fee) Bytes() []byte {
 	bz, err := amino.MarshalJSON(fee) // TODO
 	if err != nil {

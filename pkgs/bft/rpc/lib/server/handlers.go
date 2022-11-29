@@ -14,17 +14,16 @@ import (
 	"strings"
 	"time"
 
-	"github.com/gorilla/websocket"
-
 	"github.com/gnolang/gno/pkgs/amino"
 	types "github.com/gnolang/gno/pkgs/bft/rpc/lib/types"
 	"github.com/gnolang/gno/pkgs/errors"
 	"github.com/gnolang/gno/pkgs/log"
 	"github.com/gnolang/gno/pkgs/service"
+	"github.com/gorilla/websocket"
 )
 
 // RegisterRPCFuncs adds a route for each function in the funcMap, as well as general jsonrpc and websocket handlers for all functions.
-// "result" is the interface on which the result objects are registered, and is populated with every RPCResponse
+// "result" is the interface on which the result objects are registered, and is populated with every RPCResponse.
 func RegisterRPCFuncs(mux *http.ServeMux, funcMap map[string]*RPCFunc, logger log.Logger) {
 	// HTTP endpoints
 	for funcName, rpcFunc := range funcMap {
@@ -38,7 +37,7 @@ func RegisterRPCFuncs(mux *http.ServeMux, funcMap map[string]*RPCFunc, logger lo
 //-------------------------------------
 // function introspection
 
-// RPCFunc contains the introspected type information for a function
+// RPCFunc contains the introspected type information for a function.
 type RPCFunc struct {
 	f        reflect.Value  // underlying rpc function
 	args     []reflect.Type // type of each function arg
@@ -48,7 +47,7 @@ type RPCFunc struct {
 }
 
 // NewRPCFunc wraps a function for introspection.
-// f is the function, args are comma separated argument names
+// f is the function, args are comma separated argument names.
 func NewRPCFunc(f interface{}, args string) *RPCFunc {
 	return newRPCFunc(f, args, false)
 }
@@ -72,7 +71,7 @@ func newRPCFunc(f interface{}, args string, ws bool) *RPCFunc {
 	}
 }
 
-// return a function's argument types
+// return a function's argument types.
 func funcArgTypes(f interface{}) []reflect.Type {
 	t := reflect.TypeOf(f)
 	n := t.NumIn()
@@ -83,7 +82,7 @@ func funcArgTypes(f interface{}) []reflect.Type {
 	return typez
 }
 
-// return a function's return types
+// return a function's return types.
 func funcReturnTypes(f interface{}) []reflect.Type {
 	t := reflect.TypeOf(f)
 	n := t.NumOut()
@@ -98,7 +97,7 @@ func funcReturnTypes(f interface{}) []reflect.Type {
 //-----------------------------------------------------------------------------
 // rpc.json
 
-// jsonrpc calls grab the given method's function info and runs reflect.Call
+// jsonrpc calls grab the given method's function info and runs reflect.Call.
 func makeJSONRPCHandler(funcMap map[string]*RPCFunc, logger log.Logger) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		b, err := ioutil.ReadAll(r.Body)
@@ -255,7 +254,7 @@ func jsonParamsToArgs(rpcFunc *RPCFunc, raw []byte) ([]reflect.Value, error) {
 //-----------------------------------------------------------------------------
 // rpc.http
 
-// convert from a function name to the http handler
+// convert from a function name to the http handler.
 func makeHTTPHandler(rpcFunc *RPCFunc, logger log.Logger) func(http.ResponseWriter, *http.Request) {
 	// Exception for websocket endpoints
 	if rpcFunc.ws {
@@ -564,7 +563,7 @@ func (wsc *wsConnection) OnStop() {
 }
 
 // GetRemoteAddr returns the remote address of the underlying connection.
-// It implements WSRPCConnection
+// It implements WSRPCConnection.
 func (wsc *wsConnection) GetRemoteAddr() string {
 	return wsc.remoteAddr
 }
@@ -580,7 +579,7 @@ func (wsc *wsConnection) WriteRPCResponse(resp types.RPCResponse) {
 }
 
 // TryWriteRPCResponse attempts to push a response to the writeChan, but does not block.
-// It implements WSRPCConnection. It is Goroutine-safe
+// It implements WSRPCConnection. It is Goroutine-safe.
 func (wsc *wsConnection) TryWriteRPCResponse(resp types.RPCResponse) bool {
 	select {
 	case <-wsc.Quit():
@@ -602,7 +601,7 @@ func (wsc *wsConnection) Context() context.Context {
 	return wsc.ctx
 }
 
-// Read from the socket and subscribe to or unsubscribe from events
+// Read from the socket and subscribe to or unsubscribe from events.
 func (wsc *wsConnection) readRoutine() {
 	defer func() {
 		if r := recover(); r != nil {
@@ -691,7 +690,7 @@ func (wsc *wsConnection) readRoutine() {
 	}
 }
 
-// receives on a write channel and writes out on the socket
+// receives on a write channel and writes out on the socket.
 func (wsc *wsConnection) writeRoutine() {
 	pingTicker := time.NewTicker(wsc.pingPeriod)
 	defer func() {
@@ -753,7 +752,7 @@ func (wsc *wsConnection) writeMessageWithDeadline(msgType int, msg []byte) error
 
 // WebsocketManager provides a WS handler for incoming connections and passes a
 // map of functions along with any additional params to new connections.
-// NOTE: The websocket path is defined externally, e.g. in node/node.go
+// NOTE: The websocket path is defined externally, e.g. in node/node.go.
 type WebsocketManager struct {
 	websocket.Upgrader
 
@@ -806,7 +805,7 @@ func (wm *WebsocketManager) WebsocketHandler(w http.ResponseWriter, r *http.Requ
 // rpc.websocket
 //-----------------------------------------------------------------------------
 
-// NOTE: assume returns is result struct and error. If error is not nil, return it
+// NOTE: assume returns is result struct and error. If error is not nil, return it.
 func unreflectResult(returns []reflect.Value) (interface{}, error) {
 	errV := returns[1]
 	if errV.Interface() != nil {
@@ -824,7 +823,7 @@ func unreflectResult(returns []reflect.Value) (interface{}, error) {
 	}
 }
 
-// writes a list of available rpc endpoints as an html page
+// writes a list of available rpc endpoints as an html page.
 func writeListOfEndpoints(w http.ResponseWriter, r *http.Request, funcMap map[string]*RPCFunc) {
 	noArgNames := []string{}
 	argNames := []string{}
@@ -861,5 +860,5 @@ func writeListOfEndpoints(w http.ResponseWriter, r *http.Request, funcMap map[st
 	buf.WriteString("</body></html>")
 	w.Header().Set("Content-Type", "text/html")
 	w.WriteHeader(200)
-	w.Write(buf.Bytes()) // nolint: errcheck
+	w.Write(buf.Bytes()) //nolint: errcheck
 }

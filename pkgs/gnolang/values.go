@@ -895,7 +895,7 @@ func (pv *PackageValue) GetPackageNode(store Store) *PackageNode {
 	return pv.GetBlock(store).GetSource(store).(*PackageNode)
 }
 
-// Convenience
+// Convenience.
 func (pv *PackageValue) GetPkgAddr() crypto.Address {
 	return DerivePkgAddr(pv.PkgPath)
 }
@@ -1871,7 +1871,6 @@ func (tv *TypedValue) GetPointerTo(alloc *Allocator, store Store, path ValuePath
 					*/
 				}
 			}
-
 		}
 		panic(fmt.Sprintf(
 			"native type %s has no method or field %s",
@@ -2383,7 +2382,7 @@ func (b *Block) ExpandToSize(alloc *Allocator, size uint16) {
 	b.Values = values
 }
 
-// NOTE: RefValue Object methods declared in ownership.go
+// NOTE: RefValue Object methods declared in ownership.go.
 type RefValue struct {
 	ObjectID ObjectID  `json:",omitempty"`
 	Escaped  bool      `json:",omitempty"`

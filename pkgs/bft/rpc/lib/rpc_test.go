@@ -12,19 +12,17 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
-
-	"github.com/gnolang/gno/pkgs/colors"
-	"github.com/gnolang/gno/pkgs/log"
-	"github.com/gnolang/gno/pkgs/random"
-
 	client "github.com/gnolang/gno/pkgs/bft/rpc/lib/client"
 	server "github.com/gnolang/gno/pkgs/bft/rpc/lib/server"
 	types "github.com/gnolang/gno/pkgs/bft/rpc/lib/types"
+	"github.com/gnolang/gno/pkgs/colors"
+	"github.com/gnolang/gno/pkgs/log"
+	"github.com/gnolang/gno/pkgs/random"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
-// Client and Server should work over tcp or unix sockets
+// Client and Server should work over tcp or unix sockets.
 const (
 	tcpAddr                  = "tcp://0.0.0.0:47768"
 	tcpServerUnavailableAddr = "tcp://0.0.0.0:47769"
@@ -53,7 +51,7 @@ type ResultEchoDataBytes struct {
 	Value []byte `json:"value"`
 }
 
-// Define some routes
+// Define some routes.
 var Routes = map[string]*server.RPCFunc{
 	"echo":            server.NewRPCFunc(EchoResult, "arg"),
 	"echo_ws":         server.NewWSRPCFunc(EchoWSResult, "arg"),
@@ -101,7 +99,7 @@ var colorFn = func(keyvals ...interface{}) colors.Color {
 	return colors.None
 }
 
-// launch unix and tcp servers
+// launch unix and tcp servers.
 func setup() {
 	logger := log.NewTMLoggerWithColorFn(log.NewSyncWriter(os.Stdout), colorFn)
 

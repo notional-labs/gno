@@ -51,7 +51,7 @@ Usage with arbitrary error data:
 	    default: ...
 	}
 
-```
+```.
 */
 type Error interface {
 	Error() string
@@ -203,7 +203,7 @@ Theoretically it could be used to switch on the format string.
 	    default: ...
 	}
 
-```
+```.
 */
 type FmtError struct {
 	format string

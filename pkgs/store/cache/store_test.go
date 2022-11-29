@@ -4,14 +4,12 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/stretchr/testify/require"
-
 	dbm "github.com/gnolang/gno/pkgs/db"
 	"github.com/gnolang/gno/pkgs/random"
-
 	"github.com/gnolang/gno/pkgs/store/cache"
 	"github.com/gnolang/gno/pkgs/store/dbadapter"
 	"github.com/gnolang/gno/pkgs/store/types"
+	"github.com/stretchr/testify/require"
 )
 
 func newCacheStore() types.Store {
@@ -322,7 +320,7 @@ func randInt(n int) int {
 	return random.RandInt() % n
 }
 
-// useful for replaying a error case if we find one
+// useful for replaying a error case if we find one.
 func doOp(st types.Store, truth dbm.DB, op int, args ...int) {
 	switch op {
 	case opSet:
@@ -372,7 +370,7 @@ func doRandomOp(st types.Store, truth dbm.DB, maxKey int) {
 
 //-------------------------------------------------------------------------------------------
 
-// iterate over whole domain
+// iterate over whole domain.
 func assertIterateDomain(t *testing.T, st types.Store, expectedN int) {
 	itr := st.Iterator(nil, nil)
 	i := 0
@@ -467,7 +465,7 @@ func newKeyRangeCounter(kr []keyRange) *keyRangeCounter {
 	return &keyRangeCounter{keyRanges: kr}
 }
 
-// we can iterate over this and make sure our real iterators have all the right keys
+// we can iterate over this and make sure our real iterators have all the right keys.
 type keyRangeCounter struct {
 	rangeIdx  int
 	idx       int

@@ -10,12 +10,12 @@ import (
 // File for storing in-package BaseApp optional functions,
 // for options that need access to non-exported fields of the BaseApp
 
-// SetStoreOptions sets store options on the multistore associated with the app
+// SetStoreOptions sets store options on the multistore associated with the app.
 func SetStoreOptions(opts store.StoreOptions) func(*BaseApp) {
 	return func(bap *BaseApp) { bap.cms.SetStoreOptions(opts) }
 }
 
-// SetPruningOptions sets pruning options on the multistore associated with the app
+// SetPruningOptions sets pruning options on the multistore associated with the app.
 func SetPruningOptions(opts store.PruningOptions) func(*BaseApp) {
 	return func(bap *BaseApp) {
 		sopts := bap.cms.GetStoreOptions()

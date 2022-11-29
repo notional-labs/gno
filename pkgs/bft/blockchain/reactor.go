@@ -15,21 +15,21 @@ import (
 )
 
 const (
-	// BlockchainChannel is a channel for blocks and status updates (`BlockStore` height)
+	// BlockchainChannel is a channel for blocks and status updates (`BlockStore` height).
 	BlockchainChannel = byte(0x40)
 
 	trySyncIntervalMS = 10
 
 	// stop syncing when last block's time is
 	// within this much of the system time.
-	// stopSyncingDurationMinutes = 10
+	// stopSyncingDurationMinutes = 10.
 
-	// ask for best height every 10s
+	// ask for best height every 10s.
 	statusUpdateIntervalSeconds = 10
-	// check if we should switch to consensus reactor
+	// check if we should switch to consensus reactor.
 	switchToConsensusIntervalSeconds = 1
 
-	// NOTE: keep up to date with bcBlockResponseMessage
+	// NOTE: keep up to date with bcBlockResponseMessage.
 	bcBlockResponseMessagePrefixSize   = 4
 	bcBlockResponseMessageFieldKeySize = 1
 	maxMsgSize                         = types.MaxBlockSizeBytes +
@@ -124,7 +124,7 @@ func (bcR *BlockchainReactor) OnStop() {
 	bcR.pool.Stop()
 }
 
-// GetChannels implements Reactor
+// GetChannels implements Reactor.
 func (bcR *BlockchainReactor) GetChannels() []*p2p.ChannelDescriptor {
 	return []*p2p.ChannelDescriptor{
 		{
@@ -247,8 +247,7 @@ func (bcR *BlockchainReactor) poolRoutine() {
 
 			case <-statusUpdateTicker.C:
 				// ask for status updates
-				go bcR.BroadcastStatusRequest() // nolint: errcheck
-
+				go bcR.BroadcastStatusRequest() //nolint: errcheck
 			}
 		}
 	}()

@@ -8,13 +8,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
-
 	"github.com/gnolang/gno/pkgs/amino"
 	"github.com/gnolang/gno/pkgs/bft/types"
 	tmtime "github.com/gnolang/gno/pkgs/bft/types/time"
 	"github.com/gnolang/gno/pkgs/crypto/ed25519"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestGenLoadValidator(t *testing.T) {

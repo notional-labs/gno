@@ -28,7 +28,7 @@ func (c *thCounter) Count() int {
 }
 
 // Read should run in a go-routine and
-// updates count by one every time a packet comes in
+// updates count by one every time a packet comes in.
 func (c *thCounter) Read() {
 	for range c.input {
 		c.Increment()

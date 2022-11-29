@@ -3,9 +3,8 @@ package privval
 import (
 	"testing"
 
-	"github.com/stretchr/testify/assert"
-
 	"github.com/gnolang/gno/pkgs/errors"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestIsConnTimeoutForNonTimeoutErrors(t *testing.T) {

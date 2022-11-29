@@ -72,7 +72,7 @@ var (
 
 // NewHTTP takes a remote endpoint in the form <protocol>://<host>:<port> and
 // the websocket path (which always seems to be "/websocket")
-// The function panics if the provided remote is invalid.<Paste>
+// The function panics if the provided remote is invalid.<Paste>.
 func NewHTTP(remote, wsEndpoint string) *HTTP {
 	httpClient := rpcclient.DefaultHTTPClient(remote)
 	return NewHTTPWithClient(remote, wsEndpoint, httpClient)

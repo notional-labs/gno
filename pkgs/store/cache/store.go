@@ -8,12 +8,11 @@ import (
 
 	dbm "github.com/gnolang/gno/pkgs/db"
 	"github.com/gnolang/gno/pkgs/std"
-
 	"github.com/gnolang/gno/pkgs/store/types"
 )
 
 // If value is nil but deleted is false, it means the parent doesn't have the
-// key.  (No need to delete upon Write())
+// key.  (No need to delete upon Write()).
 type cValue struct {
 	value   []byte
 	deleted bool
@@ -31,7 +30,7 @@ type cacheStore struct {
 
 var _ types.Store = (*cacheStore)(nil)
 
-// nolint
+//nolint
 func New(parent types.Store) *cacheStore {
 	return &cacheStore{
 		cache:         make(map[string]*cValue),

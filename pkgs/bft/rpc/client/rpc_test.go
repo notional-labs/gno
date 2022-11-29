@@ -6,15 +6,14 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
-
 	"github.com/gnolang/gno/pkgs/bft/rpc/client"
 	ctypes "github.com/gnolang/gno/pkgs/bft/rpc/core/types"
 	rpcclient "github.com/gnolang/gno/pkgs/bft/rpc/lib/client"
 	rpctest "github.com/gnolang/gno/pkgs/bft/rpc/test"
 	"github.com/gnolang/gno/pkgs/bft/types"
 	"github.com/gnolang/gno/pkgs/maths"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func getHTTPClient() *client.HTTP {
@@ -26,7 +25,7 @@ func getLocalClient() *client.Local {
 	return client.NewLocal(node)
 }
 
-// GetClients returns a slice of clients for table-driven tests
+// GetClients returns a slice of clients for table-driven tests.
 func GetClients() []client.Client {
 	return []client.Client{
 		getHTTPClient(),
@@ -66,7 +65,7 @@ func TestCorsEnabled(t *testing.T) {
 	assert.Equal(t, resp.Header.Get("Access-Control-Allow-Origin"), origin)
 }
 
-// Make sure status is correct (we connect properly)
+// Make sure status is correct (we connect properly).
 func TestStatus(t *testing.T) {
 	for i, c := range GetClients() {
 		moniker := rpctest.GetConfig().Moniker
@@ -76,7 +75,7 @@ func TestStatus(t *testing.T) {
 	}
 }
 
-// Make sure info is correct (we connect properly)
+// Make sure info is correct (we connect properly).
 func TestInfo(t *testing.T) {
 	for i, c := range GetClients() {
 		// status, err := c.Status()
@@ -134,7 +133,6 @@ func TestHealth(t *testing.T) {
 
 func TestGenesisAndValidators(t *testing.T) {
 	for i, c := range GetClients() {
-
 		// make sure this is the right genesis file
 		gen, err := c.Genesis()
 		require.Nil(t, err, "%d: %+v", i, err)
@@ -172,11 +170,10 @@ func TestABCIQuery(t *testing.T) {
 	}
 }
 
-// Make some app checks
+// Make some app checks.
 func TestAppCalls(t *testing.T) {
 	assert, require := assert.New(t), require.New(t)
 	for i, c := range GetClients() {
-
 		// get an offset of height to avoid racing and guessing
 		s, err := c.Status()
 		require.Nil(err, "%d: %+v", i, err)

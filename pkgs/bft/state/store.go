@@ -15,7 +15,7 @@ const (
 	// persist validators every valSetCheckpointInterval blocks to avoid
 	// LoadValidators taking too much time.
 	// https://github.com/tendermint/classic/pull/3438
-	// 100000 results in ~ 100ms to get 100 validators (see BenchmarkLoadValidators)
+	// 100000 results in ~ 100ms to get 100 validators (see BenchmarkLoadValidators).
 	valSetCheckpointInterval = 100000
 )
 
@@ -122,7 +122,7 @@ type ABCIResponses struct {
 	BeginBlock abci.ResponseBeginBlock  `json:"begin_block"`
 }
 
-// NewABCIResponses returns a new ABCIResponses
+// NewABCIResponses returns a new ABCIResponses.
 func NewABCIResponses(block *types.Block) *ABCIResponses {
 	resDeliverTxs := make([]abci.ResponseDeliverTx, block.NumTxs)
 	if block.NumTxs == 0 {
@@ -174,7 +174,7 @@ func saveABCIResponses(db dbm.DB, height int64, abciResponses *ABCIResponses) {
 
 //-----------------------------------------------------------------------------
 
-// ValidatorsInfo represents the latest validator set, or the last height it changed
+// ValidatorsInfo represents the latest validator set, or the last height it changed.
 type ValidatorsInfo struct {
 	ValidatorSet      *types.ValidatorSet
 	LastHeightChanged int64
@@ -265,7 +265,7 @@ func saveValidatorsInfo(db dbm.DB, height, lastHeightChanged int64, valSet *type
 
 //-----------------------------------------------------------------------------
 
-// ConsensusParamsInfo represents the latest consensus params, or the last height it changed
+// ConsensusParamsInfo represents the latest consensus params, or the last height it changed.
 type ConsensusParamsInfo struct {
 	ConsensusParams   abci.ConsensusParams
 	LastHeightChanged int64

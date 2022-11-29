@@ -76,7 +76,7 @@ import (
 //
 // | Parameter | Type | Default | Required | Description     |
 // |-----------+------+---------+----------+-----------------|
-// | tx        | Tx   | nil     | true     | The transaction |
+// | tx        | Tx   | nil     | true     | The transaction |.
 func BroadcastTxAsync(ctx *rpctypes.Context, tx types.Tx) (*ctypes.ResultBroadcastTx, error) {
 	err := mempool.CheckTx(tx, nil)
 	if err != nil {
@@ -141,7 +141,7 @@ func BroadcastTxAsync(ctx *rpctypes.Context, tx types.Tx) (*ctypes.ResultBroadca
 //
 // | Parameter | Type | Default | Required | Description     |
 // |-----------+------+---------+----------+-----------------|
-// | tx        | Tx   | nil     | true     | The transaction |
+// | tx        | Tx   | nil     | true     | The transaction |.
 func BroadcastTxSync(ctx *rpctypes.Context, tx types.Tx) (*ctypes.ResultBroadcastTx, error) {
 	resCh := make(chan abci.Response, 1)
 	err := mempool.CheckTx(tx, func(res abci.Response) {
@@ -223,7 +223,7 @@ func BroadcastTxSync(ctx *rpctypes.Context, tx types.Tx) (*ctypes.ResultBroadcas
 //
 // | Parameter | Type | Default | Required | Description     |
 // |-----------+------+---------+----------+-----------------|
-// | tx        | Tx   | nil     | true     | The transaction |
+// | tx        | Tx   | nil     | true     | The transaction |.
 func BroadcastTxCommit(ctx *rpctypes.Context, tx types.Tx) (*ctypes.ResultBroadcastTxCommit, error) {
 	// Broadcast tx and wait for CheckTx result
 	checkTxResCh := make(chan abci.Response, 1)
@@ -297,7 +297,7 @@ func BroadcastTxCommit(ctx *rpctypes.Context, tx types.Tx) (*ctypes.ResultBroadc
 // | Parameter | Type | Default | Required | Description                          |
 // |-----------+------+---------+----------+--------------------------------------|
 // | limit     | int  | 30      | false    | Maximum number of entries (max: 100) |
-// ```
+// ```.
 func UnconfirmedTxs(ctx *rpctypes.Context, limit int) (*ctypes.ResultUnconfirmedTxs, error) {
 	// reuse per_page validator
 	limit = validatePerPage(limit)
@@ -342,7 +342,7 @@ func UnconfirmedTxs(ctx *rpctypes.Context, limit int) (*ctypes.ResultUnconfirmed
 //	  }
 //	}
 //
-// ```
+// ```.
 func NumUnconfirmedTxs(ctx *rpctypes.Context) (*ctypes.ResultUnconfirmedTxs, error) {
 	return &ctypes.ResultUnconfirmedTxs{
 		Count:      mempool.Size(),

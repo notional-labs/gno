@@ -4,11 +4,10 @@ import (
 	"math/rand"
 	"testing"
 
-	"github.com/stretchr/testify/require"
-
 	"github.com/gnolang/gno/pkgs/amino"
 	"github.com/gnolang/gno/pkgs/crypto"
 	"github.com/gnolang/gno/pkgs/crypto/ed25519"
+	"github.com/stretchr/testify/require"
 )
 
 var invalidStrs = []string{

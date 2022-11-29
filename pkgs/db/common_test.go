@@ -205,7 +205,7 @@ func benchmarkRandomReadsWrites(b *testing.B, db DB) {
 	for i := 0; i < b.N; i++ {
 		// Write something
 		{
-			idx := int64(rand.Int()) % numItems // nolint:gosec testing file, so accepting weak random number generator
+			idx := int64(rand.Int()) % numItems //nolint:gosec testing file, so accepting weak random number generator
 			internal[idx]++
 			val := internal[idx]
 			idxBytes := int642Bytes(idx)
@@ -216,7 +216,7 @@ func benchmarkRandomReadsWrites(b *testing.B, db DB) {
 
 		// Read something
 		{
-			idx := int64(rand.Int()) % numItems // nolint:gosec testing file, so accepting weak random number generator
+			idx := int64(rand.Int()) % numItems //nolint:gosec testing file, so accepting weak random number generator
 			valExp := internal[idx]
 			idxBytes := int642Bytes(idx)
 			valBytes := db.Get(idxBytes)
@@ -238,7 +238,6 @@ func benchmarkRandomReadsWrites(b *testing.B, db DB) {
 				}
 			}
 		}
-
 	}
 }
 

@@ -15,15 +15,14 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
-
 	"github.com/gnolang/gno/pkgs/async"
 	"github.com/gnolang/gno/pkgs/crypto"
 	"github.com/gnolang/gno/pkgs/crypto/ed25519"
 	"github.com/gnolang/gno/pkgs/crypto/secp256k1"
 	osm "github.com/gnolang/gno/pkgs/os"
 	"github.com/gnolang/gno/pkgs/random"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 type kvstoreConn struct {
@@ -40,7 +39,7 @@ func (drw kvstoreConn) Close() (err error) {
 	return err1
 }
 
-// Each returned ReadWriteCloser is akin to a net.Connection
+// Each returned ReadWriteCloser is akin to a net.Connection.
 func makeKVStoreConnPair() (fooConn, barConn kvstoreConn) {
 	barReader, fooWriter := io.Pipe()
 	fooReader, barWriter := io.Pipe()
@@ -330,7 +329,7 @@ func TestSecretConnectionReadWrite(t *testing.T) {
 }
 
 // Run go test -update from within this module
-// to update the golden test vector file
+// to update the golden test vector file.
 var update = flag.Bool("update", false, "update .golden files")
 
 func TestDeriveSecretsAndChallengeGolden(t *testing.T) {
@@ -416,7 +415,7 @@ func TestNonEd25519Pubkey(t *testing.T) {
 
 // Creates the data for a test vector file.
 // The file format is:
-// Hex(diffie_hellman_secret), loc_is_least, Hex(recvSecret), Hex(sendSecret), Hex(challenge)
+// Hex(diffie_hellman_secret), loc_is_least, Hex(recvSecret), Hex(sendSecret), Hex(challenge).
 func createGoldenTestVectors(t *testing.T) string {
 	data := ""
 	for i := 0; i < 32; i++ {

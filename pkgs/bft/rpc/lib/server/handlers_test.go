@@ -9,13 +9,12 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/gorilla/websocket"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
-
 	rs "github.com/gnolang/gno/pkgs/bft/rpc/lib/server"
 	types "github.com/gnolang/gno/pkgs/bft/rpc/lib/types"
 	"github.com/gnolang/gno/pkgs/log"
+	"github.com/gorilla/websocket"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 //////////////////////////////////////////////////////////////////////////////

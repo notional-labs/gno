@@ -15,10 +15,10 @@ type Allocator struct {
 var nilAllocator = (*Allocator)(nil)
 
 const (
-	// go elemental
+	// go elemental.
 	_allocBase    = 24 // defensive... XXX
 	_allocPointer = 8
-	// gno types
+	// gno types.
 	_allocSlice            = 24
 	_allocPointerValue     = 40
 	_allocStructValue      = 152
@@ -59,7 +59,7 @@ const (
 	allocNative      = _allocBase + _allocPointer + _allocNativeValue
 	allocType        = _allocBase + _allocPointer + _allocType
 	// allocDataByte    = 1
-	// allocPackge = 1
+	// allocPackge = 1.
 	allocAmino     = _allocBase + _allocPointer + _allocAny
 	allocAminoByte = 10 // XXX
 )
@@ -249,7 +249,7 @@ func (alloc *Allocator) NewSliceFromData(data []byte) *SliceValue {
 	}
 }
 
-// NOTE: fields must be allocated (e.g. from NewStructFields)
+// NOTE: fields must be allocated (e.g. from NewStructFields).
 func (alloc *Allocator) NewStruct(fields []TypedValue) *StructValue {
 	alloc.AllocateStruct()
 	return &StructValue{

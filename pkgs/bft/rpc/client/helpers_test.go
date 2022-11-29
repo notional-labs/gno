@@ -5,13 +5,12 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
-
 	"github.com/gnolang/gno/pkgs/bft/rpc/client"
 	"github.com/gnolang/gno/pkgs/bft/rpc/client/mock"
 	ctypes "github.com/gnolang/gno/pkgs/bft/rpc/core/types"
 	"github.com/gnolang/gno/pkgs/random"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestWaitForHeight(t *testing.T) {
@@ -77,7 +76,7 @@ func TestWaitForHeight(t *testing.T) {
 	assert.Equal(int64(15), postr.SyncInfo.LatestBlockHeight)
 }
 
-// MakeTxKV returns a text transaction, allong with expected key, value pair
+// MakeTxKV returns a text transaction, allong with expected key, value pair.
 func MakeTxKV() ([]byte, []byte, []byte) {
 	k := []byte(random.RandStr(8))
 	v := []byte(random.RandStr(8))

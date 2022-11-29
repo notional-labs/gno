@@ -4,13 +4,12 @@ import (
 	"math"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
-
 	"github.com/gnolang/gno/pkgs/amino"
 	"github.com/gnolang/gno/pkgs/crypto"
 	"github.com/gnolang/gno/pkgs/crypto/secp256k1"
 	"github.com/gnolang/gno/pkgs/crypto/tmhash"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 type voteData struct {

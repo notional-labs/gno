@@ -7,10 +7,10 @@ import (
 	"github.com/gnolang/gno/pkgs/std"
 )
 
-// RouterKey is they name of the bank module
+// RouterKey is they name of the bank module.
 const RouterKey = ModuleName
 
-// MsgSend - high level transaction of the coin module
+// MsgSend - high level transaction of the coin module.
 type MsgSend struct {
 	FromAddress crypto.Address `json:"from_address" yaml:"from_address"`
 	ToAddress   crypto.Address `json:"to_address" yaml:"to_address"`
@@ -57,7 +57,7 @@ func (msg MsgSend) GetSigners() []crypto.Address {
 	return []crypto.Address{msg.FromAddress}
 }
 
-// MsgMultiSend - high level transaction of the coin module
+// MsgMultiSend - high level transaction of the coin module.
 type MsgMultiSend struct {
 	Inputs  []Input  `json:"inputs" yaml:"inputs"`
 	Outputs []Output `json:"outputs" yaml:"outputs"`
@@ -70,10 +70,10 @@ func NewMsgMultiSend(in []Input, out []Output) MsgMultiSend {
 	return MsgMultiSend{Inputs: in, Outputs: out}
 }
 
-// Route Implements Msg
+// Route Implements Msg.
 func (msg MsgMultiSend) Route() string { return RouterKey }
 
-// Type Implements Msg
+// Type Implements Msg.
 func (msg MsgMultiSend) Type() string { return "multisend" }
 
 // ValidateBasic Implements Msg.
@@ -104,13 +104,13 @@ func (msg MsgMultiSend) GetSigners() []crypto.Address {
 	return addrs
 }
 
-// Input models transaction input
+// Input models transaction input.
 type Input struct {
 	Address crypto.Address `json:"address" yaml:"address"`
 	Coins   std.Coins      `json:"coins" yaml:"coins"`
 }
 
-// ValidateBasic - validate transaction input
+// ValidateBasic - validate transaction input.
 func (in Input) ValidateBasic() error {
 	if len(in.Address) == 0 {
 		return std.ErrInvalidAddress(in.Address.String())
@@ -124,7 +124,7 @@ func (in Input) ValidateBasic() error {
 	return nil
 }
 
-// NewInput - create a transaction input, used with MsgMultiSend
+// NewInput - create a transaction input, used with MsgMultiSend.
 func NewInput(addr crypto.Address, coins std.Coins) Input {
 	return Input{
 		Address: addr,
@@ -132,13 +132,13 @@ func NewInput(addr crypto.Address, coins std.Coins) Input {
 	}
 }
 
-// Output models transaction outputs
+// Output models transaction outputs.
 type Output struct {
 	Address crypto.Address `json:"address" yaml:"address"`
 	Coins   std.Coins      `json:"coins" yaml:"coins"`
 }
 
-// ValidateBasic - validate transaction output
+// ValidateBasic - validate transaction output.
 func (out Output) ValidateBasic() error {
 	if len(out.Address) == 0 {
 		return std.ErrInvalidAddress(out.Address.String())
@@ -152,7 +152,7 @@ func (out Output) ValidateBasic() error {
 	return nil
 }
 
-// NewOutput - create a transaction output, used with MsgMultiSend
+// NewOutput - create a transaction output, used with MsgMultiSend.
 func NewOutput(addr crypto.Address, coins std.Coins) Output {
 	return Output{
 		Address: addr,

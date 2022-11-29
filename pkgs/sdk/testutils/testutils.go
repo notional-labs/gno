@@ -7,7 +7,7 @@ import (
 	"github.com/gnolang/gno/pkgs/std"
 )
 
-// msg type for testing
+// msg type for testing.
 type TestMsg struct {
 	Signers []crypto.Address
 }
@@ -20,7 +20,7 @@ func NewTestMsg(addrs ...crypto.Address) *TestMsg {
 	}
 }
 
-// nolint
+//nolint
 func (msg *TestMsg) Route() string { return "TestMsg" }
 func (msg *TestMsg) Type() string  { return "Test message" }
 func (msg *TestMsg) GetSignBytes() []byte {
@@ -42,7 +42,7 @@ func NewTestFee() std.Fee {
 	return std.NewFee(50000, std.NewCoin("atom", 150))
 }
 
-// coins to more than cover the fee
+// coins to more than cover the fee.
 func NewTestCoins() std.Coins {
 	return std.Coins{std.NewCoin("atom", 10000000)}
 }

@@ -49,7 +49,7 @@ func waitForRPC() {
 	}
 }
 
-// f**ing long, but unique for each test
+// f**ing long, but unique for each test.
 func makePathname() string {
 	// get path
 	p, err := os.Getwd()
@@ -87,7 +87,7 @@ func createConfig() *cfg.Config {
 	return c
 }
 
-// GetConfig returns a config for the test cases as a singleton
+// GetConfig returns a config for the test cases as a singleton.
 func GetConfig(forceCreate ...bool) *cfg.Config {
 	if globalConfig == nil || (len(forceCreate) > 0 && forceCreate[0]) {
 		globalConfig = createConfig()
@@ -95,7 +95,7 @@ func GetConfig(forceCreate ...bool) *cfg.Config {
 	return globalConfig
 }
 
-// StartTendermint starts a test tendermint server in a go routine and returns when it is initialized
+// StartTendermint starts a test tendermint server in a go routine and returns when it is initialized.
 func StartTendermint(app abci.Application, opts ...func(*Options)) *nm.Node {
 	nodeOpts := defaultOptions
 	for _, opt := range opts {
@@ -125,7 +125,7 @@ func StopTendermint(node *nm.Node) {
 	os.RemoveAll(node.Config().RootDir)
 }
 
-// NewTendermint creates a new tendermint server and sleeps forever
+// NewTendermint creates a new tendermint server and sleeps forever.
 func NewTendermint(app abci.Application, opts *Options) *nm.Node {
 	// Create & start node
 	config := GetConfig(opts.recreateConfig)

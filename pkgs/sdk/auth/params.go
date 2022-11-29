@@ -9,7 +9,7 @@ import (
 
 type AuthParamsContextKey struct{}
 
-// Default parameter values
+// Default parameter values.
 const (
 	DefaultMaxMemoBytes           int64 = 65536
 	DefaultTxSigLimit             int64 = 7
@@ -27,7 +27,7 @@ type Params struct {
 	SigVerifyCostSecp256k1 int64 `json:"sig_verify_cost_secp256k1" yaml:"sig_verify_cost_secp256k1"`
 }
 
-// NewParams creates a new Params object
+// NewParams creates a new Params object.
 func NewParams(maxMemoBytes, txSigLimit, txSizeCostPerByte,
 	sigVerifyCostED25519, sigVerifyCostSecp256k1 int64,
 ) Params {

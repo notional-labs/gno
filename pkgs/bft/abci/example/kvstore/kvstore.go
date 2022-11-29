@@ -74,7 +74,7 @@ func (app *KVStoreApplication) Info(req abci.RequestInfo) (resInfo abci.Response
 	}
 }
 
-// tx is either "key=value" or just arbitrary bytes
+// tx is either "key=value" or just arbitrary bytes.
 func (app *KVStoreApplication) DeliverTx(req abci.RequestDeliverTx) (res abci.ResponseDeliverTx) {
 	var key, value []byte
 	parts := bytes.Split(req.Tx, []byte("="))

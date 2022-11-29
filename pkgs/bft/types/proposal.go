@@ -87,7 +87,7 @@ func (p *Proposal) String() string {
 		CanonicalTime(p.Timestamp))
 }
 
-// SignBytes returns the Proposal bytes for signing
+// SignBytes returns the Proposal bytes for signing.
 func (p *Proposal) SignBytes(chainID string) []byte {
 	bz, err := amino.MarshalSized(CanonicalizeProposal(chainID, p))
 	if err != nil {

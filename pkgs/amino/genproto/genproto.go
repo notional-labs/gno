@@ -74,7 +74,7 @@ func (p3c *P3Context) GetPackage(gopkg string) *amino.Package {
 }
 
 // Crawls the packages and flattens all dependencies.
-// Includes
+// Includes.
 func (p3c *P3Context) GetAllPackages() (res []*amino.Package) {
 	seen := map[*amino.Package]struct{}{}
 	for _, pkg := range p3c.packages {
@@ -122,7 +122,7 @@ func (p3c *P3Context) GenerateProto3MessagePartial(p3doc *P3Doc, rt reflect.Type
 		return
 	}
 	if rt.Kind() == reflect.Ptr {
-		panic("pointers not yet supported. if you meant pointer-prefered (for decoding), pass in rt.Elem()")
+		panic("pointers not yet supported. if you meant pointer-preferred (for decoding), pass in rt.Elem()")
 	}
 	if rt.Kind() == reflect.Interface {
 		panic("nothing to generate for interfaces")

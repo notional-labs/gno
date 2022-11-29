@@ -5,10 +5,9 @@ import (
 	"testing"
 	"time"
 
+	amino "github.com/gnolang/gno/pkgs/amino"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-
-	amino "github.com/gnolang/gno/pkgs/amino"
 )
 
 func TestNilSliceEmptySlice(t *testing.T) {

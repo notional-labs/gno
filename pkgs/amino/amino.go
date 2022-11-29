@@ -29,10 +29,10 @@ var (
 	// Global methods for global auto-sealing codec.
 	gcdc *Codec
 
-	// we use this time to init. an empty value (opposed to reflect.Zero which gives time.Time{} / 01-01-01 00:00:00)
+	// we use this time to init. an empty value (opposed to reflect.Zero which gives time.Time{} / 01-01-01 00:00:00).
 	emptyTime time.Time
 
-	// ErrNoPointer is thrown when you call a method that expects a pointer, e.g. Unmarshal
+	// ErrNoPointer is thrown when you call a method that expects a pointer, e.g. Unmarshal.
 	ErrNoPointer = errors.New("expected a pointer")
 )
 
@@ -167,15 +167,15 @@ func GetTypeURL(o interface{}) string {
 type Typ3 uint8
 
 const (
-	// Typ3 types
+	// Typ3 types.
 	Typ3Varint     = Typ3(0)
 	Typ38Byte      = Typ3(1)
 	Typ3ByteLength = Typ3(2)
 	// Typ3_Struct     = Typ3(3)
-	// Typ3_StructTerm = Typ3(4)
+	// Typ3_StructTerm = Typ3(4).
 	Typ34Byte = Typ3(5)
 	// Typ3_List       = Typ3(6)
-	// Typ3_Interface  = Typ3(7)
+	// Typ3_Interface  = Typ3(7).
 )
 
 func (typ Typ3) String() string {
@@ -538,7 +538,7 @@ func (cdc *Codec) UnmarshalSizedReader(r io.Reader, ptr interface{},
 	}
 	l = int64(u64)
 	if l < 0 {
-		_ = errors.New( //nolint:errcheck
+		_ = errors.New( 
 			"read overflow, this implementation can't read this because, why would anyone have this much data? Hello from 2018",
 		)
 	}
@@ -883,7 +883,7 @@ func NewPackage(gopkg string, p3pkg string, dirname string) *Package {
 	return pkg.NewPackage(gopkg, p3pkg, dirname)
 }
 
-// NOTE: duplicated in pkg/pkg.go
+// NOTE: duplicated in pkg/pkg.go.
 func GetCallersDirname() string {
 	dirname := "" // derive from caller.
 	_, filename, _, ok := runtime.Caller(1)
@@ -901,7 +901,7 @@ func GetCallersDirname() string {
 // Object
 
 // All concrete types must implement the Object interface for genproto
-// bindings.  They are generated automatically by genproto/bindings.go
+// bindings.  They are generated automatically by genproto/bindings.go.
 type Object interface {
 	GetTypeURL() string
 }

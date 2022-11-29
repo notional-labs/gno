@@ -103,11 +103,11 @@ func (fc *FuzzedConnection) SetWriteDeadline(t time.Time) error {
 
 func (fc *FuzzedConnection) randomDuration() time.Duration {
 	maxDelayMillis := int(fc.config.MaxDelay.Nanoseconds() / 1000)
-	return time.Millisecond * time.Duration(random.RandInt()%maxDelayMillis) // nolint: gas
+	return time.Millisecond * time.Duration(random.RandInt()%maxDelayMillis) //nolint: gas
 }
 
 // implements the fuzz (delay, kill conn)
-// and returns whether or not the read/write should be ignored
+// and returns whether or not the read/write should be ignored.
 func (fc *FuzzedConnection) fuzz() bool {
 	if !fc.shouldFuzz() {
 		return false
@@ -123,7 +123,7 @@ func (fc *FuzzedConnection) fuzz() bool {
 		case r < fc.config.ProbDropRW+fc.config.ProbDropConn:
 			// XXX: can't this fail because machine precision?
 			// XXX: do we need an error?
-			fc.Close() // nolint: errcheck, gas
+			fc.Close() //nolint: errcheck, gas
 			return true
 		case r < fc.config.ProbDropRW+fc.config.ProbDropConn+fc.config.ProbSleep:
 			time.Sleep(fc.randomDuration())

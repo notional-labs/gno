@@ -12,7 +12,7 @@ const (
 	maxNumChannels  = 16    // plenty of room for upgrades, for now
 )
 
-// Max size of the NodeInfo struct
+// Max size of the NodeInfo struct.
 func MaxNodeInfoSize() int {
 	return maxNodeInfoSize
 }
@@ -40,7 +40,7 @@ type NodeInfo struct {
 	Other   NodeInfoOther `json:"other"`   // other application specific data
 }
 
-// NodeInfoOther is the misc. application specific data
+// NodeInfoOther is the misc. application specific data.
 type NodeInfoOther struct {
 	TxIndex    string `json:"tx_index"`
 	RPCAddress string `json:"rpc_address"`
@@ -75,7 +75,6 @@ func (info NodeInfo) Validate() error {
 	// Validate Version
 	if len(info.Version) > 0 &&
 		(!strings.IsASCIIText(info.Version) || strings.ASCIITrim(info.Version) == "") {
-
 		return fmt.Errorf("info.Version must be valid ASCII text without tabs, but got %v", info.Version)
 	}
 
@@ -122,7 +121,7 @@ func (info NodeInfo) ID() ID {
 // CONTRACT: two nodes are compatible if the Block version and network match
 // and they have at least one channel in common.
 func (info NodeInfo) CompatibleWith(other NodeInfo) error {
-	// check protocl versions
+	// check protocol versions
 	_, err := info.VersionSet.CompatibleWith(other.VersionSet)
 	if err != nil {
 		return err

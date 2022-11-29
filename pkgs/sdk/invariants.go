@@ -8,10 +8,10 @@ import "fmt"
 // The simulator will then halt and print the logs.
 type Invariant func(ctx Context) (string, bool)
 
-// Invariants defines a group of invariants
+// Invariants defines a group of invariants.
 type Invariants []Invariant
 
-// expected interface for registering invariants
+// expected interface for registering invariants.
 type InvariantRegistry interface {
 	RegisterRoute(moduleName, route string, invar Invariant)
 }

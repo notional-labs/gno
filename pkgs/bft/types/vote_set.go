@@ -136,7 +136,7 @@ func (voteSet *VoteSet) Size() int {
 // Conflicting votes return added=*, err=ErrVoteConflictingVotes.
 // NOTE: vote should not be mutated after adding.
 // NOTE: VoteSet must not be nil
-// NOTE: Vote must not be nil
+// NOTE: Vote must not be nil.
 func (voteSet *VoteSet) AddVote(vote *Vote) (added bool, err error) {
 	if voteSet == nil {
 		panic("AddVote() on nil VoteSet")
@@ -296,7 +296,7 @@ func (voteSet *VoteSet) addVerifiedVote(vote *Vote, blockKey string, votingPower
 // NOTE: if there are too many peers, or too much peer churn,
 // this can cause memory issues.
 // TODO: implement ability to remove peers too
-// NOTE: VoteSet must not be nil
+// NOTE: VoteSet must not be nil.
 func (voteSet *VoteSet) SetPeerMaj23(peerID P2PID, blockID BlockID) error {
 	if voteSet == nil {
 		panic("SetPeerMaj23() on nil VoteSet")
@@ -354,7 +354,7 @@ func (voteSet *VoteSet) BitArrayByBlockID(blockID BlockID) *bitarray.BitArray {
 	return nil
 }
 
-// NOTE: if validator has conflicting votes, returns "canonical" vote
+// NOTE: if validator has conflicting votes, returns "canonical" vote.
 func (voteSet *VoteSet) GetByIndex(valIndex int) *Vote {
 	if voteSet == nil {
 		return nil
@@ -475,7 +475,7 @@ func (voteSet *VoteSet) MarshalJSON() ([]byte, error) {
 
 // More human readable JSON of the vote set
 // NOTE: insufficient for unmarshalling from (compressed votes)
-// TODO: make the peerMaj23s nicer to read (eg just the block hash)
+// TODO: make the peerMaj23s nicer to read (eg just the block hash).
 type VoteSetJSON struct {
 	Votes         []string          `json:"votes"`
 	VotesBitArray string            `json:"votes_bit_array"`
@@ -484,7 +484,7 @@ type VoteSetJSON struct {
 
 // Return the bit-array of votes including
 // the fraction of power that has voted like:
-// "BA{29:xx__x__x_x___x__x_______xxx__} 856/1304 = 0.66"
+// "BA{29:xx__x__x_x___x__x_______xxx__} 856/1304 = 0.66".
 func (voteSet *VoteSet) BitArrayString() string {
 	voteSet.mtx.Lock()
 	defer voteSet.mtx.Unlock()
@@ -527,7 +527,7 @@ func (voteSet *VoteSet) StringShort() string {
 		voteSet.height, voteSet.round, voteSet.type_, voteSet.maj23, frac, voteSet.votesBitArray, voteSet.peerMaj23s)
 }
 
-// return the power voted, the total, and the fraction
+// return the power voted, the total, and the fraction.
 func (voteSet *VoteSet) sumTotalFrac() (int64, int64, float64) {
 	voted, total := voteSet.sum, voteSet.valSet.TotalVotingPower()
 	fracVoted := float64(voted) / float64(total)
@@ -566,7 +566,7 @@ func (voteSet *VoteSet) MakeCommit() *Commit {
 Votes for a particular block
 There are two ways a *blockVotes gets created for a blockKey.
 1. first (non-conflicting) vote of a validator w/ blockKey (peerMaj23=false)
-2. A peer claims to have a 2/3 majority w/ blockKey (peerMaj23=true)
+2. A peer claims to have a 2/3 majority w/ blockKey (peerMaj23=true).
 */
 type blockVotes struct {
 	peerMaj23 bool               // peer claims to have maj23
@@ -602,7 +602,7 @@ func (vs *blockVotes) getByIndex(index int) *Vote {
 
 //--------------------------------------------------------------------------------
 
-// Common interface between *consensus.VoteSet and types.Commit
+// Common interface between *consensus.VoteSet and types.Commit.
 type VoteSetReader interface {
 	Height() int64
 	Round() int

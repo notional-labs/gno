@@ -21,7 +21,7 @@ type ID = crypto.ID
 // NetAddress defines information about a peer on the network
 // including its Address, IP address, and port.
 // NOTE: NetAddress is not meant to be mutated due to memoization.
-// @amino2: immutable XXX
+// @amino2: immutable XXX.
 type NetAddress struct {
 	ID   ID     `json:"id"`   // authenticated identifier (TODO)
 	IP   net.IP `json:"ip"`   // part of "addr"
@@ -72,7 +72,7 @@ func NewNetAddress(id ID, addr net.Addr) *NetAddress {
 // NewNetAddressFromString returns a new NetAddress using the provided address in
 // the form of "ID@IP:Port".
 // Also resolves the host if host is not an IP.
-// Errors are of type ErrNetAddressXxx where Xxx is in (NoID, Invalid, Lookup)
+// Errors are of type ErrNetAddressXxx where Xxx is in (NoID, Invalid, Lookup).
 func NewNetAddressFromString(idaddr string) (*NetAddress, error) {
 	idaddr = removeProtocolIfDefined(idaddr)
 	spl := strings.Split(idaddr, "@")
@@ -166,7 +166,7 @@ func (na *NetAddress) Same(other interface{}) bool {
 	return false
 }
 
-// String representation: <ID>@<IP>:<PORT>
+// String representation: <ID>@<IP>:<PORT>.
 func (na *NetAddress) String() string {
 	if na == nil {
 		return "<nil-NetAddress>"
@@ -343,7 +343,7 @@ func (na *NetAddress) ReachabilityTo(o *NetAddress) int {
 // RFC4843: IPv6 ORCHID: (2001:10::/28)
 // RFC4862: IPv6 Autoconfig (FE80::/64)
 // RFC6052: IPv6 well known prefix (64:FF9B::/96)
-// RFC6145: IPv6 IPv4 translated address ::FFFF:0:0:0/96
+// RFC6145: IPv6 IPv4 translated address ::FFFF:0:0:0/96.
 var rfc1918_10 = net.IPNet{IP: net.ParseIP("10.0.0.0"), Mask: net.CIDRMask(8, 32)}
 
 var (

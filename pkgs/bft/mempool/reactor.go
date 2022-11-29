@@ -21,7 +21,7 @@ const (
 	peerCatchupSleepIntervalMS = 100 // If peer is behind, sleep this amount
 
 	// UnknownPeerID is the peer ID to use when running CheckTx when there is
-	// no peer (e.g. RPC)
+	// no peer (e.g. RPC).
 	UnknownPeerID uint16 = 0
 
 	maxActiveIDs = math.MaxUint16

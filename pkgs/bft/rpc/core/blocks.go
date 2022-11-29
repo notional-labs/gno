@@ -72,7 +72,7 @@ import (
 //
 // ```
 //
-// <aside class="notice">Returns at most 20 items.</aside>
+// <aside class="notice">Returns at most 20 items.</aside>.
 func BlockchainInfo(ctx *rpctypes.Context, minHeight, maxHeight int64) (*ctypes.ResultBlockchainInfo, error) {
 	// maximum 20 block metas
 	const limit int64 = 20
@@ -98,7 +98,7 @@ func BlockchainInfo(ctx *rpctypes.Context, minHeight, maxHeight int64) (*ctypes.
 // error if either min or max are negative or min < max
 // if 0, use 1 for min, latest block height for max
 // enforce limit.
-// error if min > max
+// error if min > max.
 func filterMinMax(height, min, max, limit int64) (int64, int64, error) {
 	// filter negatives
 	if min < 0 || max < 0 {
@@ -234,7 +234,7 @@ func filterMinMax(height, min, max, limit int64) (int64, int64, error) {
 //	  "jsonrpc": "2.0"
 //	}
 //
-// ```
+// ```.
 func Block(ctx *rpctypes.Context, heightPtr *int64) (*ctypes.ResultBlock, error) {
 	storeHeight := blockStore.Height()
 	height, err := getHeight(storeHeight, heightPtr)
@@ -325,7 +325,7 @@ func Block(ctx *rpctypes.Context, heightPtr *int64) (*ctypes.ResultBlock, error)
 //	  "jsonrpc": "2.0"
 //	}
 //
-// ```
+// ```.
 func Commit(ctx *rpctypes.Context, heightPtr *int64) (*ctypes.ResultCommit, error) {
 	storeHeight := blockStore.Height()
 	height, err := getHeight(storeHeight, heightPtr)
@@ -398,7 +398,7 @@ func Commit(ctx *rpctypes.Context, heightPtr *int64) (*ctypes.ResultCommit, erro
 //	  }
 //	}
 //
-// ```
+// ```.
 func BlockResults(ctx *rpctypes.Context, heightPtr *int64) (*ctypes.ResultBlockResults, error) {
 	storeHeight := blockStore.Height()
 	height, err := getHeight(storeHeight, heightPtr)

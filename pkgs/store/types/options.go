@@ -29,12 +29,12 @@ func NewPruningOptions(keepRecent, keepEvery int64) PruningOptions {
 	}
 }
 
-// default pruning strategies
+// default pruning strategies.
 var (
-	// PruneEverything means all saved states will be deleted, storing only the current state
+	// PruneEverything means all saved states will be deleted, storing only the current state.
 	PruneEverything = NewPruningOptions(0, 0)
-	// PruneNothing means all historic states will be saved, nothing will be deleted
+	// PruneNothing means all historic states will be saved, nothing will be deleted.
 	PruneNothing = NewPruningOptions(0, 1)
-	// PruneSyncable means only those states not needed for state syncing will be deleted (keeps last 100 + every 10000th)
+	// PruneSyncable means only those states not needed for state syncing will be deleted (keeps last 100 + every 10000th).
 	PruneSyncable = NewPruningOptions(100, 10000)
 )

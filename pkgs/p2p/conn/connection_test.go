@@ -7,11 +7,10 @@ import (
 	"time"
 
 	"github.com/fortytw2/leaktest"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
-
 	"github.com/gnolang/gno/pkgs/amino"
 	"github.com/gnolang/gno/pkgs/log"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 const maxPingPongPacketSize = 1024 // bytes

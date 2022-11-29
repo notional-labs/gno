@@ -9,7 +9,6 @@ import (
 	"time"
 
 	"github.com/gnolang/cors"
-
 	"github.com/gnolang/gno/pkgs/amino"
 	abci "github.com/gnolang/gno/pkgs/bft/abci/types"
 	bc "github.com/gnolang/gno/pkgs/bft/blockchain"
@@ -24,9 +23,7 @@ import (
 	rpcserver "github.com/gnolang/gno/pkgs/bft/rpc/lib/server"
 	sm "github.com/gnolang/gno/pkgs/bft/state"
 	"github.com/gnolang/gno/pkgs/bft/state/txindex"
-	"github.com/gnolang/gno/pkgs/events"
 
-	//"github.com/gnolang/gno/pkgs/bft/state/txindex/kv"
 	"github.com/gnolang/gno/pkgs/bft/state/txindex/null"
 	"github.com/gnolang/gno/pkgs/bft/store"
 	"github.com/gnolang/gno/pkgs/bft/types"
@@ -35,6 +32,7 @@ import (
 	"github.com/gnolang/gno/pkgs/crypto"
 	dbm "github.com/gnolang/gno/pkgs/db"
 	"github.com/gnolang/gno/pkgs/errors"
+	"github.com/gnolang/gno/pkgs/events"
 	"github.com/gnolang/gno/pkgs/log"
 	"github.com/gnolang/gno/pkgs/p2p"
 	"github.com/gnolang/gno/pkgs/service"
@@ -640,7 +638,7 @@ func (n *Node) OnStop() {
 }
 
 // ConfigureRPC sets all variables in rpccore so they will serve
-// rpc calls from this node
+// rpc calls from this node.
 func (n *Node) ConfigureRPC() {
 	rpccore.SetStateDB(n.stateDB)
 	rpccore.SetBlockStore(n.blockStore)
@@ -887,7 +885,7 @@ func LoadStateFromDBOrGenesisDocProvider(stateDB dbm.DB, genesisDocProvider Gene
 	return state, genDoc, nil
 }
 
-// panics if failed to unmarshal bytes
+// panics if failed to unmarshal bytes.
 func loadGenesisDoc(db dbm.DB) (*types.GenesisDoc, error) {
 	b := db.Get(genesisDocKey)
 	if len(b) == 0 {
@@ -901,7 +899,7 @@ func loadGenesisDoc(db dbm.DB) (*types.GenesisDoc, error) {
 	return genDoc, nil
 }
 
-// panics if failed to marshal the given genesis document
+// panics if failed to marshal the given genesis document.
 func saveGenesisDoc(db dbm.DB, genDoc *types.GenesisDoc) {
 	b, err := amino.MarshalJSON(genDoc)
 	if err != nil {

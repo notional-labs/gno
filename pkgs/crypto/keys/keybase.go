@@ -23,7 +23,7 @@ var _ Keybase = dbKeybase{}
 // Find a list of all supported languages in the BIP 39 spec (word lists).
 type Language int
 
-// noinspection ALL
+// noinspection ALL.
 const (
 	// English is the default language to create a mnemonic.
 	// It is the only supported language by this package.
@@ -47,10 +47,10 @@ const (
 )
 
 const (
-	// used for deriving seed from mnemonic
+	// used for deriving seed from mnemonic.
 	DefaultBIP39Passphrase = ""
 
-	// bits of entropy to draw when creating a mnemonic
+	// bits of entropy to draw when creating a mnemonic.
 	defaultEntropySize = 256
 )
 
@@ -65,7 +65,7 @@ var (
 )
 
 // dbKeybase combines encryption and storage implementation to provide
-// a full-featured key manager
+// a full-featured key manager.
 type dbKeybase struct {
 	db dbm.DB
 }
@@ -104,7 +104,7 @@ func (kb dbKeybase) CreateAccountBip44(name, mnemonic, bip39Passphrase, encryptP
 }
 
 // CreateLedger creates a new locally-stored reference to a Ledger keypair
-// It returns the created key info and an error if the Ledger could not be queried
+// It returns the created key info and an error if the Ledger could not be queried.
 func (kb dbKeybase) CreateLedger(name string, algo SigningAlgo, hrp string, account, index uint32) (Info, error) {
 	if algo != Secp256k1 {
 		return nil, ErrUnsupportedSigningAlgo
@@ -392,7 +392,7 @@ func (kb dbKeybase) Delete(nameOrBech32, passphrase string, skipPass bool) error
 //
 // oldpass must be the current passphrase used for encryption,
 // getNewpass is a function to get the passphrase to permanently replace
-// the current passphrase
+// the current passphrase.
 func (kb dbKeybase) Update(nameOrBech32, oldpass string, getNewpass func() (string, error)) error {
 	info, err := kb.GetByNameOrAddress(nameOrBech32)
 	if err != nil {

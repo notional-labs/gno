@@ -6,14 +6,13 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
-
 	"github.com/gnolang/gno/pkgs/amino"
 	auto "github.com/gnolang/gno/pkgs/autofile"
 	tmtime "github.com/gnolang/gno/pkgs/bft/types/time"
 	"github.com/gnolang/gno/pkgs/log"
 	"github.com/gnolang/gno/pkgs/random"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 const (

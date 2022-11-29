@@ -50,7 +50,7 @@ func WriteConfigFile(configFilePath string, config *Config) {
 }
 
 // Note: any changes to the comments/variables/field-names
-// must be reflected in the appropriate struct in config/config.go
+// must be reflected in the appropriate struct in config/config.go.
 const defaultConfigTemplate = `# This is a TOML config file.
 # For more information, see https://github.com/toml-lang/toml
 

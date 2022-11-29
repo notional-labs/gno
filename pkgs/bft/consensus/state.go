@@ -47,14 +47,14 @@ type newRoundStepInfo struct {
 }
 
 // WAL message.
-// msgs from the reactor which may update the state
+// msgs from the reactor which may update the state.
 type msgInfo struct {
 	Msg    ConsensusMessage `json:"msg"`
 	PeerID p2p.ID           `json:"peer_key"`
 }
 
 // WAL message.
-// internally generated messages which may update the state
+// internally generated messages which may update the state.
 type timeoutInfo struct {
 	Duration time.Duration         `json:"duration"`
 	Height   int64                 `json:"height"`
@@ -74,7 +74,7 @@ func (ti *timeoutInfo) GetHRS() cstypes.HRS {
 	}
 }
 
-// interface to the mempool
+// interface to the mempool.
 type txNotifier interface {
 	TxsAvailable() <-chan struct{}
 }
@@ -198,7 +198,7 @@ func (cs *ConsensusState) SetEventSwitch(evsw events.EventSwitch) {
 // String returns a string.
 func (cs *ConsensusState) String() string {
 	// better not to access shared variables
-	return fmt.Sprintf("ConsensusState") //(H:%v R:%v S:%v", cs.Height, cs.Round, cs.Step)
+	return fmt.Sprintf("ConsensusState") // (H:%v R:%v S:%v", cs.Height, cs.Round, cs.Step)
 }
 
 // GetConfig returns a copy of the chain state.
@@ -365,14 +365,14 @@ func (cs *ConsensusState) OnStop() {
 
 // Wait waits for the the main routine to return.
 // NOTE: be sure to Stop() the event switch and drain
-// any event listeners or this may deadlock
+// any event listeners or this may deadlock.
 func (cs *ConsensusState) Wait() {
 	if cs.done != nil {
 		<-cs.done
 	}
 }
 
-// OpenWAL opens a file to log all consensus messages and timeouts for deterministic accountability
+// OpenWAL opens a file to log all consensus messages and timeouts for deterministic accountability.
 func (cs *ConsensusState) OpenWAL(walFile string) (walm.WAL, error) {
 	wal, err := walm.NewWAL(walFile, maxMsgSize)
 	if err != nil {
@@ -462,12 +462,12 @@ func (cs *ConsensusState) scheduleRound0(rs *cstypes.RoundState) {
 	cs.scheduleTimeout(sleepDuration, rs.Height, 0, cstypes.RoundStepNewHeight)
 }
 
-// Attempt to schedule a timeout (by sending timeoutInfo on the tickChan)
+// Attempt to schedule a timeout (by sending timeoutInfo on the tickChan).
 func (cs *ConsensusState) scheduleTimeout(duration time.Duration, height int64, round int, step cstypes.RoundStepType) {
 	cs.timeoutTicker.ScheduleTimeout(timeoutInfo{duration, height, round, step})
 }
 
-// send a msg into the receiveRoutine regarding our own proposal, block part, or vote
+// send a msg into the receiveRoutine regarding our own proposal, block part, or vote.
 func (cs *ConsensusState) sendInternalMessage(mi msgInfo) {
 	select {
 	case cs.internalMsgQueue <- mi:
@@ -482,7 +482,7 @@ func (cs *ConsensusState) sendInternalMessage(mi msgInfo) {
 }
 
 // Reconstruct LastCommit from SeenCommit, which we saved along with the block,
-// (which happens even before saving the state)
+// (which happens even before saving the state).
 func (cs *ConsensusState) reconstructLastCommit(state sm.State) {
 	if state.LastBlockHeight == 0 {
 		return
@@ -659,7 +659,7 @@ func (cs *ConsensusState) receiveRoutine(maxSteps int) {
 	}
 }
 
-// state transitions on complete-proposal, 2/3-any, 2/3-one
+// state transitions on complete-proposal, 2/3-any, 2/3-one.
 func (cs *ConsensusState) handleMsg(mi msgInfo) {
 	cs.mtx.Lock()
 	defer cs.mtx.Unlock()
@@ -712,7 +712,7 @@ func (cs *ConsensusState) handleMsg(mi msgInfo) {
 		return
 	}
 
-	if err != nil { // nolint:staticcheck
+	if err != nil { //nolint:staticcheck
 		// Causes TestReactorValidatorSetChanges to timeout
 		// https://github.com/tendermint/classic/issues/3406
 		// cs.Logger.Error("Error with msg", "height", cs.Height, "round", cs.Round,
@@ -849,7 +849,7 @@ func (cs *ConsensusState) enterNewRound(height int64, round int) {
 }
 
 // needProofBlock returns true on the first height (so the genesis app hash is signed right away)
-// and where the last block (height-1) caused the app hash to change
+// and where the last block (height-1) caused the app hash to change.
 func (cs *ConsensusState) needProofBlock(height int64) bool {
 	if height == 1 {
 		return true
@@ -861,7 +861,7 @@ func (cs *ConsensusState) needProofBlock(height int64) bool {
 
 // Enter (CreateEmptyBlocks): from enterNewRound(height,round)
 // Enter (CreateEmptyBlocks, CreateEmptyBlocksInterval > 0 ): after enterNewRound(height,round), after timeout of CreateEmptyBlocksInterval
-// Enter (!CreateEmptyBlocks) : after enterNewRound(height,round), once txs are in the mempool
+// Enter (!CreateEmptyBlocks) : after enterNewRound(height,round), once txs are in the mempool.
 func (cs *ConsensusState) enterPropose(height int64, round int) {
 	logger := cs.Logger.With("height", height, "round", round)
 
@@ -936,7 +936,6 @@ func (cs *ConsensusState) defaultDecideProposal(height int64, round int) {
 	propBlockId := types.BlockID{Hash: block.Hash(), PartsHeader: blockParts.Header()}
 	proposal := types.NewProposal(height, round, cs.ValidRound, propBlockId)
 	if err := cs.privValidator.SignProposal(cs.state.ChainID, proposal); err == nil {
-
 		// send proposal and block parts on internal msg queue
 		cs.sendInternalMessage(msgInfo{&ProposalMessage{proposal}, ""})
 		for i := 0; i < blockParts.Total(); i++ {
@@ -1200,7 +1199,7 @@ func (cs *ConsensusState) enterPrecommitWait(height int64, round int) {
 	cs.scheduleTimeout(cs.config.Precommit(round), height, round, cstypes.RoundStepPrecommitWait)
 }
 
-// Enter: +2/3 precommits for block
+// Enter: +2/3 precommits for block.
 func (cs *ConsensusState) enterCommit(height int64, commitRound int) {
 	logger := cs.Logger.With("height", height, "commitRound", commitRound)
 
@@ -1276,7 +1275,7 @@ func (cs *ConsensusState) tryFinalizeCommit(height int64) {
 	cs.finalizeCommit(height)
 }
 
-// Increment height and goto cstypes.RoundStepNewHeight
+// Increment height and goto cstypes.RoundStepNewHeight.
 func (cs *ConsensusState) finalizeCommit(height int64) {
 	if cs.Height != height || cs.Step != cstypes.RoundStepCommit {
 		cs.Logger.Debug(fmt.Sprintf("finalizeCommit(%v): Invalid args. Current step: %v/%v/%v", height, cs.Height, cs.Round, cs.Step))
@@ -1479,7 +1478,7 @@ func (cs *ConsensusState) addProposalBlockPart(msg *BlockPartMessage, peerID p2p
 	return added, nil
 }
 
-// Attempt to add the vote. if its a duplicate signature, dupeout the validator
+// Attempt to add the vote. if its a duplicate signature, dupeout the validator.
 func (cs *ConsensusState) tryAddVote(vote *types.Vote, peerID p2p.ID) (bool, error) {
 	added, err := cs.addVote(vote, peerID)
 	if err != nil {
@@ -1566,7 +1565,6 @@ func (cs *ConsensusState) addVote(vote *types.Vote, peerID p2p.ID) (added bool, 
 
 		// If +2/3 prevotes for a block or nil for *any* round:
 		if blockID, ok := prevotes.TwoThirdsMajority(); ok {
-
 			// There was a polka!
 			// If we're locked but this is a recent polka, unlock.
 			// If it matches our ProposalBlock, update the ValidBlock
@@ -1577,7 +1575,6 @@ func (cs *ConsensusState) addVote(vote *types.Vote, peerID p2p.ID) (added bool, 
 				(cs.LockedRound < vote.Round) &&
 				(vote.Round <= cs.Round) &&
 				!cs.LockedBlock.HashesTo(blockID.Hash) {
-
 				cs.Logger.Info("Unlocking because of POL.", "lockedRound", cs.LockedRound, "POLRound", vote.Round)
 				cs.LockedRound = -1
 				cs.LockedBlock = nil
@@ -1588,7 +1585,6 @@ func (cs *ConsensusState) addVote(vote *types.Vote, peerID p2p.ID) (added bool, 
 			// Update Valid* if we can.
 			// NOTE: our proposal block may be nil or not what received a polka..
 			if len(blockID.Hash) != 0 && (cs.ValidRound < vote.Round) && (vote.Round == cs.Round) {
-
 				if cs.ProposalBlock.HashesTo(blockID.Hash) {
 					cs.Logger.Info(
 						"Updating ValidBlock because of POL.", "validRound", cs.ValidRound, "POLRound", vote.Round)
@@ -1696,7 +1692,7 @@ func (cs *ConsensusState) voteTime() time.Time {
 	return minVoteTime
 }
 
-// sign the vote and publish on internalMsgQueue
+// sign the vote and publish on internalMsgQueue.
 func (cs *ConsensusState) signAddVote(type_ types.SignedMsgType, hash []byte, header types.PartSetHeader) *types.Vote {
 	// if we don't have a key or we're not in the validator set, do nothing
 	if cs.privValidator == nil || !cs.Validators.HasAddress(cs.privValidator.GetPubKey().Address()) {

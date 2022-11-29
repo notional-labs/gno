@@ -4,11 +4,10 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
-
 	"github.com/gnolang/gno/pkgs/amino"
 	"github.com/gnolang/gno/pkgs/random"
 	"github.com/gnolang/gno/pkgs/testutils"
+	"github.com/stretchr/testify/assert"
 )
 
 func makeTxs(cnt, size int) Txs {

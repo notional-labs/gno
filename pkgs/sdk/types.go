@@ -47,14 +47,14 @@ var (
 
 //----------------------------------------
 
-// Enum mode for app.runTx
+// Enum mode for app.runTx.
 type RunTxMode uint8
 
 const (
-	// Check a transaction
+	// Check a transaction.
 	RunTxModeCheck RunTxMode = iota
-	// Simulate a transaction
+	// Simulate a transaction.
 	RunTxModeSimulate RunTxMode = iota
-	// Deliver a transaction
+	// Deliver a transaction.
 	RunTxModeDeliver RunTxMode = iota
 )

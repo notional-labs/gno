@@ -50,7 +50,7 @@ type Iterator = dbm.Iterator
 // Queryable allows a Store to expose internal state to the abci.Query
 // interface. Multistore can route requests to the proper Store.
 //
-// This is an optional, but useful extension to any CommitStore
+// This is an optional, but useful extension to any CommitStore.
 type Queryable interface {
 	Query(abci.RequestQuery) abci.ResponseQuery
 }
@@ -58,7 +58,7 @@ type Queryable interface {
 //----------------------------------------
 // MultiStore
 
-type MultiStore interface { //nolint
+type MultiStore interface { 
 	// Convenience for fetching substores.
 	// If the store does not exist, panics.
 	GetStore(StoreKey) Store
@@ -73,7 +73,7 @@ type MultiStore interface { //nolint
 //----------------------------------------
 // Commiter, CommitID
 
-// Something that can persist to disk
+// Something that can persist to disk.
 type Committer interface {
 	Commit() CommitID
 	LastCommitID() CommitID
@@ -126,7 +126,7 @@ func (cid CommitID) Equals(oid CommitID) bool {
 	return cid.Version == oid.Version && bytes.Equal(cid.Hash, oid.Hash)
 }
 
-func (cid CommitID) IsZero() bool { //nolint
+func (cid CommitID) IsZero() bool { 
 	return cid.Version == 0 && len(cid.Hash) == 0
 }
 

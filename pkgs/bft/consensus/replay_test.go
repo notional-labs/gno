@@ -13,9 +13,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
-
 	"github.com/gnolang/gno/pkgs/amino"
 	"github.com/gnolang/gno/pkgs/bft/abci/example/kvstore"
 	abci "github.com/gnolang/gno/pkgs/bft/abci/types"
@@ -33,6 +30,8 @@ import (
 	"github.com/gnolang/gno/pkgs/log"
 	"github.com/gnolang/gno/pkgs/random"
 	"github.com/gnolang/gno/pkgs/testutils"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestMain(m *testing.M) {
@@ -289,7 +288,7 @@ func (w *crashingWAL) Start() error { return w.next.Start() }
 func (w *crashingWAL) Stop() error  { return w.next.Stop() }
 func (w *crashingWAL) Wait()        { w.next.Wait() }
 
-// ------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------.
 type testSim struct {
 	GenesisState sm.State
 	Config       *cfg.Config
@@ -309,10 +308,10 @@ var mempool = mock.Mempool{}
 
 // 0 - all synced up
 // 1 - saved block but app and state are behind
-// 2 - save block and committed but state is behind
+// 2 - save block and committed but state is behind.
 var modes = []uint{0, 1, 2}
 
-// Caller should call `defer sim.CleanupFunc()`
+// Caller should call `defer sim.CleanupFunc()`.
 func makeTestSim(t *testing.T, name string) (sim testSim) {
 	nPeers := 7
 	nVals := 4
@@ -498,7 +497,7 @@ func makeTestSim(t *testing.T, name string) (sim testSim) {
 	return sim
 }
 
-// Sync from scratch
+// Sync from scratch.
 func TestHandshakeReplayAll(t *testing.T) {
 	for _, m := range modes {
 		testHandshakeReplay(t, config, 0, m, nil)
@@ -510,7 +509,7 @@ func TestHandshakeReplayAll(t *testing.T) {
 	}
 }
 
-// Sync many, not from scratch
+// Sync many, not from scratch.
 func TestHandshakeReplaySome(t *testing.T) {
 	for _, m := range modes {
 		testHandshakeReplay(t, config, 1, m, nil)
@@ -522,7 +521,7 @@ func TestHandshakeReplaySome(t *testing.T) {
 	}
 }
 
-// Sync from lagging by one
+// Sync from lagging by one.
 func TestHandshakeReplayOne(t *testing.T) {
 	for _, m := range modes {
 		testHandshakeReplay(t, config, numBlocks-1, m, nil)
@@ -534,7 +533,7 @@ func TestHandshakeReplayOne(t *testing.T) {
 	}
 }
 
-// Sync from caught up
+// Sync from caught up.
 func TestFlappyHandshakeReplayNone(t *testing.T) {
 	testutils.FilterStability(t, testutils.Flappy)
 
@@ -548,7 +547,7 @@ func TestFlappyHandshakeReplayNone(t *testing.T) {
 	}
 }
 
-// Test mockProxyApp should not panic when app return ABCIResponses with some empty ResponseDeliverTx
+// Test mockProxyApp should not panic when app return ABCIResponses with some empty ResponseDeliverTx.
 func TestMockProxyApp(t *testing.T) {
 	logger := log.TestingLogger()
 	validTxs, invalidTxs := 0, 0
@@ -611,7 +610,7 @@ func tempWALWithData(data []byte) string {
 	return walFile.Name()
 }
 
-// Make some blocks. Start a fresh app and apply nBlocks blocks. Then restart the app and sync it up with the remaining blocks
+// Make some blocks. Start a fresh app and apply nBlocks blocks. Then restart the app and sync it up with the remaining blocks.
 func testHandshakeReplay(t *testing.T, config *cfg.Config, nBlocks int, mode uint, sim *testSim) {
 	var chain []*types.Block
 	var commits []*types.Commit
@@ -1031,7 +1030,7 @@ func readPieceFromWAL(msg *walm.TimedWALMessage) interface{} {
 	return nil
 }
 
-// fresh state and mock store
+// fresh state and mock store.
 func makeStateAndStore(config *cfg.Config, pubKey crypto.PubKey, appVersion string) (dbm.DB, sm.State, *mockBlockStore) {
 	stateDB := dbm.NewMemDB()
 	state, _ := sm.MakeGenesisStateFromFile(config.GenesisFile())
@@ -1114,7 +1113,7 @@ func TestHandshakeUpdatesValidators(t *testing.T) {
 	assert.Equal(t, newValAddr, expectValAddr)
 }
 
-// returns the vals on InitChain
+// returns the vals on InitChain.
 type initChainApp struct {
 	abci.BaseApplication
 	vals []abci.ValidatorUpdate

@@ -41,7 +41,7 @@ func NewBankKeeper(acck auth.AccountKeeper) BankKeeper {
 	}
 }
 
-// InputOutputCoins handles a list of inputs and outputs
+// InputOutputCoins handles a list of inputs and outputs.
 func (bank BankKeeper) InputOutputCoins(ctx sdk.Context, inputs []Input, outputs []Output) error {
 	// Safety check ensuring that when sending coins the bank must maintain the
 	// Check supply invariant and validity of Coins.
@@ -84,7 +84,7 @@ func (bank BankKeeper) InputOutputCoins(ctx sdk.Context, inputs []Input, outputs
 	return nil
 }
 
-// SendCoins moves coins from one account to another
+// SendCoins moves coins from one account to another.
 func (bank BankKeeper) SendCoins(ctx sdk.Context, fromAddr crypto.Address, toAddr crypto.Address, amt std.Coins) error {
 	_, err := bank.SubtractCoins(ctx, fromAddr, amt)
 	if err != nil {

@@ -3,9 +3,8 @@ package sdk
 import (
 	"testing"
 
-	"github.com/stretchr/testify/require"
-
 	abci "github.com/gnolang/gno/pkgs/bft/abci/types"
+	"github.com/stretchr/testify/require"
 )
 
 type nopTestHandler struct{}

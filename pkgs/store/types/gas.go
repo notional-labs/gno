@@ -18,7 +18,7 @@ const (
 	GasDeleteDesc           = "Delete"
 )
 
-// Gas measured by the SDK
+// Gas measured by the SDK.
 type Gas = int64
 
 // OutOfGasException defines an error thrown when an action results in out of gas.
@@ -32,7 +32,7 @@ type GasOverflowException struct {
 	Descriptor string
 }
 
-// GasMeter interface to track gas consumption
+// GasMeter interface to track gas consumption.
 type GasMeter interface {
 	GasConsumed() Gas
 	GasConsumedToLimit() Gas
@@ -208,7 +208,7 @@ func (g passthroughGasMeter) IsOutOfGas() bool {
 
 //----------------------------------------
 
-// GasConfig defines gas cost for each operation on KVStores
+// GasConfig defines gas cost for each operation on KVStores.
 type GasConfig struct {
 	HasCost          Gas
 	DeleteCost       Gas

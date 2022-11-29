@@ -12,10 +12,9 @@ import (
 	"testing"
 	"time"
 
+	"github.com/gnolang/gno/pkgs/log"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-
-	"github.com/gnolang/gno/pkgs/log"
 )
 
 func TestMaxOpenConnections(t *testing.T) {
@@ -80,7 +79,7 @@ func TestStartHTTPAndTLSServer(t *testing.T) {
 	go StartHTTPAndTLSServer(ln, mux, "test.crt", "test.key", log.TestingLogger(), DefaultConfig())
 
 	tr := &http.Transport{
-		TLSClientConfig: &tls.Config{InsecureSkipVerify: true}, // nolint: gosec
+		TLSClientConfig: &tls.Config{InsecureSkipVerify: true}, //nolint: gosec
 	}
 	c := &http.Client{Transport: tr}
 	res, err := c.Get("https://" + ln.Addr().String())

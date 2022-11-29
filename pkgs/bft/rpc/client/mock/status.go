@@ -5,7 +5,7 @@ import (
 	ctypes "github.com/gnolang/gno/pkgs/bft/rpc/core/types"
 )
 
-// StatusMock returns the result specified by the Call
+// StatusMock returns the result specified by the Call.
 type StatusMock struct {
 	Call
 }
@@ -24,7 +24,7 @@ func (m *StatusMock) Status() (*ctypes.ResultStatus, error) {
 }
 
 // StatusRecorder can wrap another type (StatusMock, full client)
-// and record the status calls
+// and record the status calls.
 type StatusRecorder struct {
 	Client client.StatusClient
 	Calls  []Call

@@ -4,10 +4,9 @@ import (
 	"fmt"
 
 	dbm "github.com/gnolang/gno/pkgs/db"
-	"github.com/gnolang/gno/pkgs/strings"
-
 	"github.com/gnolang/gno/pkgs/store/rootmulti"
 	"github.com/gnolang/gno/pkgs/store/types"
+	"github.com/gnolang/gno/pkgs/strings"
 )
 
 func NewCommitMultiStore(db dbm.DB) types.CommitMultiStore {

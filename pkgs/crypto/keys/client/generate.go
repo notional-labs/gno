@@ -57,7 +57,7 @@ func generateApp(cmd *command.Command, args []string, iopts interface{}) error {
 		}
 	}
 
-	mnemonic, err := bip39.NewMnemonic(entropySeed[:])
+	mnemonic, err := bip39.NewMnemonic(entropySeed)
 	if err != nil {
 		return err
 	}

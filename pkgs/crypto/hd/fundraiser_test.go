@@ -7,11 +7,10 @@ import (
 	"io/ioutil"
 	"testing"
 
-	"github.com/stretchr/testify/require"
-
 	"github.com/gnolang/gno/pkgs/crypto"
 	"github.com/gnolang/gno/pkgs/crypto/bip39"
 	"github.com/gnolang/gno/pkgs/crypto/secp256k1"
+	"github.com/stretchr/testify/require"
 )
 
 type addrData struct {
@@ -76,6 +75,5 @@ func TestFundraiserCompatibility(t *testing.T) {
 		addr := pub.Address()
 		t.Logf("ADDR  \t%X %X\n", addrB, addr)
 		require.Equal(t, addr, crypto.AddressFromBytes(addrB), fmt.Sprintf("Expected addresses to match %d", i))
-
 	}
 }

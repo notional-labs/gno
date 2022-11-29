@@ -11,8 +11,6 @@ import (
 	"strings"
 	"testing"
 
-	//"go/build"
-
 	gno "github.com/gnolang/gno/pkgs/gnolang"
 )
 

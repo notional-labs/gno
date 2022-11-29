@@ -80,7 +80,7 @@ func (vh vmHandler) handleMsgCall(ctx sdk.Context, msg MsgCall) (res sdk.Result)
 //----------------------------------------
 // Query
 
-// query paths
+// query paths.
 const (
 	QueryPackage = "package"
 	QueryStore   = "store"

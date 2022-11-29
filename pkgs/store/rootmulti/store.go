@@ -10,7 +10,6 @@ import (
 	"github.com/gnolang/gno/pkgs/crypto/tmhash"
 	dbm "github.com/gnolang/gno/pkgs/db"
 	"github.com/gnolang/gno/pkgs/errors"
-
 	"github.com/gnolang/gno/pkgs/store/cachemulti"
 	serrors "github.com/gnolang/gno/pkgs/store/errors"
 	"github.com/gnolang/gno/pkgs/store/immut"
@@ -39,7 +38,7 @@ var (
 	_ types.Queryable        = (*multiStore)(nil)
 )
 
-// nolint
+//nolint
 func NewMultiStore(db dbm.DB) *multiStore {
 	return &multiStore{
 		db:           db,
@@ -49,12 +48,12 @@ func NewMultiStore(db dbm.DB) *multiStore {
 	}
 }
 
-// Implements CommitMultiStore
+// Implements CommitMultiStore.
 func (ms *multiStore) GetStoreOptions() types.StoreOptions {
 	return ms.storeOpts
 }
 
-// Implements CommitMultiStore
+// Implements CommitMultiStore.
 func (ms *multiStore) SetStoreOptions(opts types.StoreOptions) {
 	ms.storeOpts = opts
 	for _, store := range ms.stores {
@@ -62,7 +61,7 @@ func (ms *multiStore) SetStoreOptions(opts types.StoreOptions) {
 	}
 }
 
-// SetLazyLoad sets if the store should be loaded lazily or not
+// SetLazyLoad sets if the store should be loaded lazily or not.
 func (ms *multiStore) SetLazyLoad(lazyLoad bool) {
 	ms.storeOpts.LazyLoad = lazyLoad
 }
@@ -315,7 +314,7 @@ func (ms *multiStore) Query(req abci.RequestQuery) (res abci.ResponseQuery) {
 
 // parsePath expects a format like /<storeName>[/<subpath>]
 // Must start with /, subpath may be empty
-// Returns error if it doesn't start with /
+// Returns error if it doesn't start with /.
 func parsePath(path string) (storeName string, subpath string, err serrors.Error) {
 	if !strings.HasPrefix(path, "/") {
 		err = serrors.ErrUnknownRequest(fmt.Sprintf("invalid path: %s", path))

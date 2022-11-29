@@ -27,7 +27,7 @@ type EventNewBlock struct {
 	ResultEndBlock   abci.ResponseEndBlock   `json:"result_end_block"`
 }
 
-// light weight event for benchmarking
+// light weight event for benchmarking.
 type EventNewBlockHeader struct {
 	Header Header `json:"header"`
 
@@ -35,7 +35,7 @@ type EventNewBlockHeader struct {
 	ResultEndBlock   abci.ResponseEndBlock   `json:"result_end_block"`
 }
 
-// All txs fire EventTx
+// All txs fire EventTx.
 type EventTx struct {
 	Result TxResult `json:"result"`
 }

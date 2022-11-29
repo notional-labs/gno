@@ -21,7 +21,7 @@ func envSet() int {
 	}
 }
 
-// Fail when FAIL_TEST_INDEX == callIndex
+// Fail when FAIL_TEST_INDEX == callIndex.
 var callIndex int // indexes Fail calls
 
 func Fail() {

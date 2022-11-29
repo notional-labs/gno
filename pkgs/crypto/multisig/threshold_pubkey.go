@@ -72,12 +72,12 @@ func (pk PubKeyMultisigThreshold) VerifyBytes(msg []byte, marshalledSig []byte) 
 	return true
 }
 
-// Bytes returns the amino encoded version of the PubKeyMultisigThreshold
+// Bytes returns the amino encoded version of the PubKeyMultisigThreshold.
 func (pk PubKeyMultisigThreshold) Bytes() []byte {
 	return amino.MustMarshalAny(pk)
 }
 
-// Address returns tmhash(PubKeyMultisigThreshold.Bytes())
+// Address returns tmhash(PubKeyMultisigThreshold.Bytes()).
 func (pk PubKeyMultisigThreshold) Address() crypto.Address {
 	return crypto.AddressFromPreimage(pk.Bytes())
 }

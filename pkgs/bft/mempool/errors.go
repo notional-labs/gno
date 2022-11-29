@@ -6,10 +6,10 @@ import (
 	"github.com/gnolang/gno/pkgs/errors"
 )
 
-// ErrTxInCache is returned to the client if we saw tx earlier
+// ErrTxInCache is returned to the client if we saw tx earlier.
 var ErrTxInCache = errors.New("Tx already exists in cache")
 
-// ErrTxTooLarge means the tx is too big to be sent in a message to other peers
+// ErrTxTooLarge means the tx is too big to be sent in a message to other peers.
 type ErrTxTooLarge struct {
 	max    int64
 	actual int64
@@ -19,7 +19,7 @@ func (e ErrTxTooLarge) Error() string {
 	return fmt.Sprintf("Tx too large. Max size is %d, but got %d", e.max, e.actual)
 }
 
-// ErrMempoolIsFull means Tendermint & an application can't handle that much load
+// ErrMempoolIsFull means Tendermint & an application can't handle that much load.
 type ErrMempoolIsFull struct {
 	numTxs int
 	maxTxs int

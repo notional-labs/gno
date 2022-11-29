@@ -54,7 +54,7 @@ import (
 // | path      | string | false   | false    | Path to the data ("/a/b/c")                    |
 // | data      | []byte | false   | true     | Data                                           |
 // | height    | int64  | 0       | false    | Height (0 means latest)                        |
-// | prove     | bool   | false   | false    | Includes proof if true                         |
+// | prove     | bool   | false   | false    | Includes proof if true                         |.
 func ABCIQuery(ctx *rpctypes.Context, path string, data []byte, height int64, prove bool) (*ctypes.ResultABCIQuery, error) {
 	resQuery, err := proxyAppQuery.QuerySync(abci.RequestQuery{
 		Path:   path,
@@ -102,7 +102,7 @@ func ABCIQuery(ctx *rpctypes.Context, path string, data []byte, height int64, pr
 //		"jsonrpc": "2.0"
 //	}
 //
-// ```
+// ```.
 func ABCIInfo(ctx *rpctypes.Context) (*ctypes.ResultABCIInfo, error) {
 	resInfo, err := proxyAppQuery.InfoSync(abci.RequestInfo{})
 	if err != nil {

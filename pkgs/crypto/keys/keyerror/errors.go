@@ -27,7 +27,7 @@ func (e errKeyNotFound) Error() string {
 	return fmt.Sprintf("Key %s not found", e.name)
 }
 
-// NewErrKeyNotFound returns a standardized error reflecting that the specified key doesn't exist
+// NewErrKeyNotFound returns a standardized error reflecting that the specified key doesn't exist.
 func NewErrKeyNotFound(name string) error {
 	return errKeyNotFound{
 		code: codeKeyNotFound,
@@ -35,7 +35,7 @@ func NewErrKeyNotFound(name string) error {
 	}
 }
 
-// IsErrKeyNotFound returns true if the given error is errKeyNotFound
+// IsErrKeyNotFound returns true if the given error is errKeyNotFound.
 func IsErrKeyNotFound(err error) bool {
 	if err == nil {
 		return false
@@ -60,14 +60,14 @@ func (e errWrongPassword) Error() string {
 	return "invalid account password"
 }
 
-// NewErrWrongPassword returns a standardized error reflecting that the specified password is wrong
+// NewErrWrongPassword returns a standardized error reflecting that the specified password is wrong.
 func NewErrWrongPassword() error {
 	return errWrongPassword{
 		code: codeWrongPassword,
 	}
 }
 
-// IsErrWrongPassword returns true if the given error is errWrongPassword
+// IsErrWrongPassword returns true if the given error is errWrongPassword.
 func IsErrWrongPassword(err error) bool {
 	if err == nil {
 		return false

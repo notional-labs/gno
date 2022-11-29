@@ -38,7 +38,7 @@ type BIP44Params struct {
 }
 
 // NewParams creates a BIP 44 parameter object from the params:
-// m / purpose' / coinType' / account' / change / addressIndex
+// m / purpose' / coinType' / account' / change / addressIndex.
 func NewParams(purpose, coinType, account uint32, change bool, addressIdx uint32) *BIP44Params {
 	return &BIP44Params{
 		Purpose:      purpose,
@@ -227,7 +227,7 @@ func derivePrivateKey(privKeyBytes [32]byte, chainCode [32]byte, index uint32, h
 	return x, chainCode2
 }
 
-// modular big endian addition
+// modular big endian addition.
 func addScalars(a []byte, b []byte) [32]byte {
 	aInt := new(big.Int).SetBytes(a)
 	bInt := new(big.Int).SetBytes(b)

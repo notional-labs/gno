@@ -9,7 +9,7 @@ import (
 
 var (
 	// The major or minor versions must bump when components bump.
-	// The TendermintClassic software version
+	// The TendermintClassic software version.
 	Version    = "v1.0.0-rc.0"
 	VersionSet verset.VersionSet
 )

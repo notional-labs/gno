@@ -4,11 +4,10 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
-
 	"github.com/gnolang/gno/pkgs/crypto"
 	"github.com/gnolang/gno/pkgs/crypto/ed25519"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestCreateAccountInvalidMnemonic(t *testing.T) {
@@ -63,7 +62,7 @@ func TestCreateLedger(t *testing.T) {
 	assert.Equal(t, "44'/118'/3'/0/1", path.String())
 }
 
-// TestKeyManagement makes sure we can manipulate these keys well
+// TestKeyManagement makes sure we can manipulate these keys well.
 func TestKeyManagement(t *testing.T) {
 	// make the storage with reasonable defaults
 	cstore := NewInMemory()
@@ -145,7 +144,7 @@ func TestKeyManagement(t *testing.T) {
 }
 
 // TestSignVerify does some detailed checks on how we sign and validate
-// signatures
+// signatures.
 func TestSignVerify(t *testing.T) {
 	cstore := NewInMemory()
 
@@ -229,7 +228,7 @@ func assertPassword(t *testing.T, cstore Keybase, name, pass, badpass string) {
 	require.Nil(t, err, "%+v", err)
 }
 
-// TestExportImport tests exporting and importing
+// TestExportImport tests exporting and importing.
 func TestExportImport(t *testing.T) {
 	// make the storage with reasonable defaults
 	cstore := NewInMemory()
@@ -300,7 +299,7 @@ func TestExportImportPubKey(t *testing.T) {
 	require.NotNil(t, err)
 }
 
-// TestAdvancedKeyManagement verifies update, import, export functionality
+// TestAdvancedKeyManagement verifies update, import, export functionality.
 func TestAdvancedKeyManagement(t *testing.T) {
 	// make the storage with reasonable defaults
 	cstore := NewInMemory()
@@ -348,7 +347,7 @@ func TestAdvancedKeyManagement(t *testing.T) {
 	require.NotNil(t, err)
 }
 
-// TestSeedPhrase verifies restoring from a seed phrase
+// TestSeedPhrase verifies restoring from a seed phrase.
 func TestSeedPhrase(t *testing.T) {
 	// make the storage with reasonable defaults
 	cstore := NewInMemory()

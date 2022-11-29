@@ -159,7 +159,6 @@ func (m *Machine) PreprocessAllFilesAndSaveBlockNodes() {
 			// This happens for non-realm file tests.
 			// TODO ensure the files are the same.
 		}
-
 	}
 }
 
@@ -693,7 +692,7 @@ type Op uint8
 
 const (
 
-	/* Control operators */
+	/* Control operators. */
 	OpInvalid             Op = 0x00 // invalid
 	OpHalt                Op = 0x01 // halt (e.g. last statement)
 	OpNoop                Op = 0x02 // no-op
@@ -719,7 +718,7 @@ const (
 	OpPanic1              Op = 0x16 // pop exception and pop call frames.
 	OpPanic2              Op = 0x17 // pop call frames.
 
-	/* Unary & binary operators */
+	/* Unary & binary operators. */
 	OpUpos  Op = 0x20 // + (unary)
 	OpUneg  Op = 0x21 // - (unary)
 	OpUnot  Op = 0x22 // ! (unary)
@@ -745,7 +744,7 @@ const (
 	OpBand  Op = 0x37 // &
 	OpBandn Op = 0x38 // &^
 
-	/* Other expression operators */
+	/* Other expression operators. */
 	OpEval         Op = 0x40 // eval next expression
 	OpBinary1      Op = 0x41 // X op ?
 	OpIndex1       Op = 0x42 // X[Y]
@@ -766,13 +765,13 @@ const (
 	OpFuncLit      Op = 0x51 // func(T){Body}
 	OpConvert      Op = 0x52 // Y(X)
 
-	/* Native operators */
+	/* Native operators. */
 	OpArrayLitGoNative  Op = 0x60
 	OpSliceLitGoNative  Op = 0x61
 	OpStructLitGoNative Op = 0x62
 	OpCallGoNative      Op = 0x63
 
-	/* Type operators */
+	/* Type operators. */
 	OpFieldType       Op = 0x70 // Name: X `tag`
 	OpArrayType       Op = 0x71 // [X]Y{}
 	OpSliceType       Op = 0x72 // []X{}
@@ -784,7 +783,7 @@ const (
 	OpStructType      Op = 0x78 // struct{...}
 	OpMaybeNativeType Op = 0x79 // maybenative{X}
 
-	/* Statement operators */
+	/* Statement operators. */
 	OpAssign      Op = 0x80 // Lhs = Rhs
 	OpAddAssign   Op = 0x81 // Lhs += Rhs
 	OpSubAssign   Op = 0x82 // Lhs -= Rhs
@@ -801,11 +800,11 @@ const (
 	OpInc         Op = 0x8D // X++
 	OpDec         Op = 0x8E // X--
 
-	/* Decl operators */
+	/* Decl operators. */
 	OpValueDecl Op = 0x90 // var/const ...
 	OpTypeDecl  Op = 0x91 // type ...
 
-	/* Loop (sticky) operators (>= 0xD0) */
+	/* Loop (sticky) operators (>= 0xD0). */
 	OpSticky            Op = 0xD0 // not a real op.
 	OpBody              Op = 0xD1 // if/block/switch/select.
 	OpForLoop           Op = 0xD2
@@ -827,7 +826,7 @@ func (m *Machine) incrCPU(cycles int64) {
 }
 
 const (
-	/* Control operators */
+	/* Control operators. */
 	OpCPUInvalid             = 1
 	OpCPUHalt                = 1
 	OpCPUNoop                = 1
@@ -853,7 +852,7 @@ const (
 	OpCPUPanic1              = 1
 	OpCPUPanic2              = 1
 
-	/* Unary & binary operators */
+	/* Unary & binary operators. */
 	OpCPUUpos  = 1
 	OpCPUUneg  = 1
 	OpCPUUnot  = 1
@@ -879,7 +878,7 @@ const (
 	OpCPUBand  = 1
 	OpCPUBandn = 1
 
-	/* Other expression operators */
+	/* Other expression operators. */
 	OpCPUEval         = 1
 	OpCPUBinary1      = 1
 	OpCPUIndex1       = 1
@@ -900,13 +899,13 @@ const (
 	OpCPUFuncLit      = 1
 	OpCPUConvert      = 1
 
-	/* Native operators */
+	/* Native operators. */
 	OpCPUArrayLitGoNative  = 1
 	OpCPUSliceLitGoNative  = 1
 	OpCPUStructLitGoNative = 1
 	OpCPUCallGoNative      = 1
 
-	/* Type operators */
+	/* Type operators. */
 	OpCPUFieldType       = 1
 	OpCPUArrayType       = 1
 	OpCPUSliceType       = 1
@@ -918,7 +917,7 @@ const (
 	OpCPUStructType      = 1
 	OpCPUMaybeNativeType = 1
 
-	/* Statement operators */
+	/* Statement operators. */
 	OpCPUAssign      = 1
 	OpCPUAddAssign   = 1
 	OpCPUSubAssign   = 1
@@ -935,11 +934,11 @@ const (
 	OpCPUInc         = 1
 	OpCPUDec         = 1
 
-	/* Decl operators */
+	/* Decl operators. */
 	OpCPUValueDecl = 1
 	OpCPUTypeDecl  = 1
 
-	/* Loop (sticky) operators (>= 0xD0) */
+	/* Loop (sticky) operators (>= 0xD0). */
 	OpCPUSticky            = 1
 	OpCPUBody              = 1
 	OpCPUForLoop           = 1

@@ -11,7 +11,7 @@ var _ types.Store = Store{}
 
 // Store is similar with tendermint/tendermint/libs/db/prefix_db
 // both gives access only to the limited subset of the store
-// for convenience or safety
+// for convenience or safety.
 type Store struct {
 	parent types.Store
 	prefix []byte
@@ -39,35 +39,35 @@ func (s Store) key(key []byte) (res []byte) {
 	return
 }
 
-// Implements Store
+// Implements Store.
 func (s Store) CacheWrap() types.Store {
 	return cache.New(s)
 }
 
-// Implements Store
+// Implements Store.
 func (s Store) Write() {
 	panic("unexpected .Write() on prefix.Store")
 }
 
-// Implements Store
+// Implements Store.
 func (s Store) Get(key []byte) []byte {
 	res := s.parent.Get(s.key(key))
 	return res
 }
 
-// Implements Store
+// Implements Store.
 func (s Store) Has(key []byte) bool {
 	return s.parent.Has(s.key(key))
 }
 
-// Implements Store
+// Implements Store.
 func (s Store) Set(key, value []byte) {
 	types.AssertValidKey(key)
 	types.AssertValidValue(value)
 	s.parent.Set(s.key(key), value)
 }
 
-// Implements Store
+// Implements Store.
 func (s Store) Delete(key []byte) {
 	s.parent.Delete(s.key(key))
 }
@@ -125,17 +125,17 @@ func newPrefixIterator(prefix, start, end []byte, parent types.Iterator) *prefix
 	}
 }
 
-// Implements Iterator
+// Implements Iterator.
 func (iter *prefixIterator) Domain() ([]byte, []byte) {
 	return iter.start, iter.end
 }
 
-// Implements Iterator
+// Implements Iterator.
 func (iter *prefixIterator) Valid() bool {
 	return iter.valid && iter.iter.Valid()
 }
 
-// Implements Iterator
+// Implements Iterator.
 func (iter *prefixIterator) Next() {
 	if !iter.valid {
 		panic("prefixIterator invalid, cannot call Next()")
@@ -146,7 +146,7 @@ func (iter *prefixIterator) Next() {
 	}
 }
 
-// Implements Iterator
+// Implements Iterator.
 func (iter *prefixIterator) Key() (key []byte) {
 	if !iter.valid {
 		panic("prefixIterator invalid, cannot call Key()")
@@ -156,7 +156,7 @@ func (iter *prefixIterator) Key() (key []byte) {
 	return
 }
 
-// Implements Iterator
+// Implements Iterator.
 func (iter *prefixIterator) Value() []byte {
 	if !iter.valid {
 		panic("prefixIterator invalid, cannot call Value()")
@@ -164,12 +164,12 @@ func (iter *prefixIterator) Value() []byte {
 	return iter.iter.Value()
 }
 
-// Implements Iterator
+// Implements Iterator.
 func (iter *prefixIterator) Close() {
 	iter.iter.Close()
 }
 
-// copied from github.com/tendermint/classic/libs/db/prefix_db.go
+// copied from github.com/tendermint/classic/libs/db/prefix_db.go.
 func stripPrefix(key []byte, prefix []byte) []byte {
 	if len(key) < len(prefix) || !bytes.Equal(key[:len(prefix)], prefix) {
 		panic("should not happen")
@@ -177,7 +177,7 @@ func stripPrefix(key []byte, prefix []byte) []byte {
 	return key[len(prefix):]
 }
 
-// wrapping types.PrefixEndBytes
+// wrapping types.PrefixEndBytes.
 func cpIncr(bz []byte) []byte {
 	return types.PrefixEndBytes(bz)
 }

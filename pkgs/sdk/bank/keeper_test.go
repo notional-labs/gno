@@ -3,11 +3,10 @@ package bank
 import (
 	"testing"
 
-	"github.com/stretchr/testify/require"
-
 	"github.com/gnolang/gno/pkgs/crypto"
 	"github.com/gnolang/gno/pkgs/sdk"
 	"github.com/gnolang/gno/pkgs/std"
+	"github.com/stretchr/testify/require"
 )
 
 func TestKeeper(t *testing.T) {

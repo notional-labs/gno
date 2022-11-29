@@ -22,7 +22,7 @@ type AccountKeeper struct {
 
 // NewAccountKeeper returns a new AccountKeeper that uses go-amino to
 // (binary) encode and decode concrete std.Accounts.
-// nolint
+//nolint
 func NewAccountKeeper(
 	key store.StoreKey, proto func() std.Account,
 ) AccountKeeper {
@@ -88,7 +88,7 @@ func (ak AccountKeeper) SetAccount(ctx sdk.Context, acc std.Account) {
 }
 
 // RemoveAccount removes an account for the account mapper store.
-// NOTE: this will cause supply invariant violation if called
+// NOTE: this will cause supply invariant violation if called.
 func (ak AccountKeeper) RemoveAccount(ctx sdk.Context, acc std.Account) {
 	addr := acc.GetAddress()
 	stor := ctx.Store(ak.key)
@@ -113,7 +113,7 @@ func (ak AccountKeeper) IterateAccounts(ctx sdk.Context, process func(std.Accoun
 	}
 }
 
-// GetPubKey Returns the PubKey of the account at address
+// GetPubKey Returns the PubKey of the account at address.
 func (ak AccountKeeper) GetPubKey(ctx sdk.Context, addr crypto.Address) (crypto.PubKey, error) {
 	acc := ak.GetAccount(ctx, addr)
 	if acc == nil {
@@ -122,7 +122,7 @@ func (ak AccountKeeper) GetPubKey(ctx sdk.Context, addr crypto.Address) (crypto.
 	return acc.GetPubKey(), nil
 }
 
-// GetSequence Returns the Sequence of the account at address
+// GetSequence Returns the Sequence of the account at address.
 func (ak AccountKeeper) GetSequence(ctx sdk.Context, addr crypto.Address) (uint64, error) {
 	acc := ak.GetAccount(ctx, addr)
 	if acc == nil {
@@ -131,7 +131,7 @@ func (ak AccountKeeper) GetSequence(ctx sdk.Context, addr crypto.Address) (uint6
 	return acc.GetSequence(), nil
 }
 
-// GetNextAccountNumber Returns and increments the global account number counter
+// GetNextAccountNumber Returns and increments the global account number counter.
 func (ak AccountKeeper) GetNextAccountNumber(ctx sdk.Context) uint64 {
 	var accNumber uint64
 	stor := ctx.Store(ak.key)

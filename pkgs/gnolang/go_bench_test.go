@@ -96,7 +96,7 @@ func BenchmarkStructStack(b *testing.B) {
 	fmt.Println(x)
 }
 
-// this doesn't work
+// this doesn't work.
 func BenchmarkStructGC(b *testing.B) {
 	x := int32(0)
 	gen := func(i int) *SomeStruct { return &SomeStruct{Field1: int32(i) % 20} }

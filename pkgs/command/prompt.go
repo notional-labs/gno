@@ -91,7 +91,7 @@ func (cmd *Command) GetString(prompt string) (string, error) {
 
 // readLineFromInBuf reads one line from stdin.
 // Subsequent calls reuse the same buffer, so we don't lose
-// any input when reading a password twice (to verify)
+// any input when reading a password twice (to verify).
 func (cmd *Command) readLineFromInBuf() (string, error) {
 	pass, err := cmd.InBuf.ReadString('\n')
 	if err != nil {

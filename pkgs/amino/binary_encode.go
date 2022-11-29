@@ -85,7 +85,6 @@ func (cdc *Codec) encodeReflectBinary(w io.Writer, info *TypeInfo, rv reflect.Va
 	}
 
 	switch info.Type.Kind() {
-
 	//----------------------------------------
 	// Complex
 
@@ -465,7 +464,7 @@ func (cdc *Codec) encodeReflectBinaryList(w io.Writer, info *TypeInfo, rv reflec
 	return writeMaybeBare(w, buf.Bytes(), bare)
 }
 
-// CONTRACT: info.Type.Elem().Kind() == reflect.Uint8
+// CONTRACT: info.Type.Elem().Kind() == reflect.Uint8.
 func (cdc *Codec) encodeReflectBinaryByteSlice(w io.Writer, info *TypeInfo, rv reflect.Value,
 	fopts FieldOptions,
 ) (err error) {

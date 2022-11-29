@@ -13,20 +13,19 @@ import (
 	"sync"
 	"time"
 
-	pool "github.com/libp2p/go-buffer-pool"
-	"golang.org/x/crypto/chacha20poly1305"
-	"golang.org/x/crypto/curve25519"
-	"golang.org/x/crypto/hkdf"
-	"golang.org/x/crypto/nacl/box"
-
 	"github.com/gnolang/gno/pkgs/amino"
 	"github.com/gnolang/gno/pkgs/async"
 	"github.com/gnolang/gno/pkgs/crypto"
 	"github.com/gnolang/gno/pkgs/crypto/ed25519"
 	"github.com/gnolang/gno/pkgs/errors"
+	pool "github.com/libp2p/go-buffer-pool"
+	"golang.org/x/crypto/chacha20poly1305"
+	"golang.org/x/crypto/curve25519"
+	"golang.org/x/crypto/hkdf"
+	"golang.org/x/crypto/nacl/box"
 )
 
-// 4 + 1024 == 1028 total frame size
+// 4 + 1024 == 1028 total frame size.
 const dataLenSize = 4
 
 const (
@@ -151,7 +150,7 @@ func MakeSecretConnection(conn io.ReadWriteCloser, locPrivKey crypto.PrivKey) (*
 	return sc, nil
 }
 
-// RemotePubKey returns authenticated remote pubkey
+// RemotePubKey returns authenticated remote pubkey.
 func (sc *SecretConnection) RemotePubKey() crypto.PubKey {
 	return sc.remPubKey
 }
@@ -247,7 +246,7 @@ func (sc *SecretConnection) Read(data []byte) (n int, err error) {
 }
 
 // Implements net.Conn
-// nolint
+//nolint
 func (sc *SecretConnection) Close() error                  { return sc.conn.Close() }
 func (sc *SecretConnection) LocalAddr() net.Addr           { return sc.conn.(net.Conn).LocalAddr() }
 func (sc *SecretConnection) RemoteAddr() net.Addr          { return sc.conn.(net.Conn).RemoteAddr() }

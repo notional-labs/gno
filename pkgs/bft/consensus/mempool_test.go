@@ -7,8 +7,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stretchr/testify/assert"
-
 	"github.com/gnolang/gno/pkgs/bft/abci/example/errors"
 	abci "github.com/gnolang/gno/pkgs/bft/abci/types"
 	cstypes "github.com/gnolang/gno/pkgs/bft/consensus/types"
@@ -16,9 +14,10 @@ import (
 	sm "github.com/gnolang/gno/pkgs/bft/state"
 	"github.com/gnolang/gno/pkgs/bft/types"
 	dbm "github.com/gnolang/gno/pkgs/db"
+	"github.com/stretchr/testify/assert"
 )
 
-// for testing
+// for testing.
 func assertMempool(txn txNotifier) mempl.Mempool {
 	return txn.(mempl.Mempool)
 }
@@ -235,7 +234,7 @@ func TestMempoolRmBadTx(t *testing.T) {
 	}
 }
 
-// CounterApplication that maintains a mempool state and resets it upon commit
+// CounterApplication that maintains a mempool state and resets it upon commit.
 type CounterApplication struct {
 	abci.BaseApplication
 

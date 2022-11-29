@@ -436,33 +436,33 @@ var StructTypes = []interface{}{
 // Type definition types
 
 // This will be encoded as
-// message SomeName { int64 val = 1; }
+// message SomeName { int64 val = 1; }.
 type IntDef int
 
 // This will be encoded as
-// message SomeName { repeated int val = 1; }
+// message SomeName { repeated int val = 1; }.
 type IntAr [4]int
 
 // This will be encoded as
-// message SomeName { repeated int val = 1; }
+// message SomeName { repeated int val = 1; }.
 type IntSl []int
 
 // This will be encoded as
-// message SomeName { bytes val = 1; }
+// message SomeName { bytes val = 1; }.
 type ByteAr [4]byte
 
 // This will be encoded as
-// message SomeName { bytes val = 1; }
+// message SomeName { bytes val = 1; }.
 type ByteSl []byte
 
 type PrimitivesStructDef PrimitivesStruct
 
 // This will be encoded as
-// message SomeName { repeated PrimitivesStruct val = 1; }
+// message SomeName { repeated PrimitivesStruct val = 1; }.
 type PrimitivesStructSl []PrimitivesStruct
 
 // This will be encoded as
-// message SomeName { repeated PrimitivesStruct val = 1; }
+// message SomeName { repeated PrimitivesStruct val = 1; }.
 type PrimitivesStructAr [2]PrimitivesStruct
 
 var DefTypes = []interface{}{
@@ -502,7 +502,7 @@ type ConcreteTypeDef [4]byte
 func (ConcreteTypeDef) AssertInterface1() {}
 
 // Ideally, user's of amino should refrain from using the above
-// but wrap actual values in structs; e.g. like:
+// but wrap actual values in structs; e.g. like:.
 type ConcreteWrappedBytes struct {
 	Value []byte
 }

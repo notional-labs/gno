@@ -104,7 +104,7 @@ func runDelete(b *testing.B, t *iavl.MutableTree, blockSize int, keys [][]byte) 
 	return t
 }
 
-// runBlock measures time for an entire block, not just one tx
+// runBlock measures time for an entire block, not just one tx.
 func runBlock(b *testing.B, t *iavl.MutableTree, keyLen, dataLen, blockSize int, keys [][]byte) *iavl.MutableTree {
 	l := int32(len(keys))
 
@@ -208,7 +208,7 @@ func BenchmarkLevelDBBatchSizes(b *testing.B) {
 }
 
 // BenchmarkLevelDBLargeData is intended to push disk limits
-// in the leveldb, to make sure not everything is cached
+// in the leveldb, to make sure not everything is cached.
 func BenchmarkLevelDBLargeData(b *testing.B) {
 	benchmarks := []benchmark{
 		{"goleveldb", 50000, 100, 32, 100},
@@ -245,7 +245,7 @@ func runBenchmarks(b *testing.B, benchmarks []benchmark) {
 	}
 }
 
-// returns number of MB in use
+// returns number of MB in use.
 func memUseMB() float64 {
 	var mem runtime.MemStats
 	runtime.ReadMemStats(&mem)

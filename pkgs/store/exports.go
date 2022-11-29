@@ -5,7 +5,7 @@ import (
 )
 
 // Import cosmos-sdk/types/store.go for convenience.
-// nolint
+//nolint
 type (
 	PruningOptions         = types.PruningOptions
 	Store                  = types.Store
@@ -27,7 +27,7 @@ type (
 	GasOverflowException   = types.GasOverflowException
 )
 
-// nolint - reexport
+//nolint - reexport
 var (
 	PruneNothing           = types.PruneNothing
 	PruneEverything        = types.PruneEverything

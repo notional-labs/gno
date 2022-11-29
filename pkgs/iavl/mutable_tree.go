@@ -48,7 +48,7 @@ func (tree *MutableTree) VersionExists(version int64) bool {
 	return tree.ndb.getRoot(version) != nil
 }
 
-// AvailableVersions returns all available versions in ascending order
+// AvailableVersions returns all available versions in ascending order.
 func (tree *MutableTree) AvailableVersions() <-chan int64 {
 	return tree.ndb.getRootsCh()
 }
@@ -273,7 +273,7 @@ func (tree *MutableTree) LazyLoadVersion(targetVersion int64) (int64, error) {
 	return targetVersion, nil
 }
 
-// Returns the version number of the latest version found
+// Returns the version number of the latest version found.
 func (tree *MutableTree) LoadVersion(targetVersion int64) (int64, error) {
 	roots, err := tree.ndb.getRoots()
 	if err != nil {
@@ -326,7 +326,7 @@ func (tree *MutableTree) LoadVersionForOverwriting(targetVersion int64) (int64, 
 	return targetVersion, nil
 }
 
-// GetImmutable loads an ImmutableTree at a given version for querying
+// GetImmutable loads an ImmutableTree at a given version for querying.
 func (tree *MutableTree) GetImmutable(version int64) (*ImmutableTree, error) {
 	rootHash := tree.ndb.getRoot(version)
 	if rootHash == nil {
@@ -494,7 +494,7 @@ func (tree *MutableTree) rotateLeft(node *Node) (*Node, *Node) {
 }
 
 // NOTE: assumes that node can be modified
-// TODO: optimize balance & rotate
+// TODO: optimize balance & rotate.
 func (tree *MutableTree) balance(node *Node) (newSelf *Node, orphaned []*Node) {
 	if node.persisted {
 		panic("Unexpected balance() call on persisted node")

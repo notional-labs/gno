@@ -2,7 +2,6 @@ package dbadapter
 
 import (
 	dbm "github.com/gnolang/gno/pkgs/db"
-
 	"github.com/gnolang/gno/pkgs/store/cache"
 	"github.com/gnolang/gno/pkgs/store/types"
 )
@@ -14,7 +13,7 @@ func StoreConstructor(db dbm.DB, opts types.StoreOptions) types.CommitStore {
 	}
 }
 
-// Wrapper type for dbm.Db with implementation of Store
+// Wrapper type for dbm.Db with implementation of Store.
 type Store struct {
 	dbm.DB
 }

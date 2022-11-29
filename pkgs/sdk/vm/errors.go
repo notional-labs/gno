@@ -2,7 +2,7 @@ package vm
 
 import "github.com/gnolang/gno/pkgs/errors"
 
-// for convenience:
+// for convenience:.
 type abciError struct{}
 
 func (_ abciError) AssertABCIError() {}

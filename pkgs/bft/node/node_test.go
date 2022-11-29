@@ -8,9 +8,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
-
 	"github.com/gnolang/gno/pkgs/bft/abci/example/kvstore"
 	cfg "github.com/gnolang/gno/pkgs/bft/config"
 	mempl "github.com/gnolang/gno/pkgs/bft/mempool"
@@ -26,6 +23,8 @@ import (
 	"github.com/gnolang/gno/pkgs/p2p"
 	p2pmock "github.com/gnolang/gno/pkgs/p2p/mock"
 	"github.com/gnolang/gno/pkgs/random"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestNodeStartStop(t *testing.T) {
@@ -162,7 +161,7 @@ func TestNodeSetPrivValTCP(t *testing.T) {
 	assert.IsType(t, &privval.SignerClient{}, n.PrivValidator())
 }
 
-// address without a protocol must result in error
+// address without a protocol must result in error.
 func TestPrivValidatorListenAddrNoProtocol(t *testing.T) {
 	addrNoPrefix := testFreeAddr(t)
 

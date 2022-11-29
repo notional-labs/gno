@@ -22,12 +22,12 @@ const (
 //-----------------------------------------------------------------
 // add armor
 
-// Armor the InfoBytes
+// Armor the InfoBytes.
 func ArmorInfoBytes(bz []byte) string {
 	return armorBytes(bz, blockTypeKeyInfo)
 }
 
-// Armor the PubKeyBytes
+// Armor the PubKeyBytes.
 func ArmorPubKeyBytes(bz []byte) string {
 	return armorBytes(bz, blockTypePubKey)
 }
@@ -43,12 +43,12 @@ func armorBytes(bz []byte, blockType string) string {
 //-----------------------------------------------------------------
 // remove armor
 
-// Unarmor the InfoBytes
+// Unarmor the InfoBytes.
 func UnarmorInfoBytes(armorStr string) (bz []byte, err error) {
 	return unarmorBytes(armorStr, blockTypeKeyInfo)
 }
 
-// Unarmor the PubKeyBytes
+// Unarmor the PubKeyBytes.
 func UnarmorPubKeyBytes(armorStr string) (bz []byte, err error) {
 	return unarmorBytes(armorStr, blockTypePubKey)
 }

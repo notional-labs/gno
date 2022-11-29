@@ -2,11 +2,10 @@ package benchmarks
 
 import (
 	"crypto"
+	_ "crypto/sha256"
 	"fmt"
 	"hash"
 	"testing"
-
-	_ "crypto/sha256"
 
 	_ "golang.org/x/crypto/ripemd160"
 	_ "golang.org/x/crypto/sha3"

@@ -6,7 +6,6 @@ import (
 	"github.com/gnolang/gno/pkgs/crypto"
 	dbm "github.com/gnolang/gno/pkgs/db"
 	"github.com/gnolang/gno/pkgs/log"
-
 	"github.com/gnolang/gno/pkgs/sdk"
 	"github.com/gnolang/gno/pkgs/std"
 	"github.com/gnolang/gno/pkgs/store"
@@ -19,7 +18,7 @@ type testEnv struct {
 	bank BankKeeperI
 }
 
-// moduleAccount defines an account for modules that holds coins on a pool
+// moduleAccount defines an account for modules that holds coins on a pool.
 type moduleAccount struct {
 	*std.BaseAccount
 	name        string   `json:"name" yaml:"name"`              // name of the module
@@ -36,12 +35,12 @@ func (ma moduleAccount) HasPermission(permission string) bool {
 	return false
 }
 
-// GetName returns the the name of the holder's module
+// GetName returns the the name of the holder's module.
 func (ma moduleAccount) GetName() string {
 	return ma.name
 }
 
-// GetPermissions returns permissions granted to the module account
+// GetPermissions returns permissions granted to the module account.
 func (ma moduleAccount) GetPermissions() []string {
 	return ma.permissions
 }
@@ -77,17 +76,17 @@ func setupTestEnv() testEnv {
 }
 
 // DummyBankKeeper defines a supply keeper used only for testing to avoid
-// circle dependencies
+// circle dependencies.
 type DummyBankKeeper struct {
 	acck AccountKeeper
 }
 
-// NewDummyBankKeeper creates a DummyBankKeeper instance
+// NewDummyBankKeeper creates a DummyBankKeeper instance.
 func NewDummyBankKeeper(acck AccountKeeper) DummyBankKeeper {
 	return DummyBankKeeper{acck}
 }
 
-// SendCoins for the dummy supply keeper
+// SendCoins for the dummy supply keeper.
 func (bank DummyBankKeeper) SendCoins(ctx sdk.Context, fromAddr crypto.Address, toAddr crypto.Address, amt std.Coins) error {
 	fromAcc := bank.acck.GetAccount(ctx, fromAddr)
 	toAcc := bank.acck.GetAccount(ctx, toAddr)

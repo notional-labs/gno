@@ -693,7 +693,7 @@ func addAssign(alloc *Allocator, lv, rv *TypedValue) {
 		lv.SetUint64(lv.GetUint64() + rv.GetUint64())
 	case Float32Type:
 		// NOTE: gno doesn't fuse *+.
-		lv.SetFloat32(lv.GetFloat32() + rv.GetFloat32()) // XXX determinsm?
+		lv.SetFloat32(lv.GetFloat32() + rv.GetFloat32()) // XXX determinism?
 	case Float64Type:
 		// NOTE: gno doesn't fuse *+.
 		lv.SetFloat64(lv.GetFloat64() + rv.GetFloat64()) // XXX determinism?

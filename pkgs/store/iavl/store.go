@@ -11,7 +11,6 @@ import (
 	"github.com/gnolang/gno/pkgs/errors"
 	"github.com/gnolang/gno/pkgs/iavl"
 	"github.com/gnolang/gno/pkgs/std"
-
 	"github.com/gnolang/gno/pkgs/store/cache"
 	serrors "github.com/gnolang/gno/pkgs/store/errors"
 	"github.com/gnolang/gno/pkgs/store/types"
@@ -212,7 +211,7 @@ func (st *Store) ReverseIterator(start, end []byte) types.Iterator {
 	return newIAVLIterator(iTree, start, end, false)
 }
 
-// Handle gatest the latest height, if height is 0
+// Handle gatest the latest height, if height is 0.
 func getHeight(tree Tree, req abci.RequestQuery) int64 {
 	height := req.Height
 	if height == 0 {
@@ -232,7 +231,7 @@ func getHeight(tree Tree, req abci.RequestQuery) int64 {
 // as we will have merkle proofs immediately (header height = data height + 1)
 // If latest-1 is not present, use latest (which must be present)
 // if you care to have the latest data to see a tx results, you must
-// explicitly set the height you want to see
+// explicitly set the height you want to see.
 func (st *Store) Query(req abci.RequestQuery) (res abci.ResponseQuery) {
 	if len(req.Data) == 0 {
 		msg := "Query cannot be zero length"
@@ -459,7 +458,7 @@ func (iter *iavlIterator) receiveNext() {
 
 // assertIsValid panics if the iterator is invalid. If unlockMutex is true,
 // it also unlocks the mutex before panicing, to prevent deadlocks in code that
-// recovers from panics
+// recovers from panics.
 func (iter *iavlIterator) assertIsValid(unlockMutex bool) {
 	if iter.invalid {
 		if unlockMutex {

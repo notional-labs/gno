@@ -15,17 +15,16 @@ import (
 	"strings"
 	"time"
 
+	"github.com/gnolang/gno/gnoland/website/static" // for static files
 	"github.com/gnolang/gno/pkgs/amino"
 	abci "github.com/gnolang/gno/pkgs/bft/abci/types"
 	"github.com/gnolang/gno/pkgs/bft/rpc/client"
 	osm "github.com/gnolang/gno/pkgs/os"
+	"github.com/gnolang/gno/pkgs/sdk/vm" // for error types
 	"github.com/gnolang/gno/pkgs/std"
 	"github.com/gorilla/mux"
 	"github.com/gotuna/gotuna"
-
-	"github.com/gnolang/gno/gnoland/website/static" // for static files
-	"github.com/gnolang/gno/pkgs/sdk/vm"            // for error types
-	// "github.com/gnolang/gno/pkgs/sdk"               // for baseapp (info, status)
+	// "github.com/gnolang/gno/pkgs/sdk"               // for baseapp (info, status).
 )
 
 var flags struct {

@@ -7,7 +7,7 @@ import (
 
 //-----------------------------
 
-// Tendermint's interface to the application consists of multiple connections
+// Tendermint's interface to the application consists of multiple connections.
 type AppConns interface {
 	service.Service
 
@@ -25,7 +25,7 @@ func NewAppConns(clientCreator ClientCreator) AppConns {
 
 // a multiAppConn is made of a few appConns (mempool, consensus, query)
 // and manages their underlying abci clients
-// TODO: on app restart, clients must reboot together
+// TODO: on app restart, clients must reboot together.
 type multiAppConn struct {
 	service.BaseService
 
@@ -36,7 +36,7 @@ type multiAppConn struct {
 	clientCreator ClientCreator
 }
 
-// Make all necessary abci connections to the application
+// Make all necessary abci connections to the application.
 func NewMultiAppConn(clientCreator ClientCreator) *multiAppConn {
 	multiAppConn := &multiAppConn{
 		clientCreator: clientCreator,
@@ -45,17 +45,17 @@ func NewMultiAppConn(clientCreator ClientCreator) *multiAppConn {
 	return multiAppConn
 }
 
-// Returns the mempool connection
+// Returns the mempool connection.
 func (app *multiAppConn) Mempool() AppConnMempool {
 	return app.mempoolConn
 }
 
-// Returns the consensus Connection
+// Returns the consensus Connection.
 func (app *multiAppConn) Consensus() AppConnConsensus {
 	return app.consensusConn
 }
 
-// Returns the query Connection
+// Returns the query Connection.
 func (app *multiAppConn) Query() AppConnQuery {
 	return app.queryConn
 }

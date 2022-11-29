@@ -3,9 +3,8 @@ package auth
 import (
 	"testing"
 
-	"github.com/stretchr/testify/require"
-
 	"github.com/gnolang/gno/pkgs/crypto"
+	"github.com/stretchr/testify/require"
 )
 
 func TestAccountMapperGetSet(t *testing.T) {

@@ -179,11 +179,9 @@ func Preprocess(store Store, ctx BlockNode, n Node) Node {
 		}
 
 		switch stage {
-
 		//----------------------------------------
 		case TRANS_ENTER:
 			switch n := n.(type) {
-
 			// TRANS_ENTER -----------------------
 			case *AssignStmt:
 				if n.Op == DEFINE {
@@ -250,7 +248,6 @@ func Preprocess(store Store, ctx BlockNode, n Node) Node {
 						r.Name = Name(rn)
 					}
 				}
-
 			}
 
 			// TRANS_ENTER -----------------------
@@ -260,7 +257,6 @@ func Preprocess(store Store, ctx BlockNode, n Node) Node {
 		case TRANS_BLOCK:
 
 			switch n := n.(type) {
-
 			// TRANS_BLOCK -----------------------
 			case *BlockStmt:
 				pushInitBlock(n, &last, &stack)
@@ -602,7 +598,7 @@ func Preprocess(store Store, ctx BlockNode, n Node) Node {
 			n.SetAttribute(ATTR_PREPROCESSED, true)
 
 			//-There is still work to be done while leaving, but
-			//once the logic of that is done, we will have to
+			// once the logic of that is done, we will have to
 			//perform additionally deferred logic that is best
 			//handled with orthogonal switch conditions.
 			//-For example, while leaving nodes w/
@@ -625,7 +621,6 @@ func Preprocess(store Store, ctx BlockNode, n Node) Node {
 
 			// The main TRANS_LEAVE switch.
 			switch n := n.(type) {
-
 			// TRANS_LEAVE -----------------------
 			case *NameExpr:
 				// Validity: check that name isn't reserved.
@@ -1178,7 +1173,6 @@ func Preprocess(store Store, ctx BlockNode, n Node) Node {
 					panic(fmt.Sprintf(
 						"unexpected index base kind for type %s",
 						dt.String()))
-
 				}
 
 			// TRANS_LEAVE -----------------------
@@ -2277,7 +2271,7 @@ func cmpSpecificity(t1, t2 Type) int {
 // autoNative is usually false, but set to true
 // for native function calls, where gno values are
 // automatically converted to native go types.
-// NOTE: also see checkOrConvertIntegerType()
+// NOTE: also see checkOrConvertIntegerType().
 func checkOrConvertType(store Store, last BlockNode, x *Expr, t Type, autoNative bool) {
 	if cx, ok := (*x).(*ConstExpr); ok {
 		convertConst(store, last, cx, t)
@@ -2317,7 +2311,7 @@ func checkOrConvertType(store Store, last BlockNode, x *Expr, t Type, autoNative
 	}
 }
 
-// like checkOrConvertType(last, x, nil)
+// like checkOrConvertType(last, x, nil).
 func convertIfConst(store Store, last BlockNode, x Expr) {
 	if cx, ok := x.(*ConstExpr); ok {
 		convertConst(store, last, cx, nil)
@@ -2403,7 +2397,7 @@ func checkType(xt Type, dt Type, autoNative bool) {
 	// convert to *NativeType of pointer kind.
 	if pxt, ok := xt.(*PointerType); ok {
 		// *gonative{x} is gonative{*x}
-		if enxt, ok := pxt.Elt.(*NativeType); ok {
+		if next, ok := pxt.Elt.(*NativeType); ok {
 			xt = &NativeType{
 				Type: reflect.PtrTo(enxt.Type),
 			}

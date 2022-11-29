@@ -22,10 +22,10 @@ type Banker interface {
 	RemoveCoin(addr Address, denom string, amount int64)
 }
 
-// Also available natively in stdlibs/context.go
+// Also available natively in stdlibs/context.go.
 type BankerType uint8
 
-// Also available natively in stdlibs/context.go
+// Also available natively in stdlibs/context.go.
 const (
 	// Can only read state.
 	BankerTypeReadonly BankerType = iota

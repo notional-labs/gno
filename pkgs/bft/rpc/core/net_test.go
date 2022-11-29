@@ -3,13 +3,12 @@ package core
 import (
 	"testing"
 
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
-
 	rpctypes "github.com/gnolang/gno/pkgs/bft/rpc/lib/types"
 	"github.com/gnolang/gno/pkgs/log"
 	"github.com/gnolang/gno/pkgs/p2p"
 	p2pcfg "github.com/gnolang/gno/pkgs/p2p/config"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestUnsafeDialSeeds(t *testing.T) {

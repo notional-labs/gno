@@ -807,7 +807,7 @@ func SIf(cond bool, then_, else_ Stmt) Stmt {
 //----------------------------------------
 // chop functions
 
-// ----------------------------------------
+// ----------------------------------------.
 func chopBinary(expr string) (left, op, right string, ok bool) {
 	// 0 for prec1... -1 if no match.
 	matchOp := func(op string) int {

@@ -71,7 +71,7 @@ import (
 //	  }
 //	}
 //
-// ```
+// ```.
 func Status(ctx *rpctypes.Context) (*ctypes.ResultStatus, error) {
 	var latestHeight int64
 	if consensusReactor.FastSync() {

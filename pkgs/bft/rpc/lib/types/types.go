@@ -18,12 +18,12 @@ type jsonrpcid interface {
 	isJSONRPCID()
 }
 
-// JSONRPCStringID a wrapper for JSON-RPC string IDs
+// JSONRPCStringID a wrapper for JSON-RPC string IDs.
 type JSONRPCStringID string
 
 func (JSONRPCStringID) isJSONRPCID() {}
 
-// JSONRPCIntID a wrapper for JSON-RPC integer IDs
+// JSONRPCIntID a wrapper for JSON-RPC integer IDs.
 type JSONRPCIntID int
 
 func (JSONRPCIntID) isJSONRPCID() {}
@@ -54,7 +54,7 @@ type RPCRequest struct {
 	Params  json.RawMessage `json:"params"` // must be map[string]interface{} or []interface{}
 }
 
-// UnmarshalJSON custom JSON unmarshalling due to jsonrpcid being string or int
+// UnmarshalJSON custom JSON unmarshalling due to jsonrpcid being string or int.
 func (request *RPCRequest) UnmarshalJSON(data []byte) error {
 	unsafeReq := &struct {
 		JSONRPC string          `json:"jsonrpc"`
@@ -151,7 +151,7 @@ type RPCResponse struct {
 	Error   *RPCError       `json:"error,omitempty"`
 }
 
-// UnmarshalJSON custom JSON unmarshalling due to jsonrpcid being string or int
+// UnmarshalJSON custom JSON unmarshalling due to jsonrpcid being string or int.
 func (response *RPCResponse) UnmarshalJSON(data []byte) error {
 	unsafeResp := &struct {
 		JSONRPC string          `json:"jsonrpc"`
@@ -302,7 +302,7 @@ func (ctx *Context) Context() context.Context {
 
 // Determine if its a unix or tcp socket.
 // If tcp, must specify the port; `0.0.0.0` will return incorrectly as "unix" since there's no port
-// TODO: deprecate
+// TODO: deprecate.
 func SocketType(listenAddr string) string {
 	socketType := "unix"
 	if len(strings.Split(listenAddr, ":")) >= 2 {

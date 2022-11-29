@@ -6,9 +6,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stretchr/testify/assert"
-
 	"github.com/gnolang/gno/pkgs/errors"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestParallel(t *testing.T) {
@@ -126,7 +125,7 @@ func TestParallelRecover(t *testing.T) {
 	checkResult(t, taskResultSet, 2, nil, nil, 2)
 }
 
-// Wait for result
+// Wait for result.
 func checkResult(t *testing.T, taskResultSet *TaskResultSet, index int, val interface{}, err error, pnk interface{}) {
 	taskResult, ok := taskResultSet.LatestResult(index)
 	taskName := fmt.Sprintf("Task #%v", index)
@@ -142,7 +141,7 @@ func checkResult(t *testing.T, taskResultSet *TaskResultSet, index int, val inte
 	}
 }
 
-// Wait for timeout (no result)
+// Wait for timeout (no result).
 func waitTimeout(t *testing.T, taskResultCh TaskResultCh, taskName string) {
 	select {
 	case _, ok := <-taskResultCh:

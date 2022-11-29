@@ -10,11 +10,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/gorilla/websocket"
-	"github.com/stretchr/testify/require"
-
 	types "github.com/gnolang/gno/pkgs/bft/rpc/lib/types"
 	"github.com/gnolang/gno/pkgs/log"
+	"github.com/gorilla/websocket"
+	"github.com/stretchr/testify/require"
 )
 
 var wsCallTimeout = 5 * time.Second

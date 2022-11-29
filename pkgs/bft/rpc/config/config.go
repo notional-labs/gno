@@ -14,7 +14,7 @@ const (
 	defaultConfigDir = "config"
 )
 
-// RPCConfig defines the configuration options for the Tendermint RPC server
+// RPCConfig defines the configuration options for the Tendermint RPC server.
 type RPCConfig struct {
 	RootDir string `toml:"home"`
 
@@ -85,7 +85,7 @@ type RPCConfig struct {
 	TLSKeyFile string `toml:"tls_key_file"`
 }
 
-// DefaultRPCConfig returns a default configuration for the RPC server
+// DefaultRPCConfig returns a default configuration for the RPC server.
 func DefaultRPCConfig() *RPCConfig {
 	return &RPCConfig{
 		ListenAddress:          "tcp://127.0.0.1:26657",
@@ -108,7 +108,7 @@ func DefaultRPCConfig() *RPCConfig {
 	}
 }
 
-// TestRPCConfig returns a configuration for testing the RPC server
+// TestRPCConfig returns a configuration for testing the RPC server.
 func TestRPCConfig() *RPCConfig {
 	cfg := DefaultRPCConfig()
 	cfg.ListenAddress = "tcp://0.0.0.0:36657"

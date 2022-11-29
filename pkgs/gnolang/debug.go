@@ -3,9 +3,8 @@ package gnolang
 import (
 	"fmt"
 	"net/http"
-	"os"
-
 	_ "net/http/pprof"
+	"os"
 )
 
 // NOTE: the golang compiler doesn't seem to be intelligent
@@ -16,7 +15,7 @@ import (
 type debugging bool
 
 // using a const is probably faster.
-// const debug debugging = true // or flip
+// const debug debugging = true // or flip.
 var debug debugging = false
 
 func init() {

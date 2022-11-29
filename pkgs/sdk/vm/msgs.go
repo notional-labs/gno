@@ -13,7 +13,7 @@ import (
 //----------------------------------------
 // MsgAddPackage
 
-// MsgAddPackage - create and initialize new package
+// MsgAddPackage - create and initialize new package.
 type MsgAddPackage struct {
 	Creator crypto.Address  `json:"creator" yaml:"creator"`
 	Package *std.MemPackage `json:"package" yaml:"package"`

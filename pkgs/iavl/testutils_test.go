@@ -3,10 +3,9 @@ package iavl
 import (
 	"bytes"
 	"fmt"
+	mrand "math/rand"
 	"runtime"
 	"testing"
-
-	mrand "math/rand"
 
 	"github.com/gnolang/gno/pkgs/amino"
 	"github.com/gnolang/gno/pkgs/db"
@@ -28,7 +27,7 @@ func b2i(bz []byte) int {
 	return int(i)
 }
 
-// Convenience for a new node
+// Convenience for a new node.
 func N(l, r interface{}) *Node {
 	var left, right *Node
 	if _, ok := l.(*Node); ok {
@@ -52,7 +51,7 @@ func N(l, r interface{}) *Node {
 	return n
 }
 
-// Setup a deep node
+// Setup a deep node.
 func T(n *Node) *MutableTree {
 	d := db.NewDB("test", db.MemDBBackend, "")
 	t := NewMutableTree(d, 0)
@@ -62,7 +61,7 @@ func T(n *Node) *MutableTree {
 	return t
 }
 
-// Convenience for simple printing of keys & tree structure
+// Convenience for simple printing of keys & tree structure.
 func P(n *Node) string {
 	if n.height == 0 {
 		return fmt.Sprintf("%v", b2i(n.key))
@@ -74,7 +73,7 @@ func randBytes(length int) []byte {
 	key := make([]byte, length)
 	// math.rand.Read always returns err=nil
 	// we do not need cryptographic randomness for this test:
-	//nolint:gosec
+	
 	mrand.Read(key)
 	return key
 }

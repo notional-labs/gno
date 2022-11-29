@@ -19,11 +19,11 @@ import (
 type Word int
 
 const (
-	// Special words
+	// Special words.
 	ILLEGAL Word = iota
 
 	// Names and basic type literals
-	// (these words stand for classes of literals)
+	// (these words stand for classes of literals).
 	NAME   // main
 	INT    // 12345
 	FLOAT  // 123.45
@@ -31,7 +31,7 @@ const (
 	CHAR   // 'a'
 	STRING // "abc"
 
-	// Operators and delimiters
+	// Operators and delimiters.
 	ADD // +
 	SUB // -
 	MUL // *
@@ -74,7 +74,7 @@ const (
 	GEQ    // >=
 	DEFINE // :=
 
-	// Keywords
+	// Keywords.
 	BREAK
 	CASE
 	CHAN
@@ -645,7 +645,7 @@ type constTypeExpr struct {
 	Type   Type
 }
 
-// Only used for native func arguments
+// Only used for native func arguments.
 type MaybeNativeTypeExpr struct {
 	Attributes
 	Type Expr
@@ -1450,10 +1450,10 @@ type StaticBlock struct {
 	Loc      Location
 }
 
-// Implements BlockNode
+// Implements BlockNode.
 func (sb *StaticBlock) InitStaticBlock(source BlockNode, parent BlockNode) {
 	if sb.Names != nil || sb.Block.Source != nil {
-		panic("StaticBlock already initalized")
+		panic("StaticBlock already initialized")
 	}
 	if parent == nil {
 		sb.Block = Block{
@@ -1770,7 +1770,7 @@ func (sb *StaticBlock) Define2(isConst bool, n Name, st Type, tv TypedValue) {
 	}
 }
 
-// Implements BlockNode
+// Implements BlockNode.
 func (sb *StaticBlock) SetStaticBlock(osb StaticBlock) {
 	*sb = osb
 }

@@ -32,7 +32,7 @@ type HTTPClient interface {
 }
 
 // protocol - client's protocol (for example, "http", "https", "wss", "ws", "tcp")
-// trimmedS - rest of the address (for example, "192.0.2.1:25", "[2001:db8::1]:80") with "/" replaced with "."
+// trimmedS - rest of the address (for example, "192.0.2.1:25", "[2001:db8::1]:80") with "/" replaced with ".".
 func toClientAddrAndParse(remoteAddr string) (network string, trimmedS string, err error) {
 	protocol, address, err := parseRemoteAddr(remoteAddr)
 	if err != nil {
@@ -64,7 +64,7 @@ func toClientAddress(remoteAddr string) (string, error) {
 
 // network - name of the network (for example, "tcp", "unix")
 // s - rest of the address (for example, "192.0.2.1:25", "[2001:db8::1]:80")
-// TODO: Deprecate support for IP:PORT or /path/to/socket
+// TODO: Deprecate support for IP:PORT or /path/to/socket.
 func parseRemoteAddr(remoteAddr string) (network string, s string, err error) {
 	parts := strings.SplitN(remoteAddr, "://", 2)
 	var protocol, address string
@@ -136,7 +136,7 @@ type JSONRPCRequestBatch struct {
 	requests []*jsonRPCBufferedRequest
 }
 
-// JSONRPCClient takes params as a slice
+// JSONRPCClient takes params as a slice.
 type JSONRPCClient struct {
 	address string
 	client  *http.Client
@@ -298,7 +298,7 @@ func (b *JSONRPCRequestBatch) Call(method string, params map[string]interface{},
 
 //-------------------------------------------------------------
 
-// URI takes params as a map
+// URI takes params as a map.
 type URIClient struct {
 	address string
 	client  *http.Client

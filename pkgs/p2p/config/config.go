@@ -10,15 +10,15 @@ import (
 // P2PConfig
 
 const (
-	// FuzzModeDrop is a mode in which we randomly drop reads/writes, connections or sleep
+	// FuzzModeDrop is a mode in which we randomly drop reads/writes, connections or sleep.
 	FuzzModeDrop = iota
-	// FuzzModeDelay is a mode in which we randomly sleep
+	// FuzzModeDelay is a mode in which we randomly sleep.
 	FuzzModeDelay
 )
 
 var defaultConfigDir = "config" // duplicate across module configs?
 
-// P2PConfig defines the configuration options for the Tendermint peer-to-peer networking layer
+// P2PConfig defines the configuration options for the Tendermint peer-to-peer networking layer.
 type P2PConfig struct {
 	RootDir string `toml:"home"`
 
@@ -83,7 +83,7 @@ type P2PConfig struct {
 	TestFuzzConfig *FuzzConnConfig `toml:"test_fuzz_config"`
 }
 
-// DefaultP2PConfig returns a default configuration for the peer-to-peer layer
+// DefaultP2PConfig returns a default configuration for the peer-to-peer layer.
 func DefaultP2PConfig() *P2PConfig {
 	return &P2PConfig{
 		ListenAddress:           "tcp://0.0.0.0:26656",
@@ -106,7 +106,7 @@ func DefaultP2PConfig() *P2PConfig {
 	}
 }
 
-// TestP2PConfig returns a configuration for testing the peer-to-peer layer
+// TestP2PConfig returns a configuration for testing the peer-to-peer layer.
 func TestP2PConfig() *P2PConfig {
 	cfg := DefaultP2PConfig()
 	cfg.ListenAddress = "tcp://0.0.0.0:36656"

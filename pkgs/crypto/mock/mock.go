@@ -72,10 +72,10 @@ func (pubKey PubKeyMock) VerifyBytes(msg []byte, sig []byte) bool {
 }
 
 func (pubKey PubKeyMock) String() string {
-	return fmt.Sprintf("PubKeyMock{%X}", ([]byte(pubKey))[:])
+	return fmt.Sprintf("PubKeyMock{%X}", ([]byte(pubKey)))
 }
 
-// nolint: golint
+//nolint: golint
 func (pubKey PubKeyMock) Equals(other crypto.PubKey) bool {
 	if otherMock, ok := other.(PubKeyMock); ok {
 		return bytes.Equal(pubKey[:], otherMock[:])

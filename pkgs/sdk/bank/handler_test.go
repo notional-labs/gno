@@ -5,14 +5,13 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/stretchr/testify/require"
-
 	"github.com/gnolang/gno/pkgs/amino"
 	abci "github.com/gnolang/gno/pkgs/bft/abci/types"
 	bft "github.com/gnolang/gno/pkgs/bft/types"
 	"github.com/gnolang/gno/pkgs/sdk"
 	tu "github.com/gnolang/gno/pkgs/sdk/testutils"
 	"github.com/gnolang/gno/pkgs/std"
+	"github.com/stretchr/testify/require"
 )
 
 func TestInvalidMsg(t *testing.T) {

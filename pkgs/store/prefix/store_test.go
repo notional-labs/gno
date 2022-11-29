@@ -4,18 +4,16 @@ import (
 	"crypto/rand"
 	"testing"
 
-	"github.com/stretchr/testify/require"
-
 	dbm "github.com/gnolang/gno/pkgs/db"
 	tiavl "github.com/gnolang/gno/pkgs/iavl"
-
 	"github.com/gnolang/gno/pkgs/store/dbadapter"
 	"github.com/gnolang/gno/pkgs/store/gas"
 	"github.com/gnolang/gno/pkgs/store/iavl"
 	"github.com/gnolang/gno/pkgs/store/types"
+	"github.com/stretchr/testify/require"
 )
 
-// copied from iavl/store_test.go
+// copied from iavl/store_test.go.
 var (
 	cacheSize        = 100
 	numRecent  int64 = 5

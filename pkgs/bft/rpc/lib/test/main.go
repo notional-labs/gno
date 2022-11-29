@@ -5,11 +5,10 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/gnolang/gno/pkgs/log"
-	osm "github.com/gnolang/gno/pkgs/os"
-
 	rpcserver "github.com/gnolang/gno/pkgs/bft/rpc/lib/server"
 	rpctypes "github.com/gnolang/gno/pkgs/bft/rpc/lib/types"
+	"github.com/gnolang/gno/pkgs/log"
+	osm "github.com/gnolang/gno/pkgs/os"
 )
 
 var routes = map[string]*rpcserver.RPCFunc{

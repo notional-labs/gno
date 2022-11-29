@@ -10,11 +10,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
-
 	amino "github.com/gnolang/gno/pkgs/amino"
 	"github.com/gnolang/gno/pkgs/amino/pkg"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 type Dummy struct{}

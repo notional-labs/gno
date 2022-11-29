@@ -354,7 +354,7 @@ func (node *Node) getRightNode(t *ImmutableTree) *Node {
 	return t.ndb.GetNode(node.rightHash)
 }
 
-// NOTE: mutates height and size
+// NOTE: mutates height and size.
 func (node *Node) calcHeightAndSize(t *ImmutableTree) {
 	node.height = maxInt8(node.getLeftNode(t).height, node.getRightNode(t).height) + 1
 	node.size = node.getLeftNode(t).size + node.getRightNode(t).size
@@ -364,7 +364,7 @@ func (node *Node) calcBalance(t *ImmutableTree) int {
 	return int(node.getLeftNode(t).height) - int(node.getRightNode(t).height)
 }
 
-// traverse is a wrapper over traverseInRange when we want the whole tree
+// traverse is a wrapper over traverseInRange when we want the whole tree.
 func (node *Node) traverse(t *ImmutableTree, ascending bool, cb func(*Node) bool) bool {
 	return node.traverseInRange(t, nil, nil, ascending, false, 0, func(node *Node, depth uint8) bool {
 		return cb(node)

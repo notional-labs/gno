@@ -6,7 +6,6 @@ import (
 	"testing"
 
 	dbm "github.com/gnolang/gno/pkgs/db"
-
 	"github.com/gnolang/gno/pkgs/store/cache"
 	"github.com/gnolang/gno/pkgs/store/dbadapter"
 )

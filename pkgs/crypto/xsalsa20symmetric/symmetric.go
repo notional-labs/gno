@@ -4,9 +4,8 @@ import (
 	"errors"
 	"fmt"
 
-	"golang.org/x/crypto/nacl/secretbox"
-
 	"github.com/gnolang/gno/pkgs/crypto"
+	"golang.org/x/crypto/nacl/secretbox"
 )
 
 // TODO, make this into a struct that implements crypto.Symmetric.

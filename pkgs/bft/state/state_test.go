@@ -7,9 +7,6 @@ import (
 	"os"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
-
 	abci "github.com/gnolang/gno/pkgs/bft/abci/types"
 	cfg "github.com/gnolang/gno/pkgs/bft/config"
 	sm "github.com/gnolang/gno/pkgs/bft/state"
@@ -17,6 +14,8 @@ import (
 	"github.com/gnolang/gno/pkgs/crypto/ed25519"
 	dbm "github.com/gnolang/gno/pkgs/db"
 	"github.com/gnolang/gno/pkgs/random"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 // setupTestCase does setup common to all test cases.
@@ -36,7 +35,7 @@ func setupTestCase(t *testing.T) (func(t *testing.T), dbm.DB, sm.State) {
 func TestStateCopy(t *testing.T) {
 	tearDown, _, state := setupTestCase(t)
 	defer tearDown(t)
-	// nolint: vetshadow
+	//nolint: vetshadow
 	assert := assert.New(t)
 
 	stateCopy := state.Copy()
@@ -67,7 +66,7 @@ func TestMakeGenesisStateNilValidators(t *testing.T) {
 func TestStateSaveLoad(t *testing.T) {
 	tearDown, stateDB, state := setupTestCase(t)
 	defer tearDown(t)
-	// nolint: vetshadow
+	//nolint: vetshadow
 	assert := assert.New(t)
 
 	state.LastBlockHeight++
@@ -83,7 +82,7 @@ func TestStateSaveLoad(t *testing.T) {
 func TestABCIResponsesSaveLoad1(t *testing.T) {
 	tearDown, stateDB, state := setupTestCase(t)
 	defer tearDown(t)
-	// nolint: vetshadow
+	//nolint: vetshadow
 	assert := assert.New(t)
 
 	state.LastBlockHeight++
@@ -121,7 +120,7 @@ func TestABCIResponsesSaveLoad1(t *testing.T) {
 func TestABCIResponsesSaveLoad2(t *testing.T) {
 	tearDown, stateDB, _ := setupTestCase(t)
 	defer tearDown(t)
-	// nolint: vetshadow
+	//nolint: vetshadow
 	assert := assert.New(t)
 
 	cases := [...]struct {
@@ -215,7 +214,7 @@ func TestABCIResponsesSaveLoad2(t *testing.T) {
 func TestValidatorSimpleSaveLoad(t *testing.T) {
 	tearDown, stateDB, state := setupTestCase(t)
 	defer tearDown(t)
-	// nolint: vetshadow
+	//nolint: vetshadow
 	assert := assert.New(t)
 
 	// Can't load anything for height 0.
@@ -369,7 +368,7 @@ func TestProposerFrequency(t *testing.T) {
 	}
 }
 
-// new val set with given powers and random initial priorities
+// new val set with given powers and random initial priorities.
 func genValSetWithPowers(powers []int64) *types.ValidatorSet {
 	size := len(powers)
 	vals := make([]*types.Validator, size)
@@ -385,7 +384,7 @@ func genValSetWithPowers(powers []int64) *types.ValidatorSet {
 	return valSet
 }
 
-// test a proposer appears as frequently as expected
+// test a proposer appears as frequently as expected.
 func testProposerFreq(t *testing.T, caseNum int, valSet *types.ValidatorSet) {
 	N := valSet.Size()
 	totalPower := valSet.TotalVotingPower()

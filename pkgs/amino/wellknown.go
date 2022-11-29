@@ -15,17 +15,16 @@ import (
 	"google.golang.org/protobuf/types/known/durationpb"
 	"google.golang.org/protobuf/types/known/emptypb"
 
-	//"google.golang.org/protobuf/types/known/structpb"
 	"google.golang.org/protobuf/types/known/timestamppb"
 	"google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 var (
-	// native
+	// native.
 	timeType     = reflect.TypeOf(time.Time{})
 	durationType = reflect.TypeOf(time.Duration(0))
 	// doubleType   = reflect.TypeOf(float64(0))
-	// floatType    = reflect.TypeOf(float32(0))
+	// floatType    = reflect.TypeOf(float32(0)).
 	int64Type  = reflect.TypeOf(int64(0))
 	uint64Type = reflect.TypeOf(uint64(0))
 	int32Type  = reflect.TypeOf(int32(0))
@@ -40,7 +39,7 @@ var (
 	intType    = reflect.TypeOf(int(0))
 	uintType   = reflect.TypeOf(uint(0))
 
-	// google
+	// google.
 	gAnyType       = reflect.TypeOf(anypb.Any{})
 	gTimestampType = reflect.TypeOf(timestamppb.Timestamp{})
 	gDurationType  = reflect.TypeOf(durationpb.Duration{})
@@ -49,7 +48,7 @@ var (
 	// gValueType     = reflect.TypeOf(structpb.Value{})
 	// gListType      = reflect.TypeOf(structpb.ListValue{})
 	// gDoubleType    = reflect.TypeOf(wrapperspb.DoubleValue{})
-	// gFloatType     = reflect.TypeOf(wrapperspb.FloatValue{})
+	// gFloatType     = reflect.TypeOf(wrapperspb.FloatValue{}).
 	gInt64Type  = reflect.TypeOf(wrapperspb.Int64Value{})
 	gUInt64Type = reflect.TypeOf(wrapperspb.UInt64Value{})
 	gInt32Type  = reflect.TypeOf(wrapperspb.Int32Value{})

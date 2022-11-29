@@ -3,13 +3,11 @@ package rootmulti
 import (
 	"testing"
 
-	"github.com/stretchr/testify/require"
-
 	abci "github.com/gnolang/gno/pkgs/bft/abci/types"
 	dbm "github.com/gnolang/gno/pkgs/db"
-
 	"github.com/gnolang/gno/pkgs/store/iavl"
 	"github.com/gnolang/gno/pkgs/store/types"
+	"github.com/stretchr/testify/require"
 )
 
 func TestVerifyIAVLStoreQueryProof(t *testing.T) {

@@ -3,11 +3,10 @@ package merkle
 import (
 	"testing"
 
-	"github.com/stretchr/testify/require"
-
 	"github.com/gnolang/gno/pkgs/crypto/tmhash"
 	"github.com/gnolang/gno/pkgs/random"
 	"github.com/gnolang/gno/pkgs/testutils"
+	"github.com/stretchr/testify/require"
 )
 
 type testItem []byte

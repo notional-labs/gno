@@ -93,7 +93,7 @@ func (conR *ConsensusReactor) OnStop() {
 }
 
 // SwitchToConsensus switches from fast_sync mode to consensus mode.
-// It resets the state, turns off fast_sync, and starts the consensus state-machine
+// It resets the state, turns off fast_sync, and starts the consensus state-machine.
 func (conR *ConsensusReactor) SwitchToConsensus(state sm.State, blocksSynced int) {
 	conR.Logger.Info("SwitchToConsensus")
 	conR.conS.reconstructLastCommit(state)
@@ -121,7 +121,7 @@ conR:
 	}
 }
 
-// GetChannels implements Reactor
+// GetChannels implements Reactor.
 func (conR *ConsensusReactor) GetChannels() []*p2p.ChannelDescriptor {
 	// TODO optimize
 	return []*p2p.ChannelDescriptor{
@@ -203,7 +203,7 @@ func (conR *ConsensusReactor) RemovePeer(peer p2p.Peer, reason interface{}) {
 // Messages affect either a peer state or the consensus state.
 // Peer state updates can happen in parallel, but processing of
 // proposals, block parts, and votes are ordered by the receiveRoutine
-// NOTE: blocks on consensus state for proposals, block parts, and votes
+// NOTE: blocks on consensus state for proposals, block parts, and votes.
 func (conR *ConsensusReactor) Receive(chID byte, src p2p.Peer, msgBytes []byte) {
 	if !conR.IsRunning() {
 		conR.Logger.Debug("Receive", "src", src, "chId", chID, "bytes", msgBytes)
@@ -850,7 +850,7 @@ func (conR *ConsensusReactor) String() string {
 	return "ConsensusReactor" // conR.StringIndented("")
 }
 
-// StringIndented returns an indented string representation of the ConsensusReactor
+// StringIndented returns an indented string representation of the ConsensusReactor.
 func (conR *ConsensusReactor) StringIndented(indent string) string {
 	s := "ConsensusReactor{\n"
 	s += indent + "  " + conR.conS.StringIndented(indent+"  ") + "\n"
@@ -896,7 +896,7 @@ func (pss peerStateStats) String() string {
 		pss.Votes, pss.BlockParts)
 }
 
-// NewPeerState returns a new PeerState for the given Peer
+// NewPeerState returns a new PeerState for the given Peer.
 func NewPeerState(peer p2p.Peer) *PeerState {
 	return &PeerState{
 		peer:   peer,
@@ -937,7 +937,7 @@ func (ps *PeerState) ToJSON() ([]byte, error) {
 }
 
 // GetHeight returns an atomic snapshot of the PeerRoundState's height
-// used by the mempool to ensure peers are caught up before broadcasting new txs
+// used by the mempool to ensure peers are caught up before broadcasting new txs.
 func (ps *PeerState) GetHeight() int64 {
 	ps.mtx.Lock()
 	defer ps.mtx.Unlock()
@@ -1177,7 +1177,7 @@ func (ps *PeerState) BlockPartsSent() int {
 	return ps.Stats.BlockParts
 }
 
-// SetHasVote sets the given vote as known by the peer
+// SetHasVote sets the given vote as known by the peer.
 func (ps *PeerState) SetHasVote(vote *types.Vote) {
 	ps.mtx.Lock()
 	defer ps.mtx.Unlock()
@@ -1316,12 +1316,12 @@ func (ps *PeerState) ApplyVoteSetBitsMessage(msg *VoteSetBitsMessage, ourVotes *
 	}
 }
 
-// String returns a string representation of the PeerState
+// String returns a string representation of the PeerState.
 func (ps *PeerState) String() string {
 	return ps.StringIndented("")
 }
 
-// StringIndented returns a string representation of the PeerState
+// StringIndented returns a string representation of the PeerState.
 func (ps *PeerState) StringIndented(indent string) string {
 	ps.mtx.Lock()
 	defer ps.mtx.Unlock()
@@ -1339,7 +1339,7 @@ func (ps *PeerState) StringIndented(indent string) string {
 //-----------------------------------------------------------------------------
 // Messages
 
-// ConsensusMessage is a message that can be sent and received on the ConsensusReactor
+// ConsensusMessage is a message that can be sent and received on the ConsensusReactor.
 type ConsensusMessage interface {
 	ValidateBasic() error
 }
@@ -1355,7 +1355,7 @@ func decodeMsg(bz []byte) (msg ConsensusMessage, err error) {
 //-------------------------------------
 
 // NewRoundStepMessage is sent for every step taken in the ConsensusState.
-// For every height/round/step transition
+// For every height/round/step transition.
 type NewRoundStepMessage struct {
 	Height                int64
 	Round                 int

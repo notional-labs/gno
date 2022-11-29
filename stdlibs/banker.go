@@ -21,10 +21,10 @@ type Banker interface {
 }
 
 // Used in std.GetBanker(options).
-// Also available as Gno in stdlibs/std/banker.go
+// Also available as Gno in stdlibs/std/banker.go.
 type BankerType uint8
 
-// Also available as Gno in stdlibs/std/banker.go
+// Also available as Gno in stdlibs/std/banker.go.
 const (
 	// Can only read state.
 	BankerTypeReadonly BankerType = iota

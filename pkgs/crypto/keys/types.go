@@ -9,7 +9,7 @@ import (
 	"github.com/gnolang/gno/pkgs/crypto/multisig"
 )
 
-// Keybase exposes operations on a generic keystore
+// Keybase exposes operations on a generic keystore.
 type Keybase interface {
 	// CRUD on the keystore
 	List() ([]Info, error)
@@ -58,7 +58,7 @@ type Keybase interface {
 // KeyType reflects a human-readable type for key listing.
 type KeyType uint
 
-// Info KeyTypes
+// Info KeyTypes.
 const (
 	TypeLocal   KeyType = 0
 	TypeLedger  KeyType = 1
@@ -78,7 +78,7 @@ func (kt KeyType) String() string {
 	return keyTypes[kt]
 }
 
-// Info is the publicly exposed information about a keypair
+// Info is the publicly exposed information about a keypair.
 type Info interface {
 	// Human-readable type for key listing
 	GetType() KeyType
@@ -99,7 +99,7 @@ var (
 	_ Info = &multiInfo{}
 )
 
-// localInfo is the public information about a locally stored key
+// localInfo is the public information about a locally stored key.
 type localInfo struct {
 	Name         string        `json:"name"`
 	PubKey       crypto.PubKey `json:"pubkey"`
@@ -114,32 +114,32 @@ func newLocalInfo(name string, pub crypto.PubKey, privArmor string) Info {
 	}
 }
 
-// GetType implements Info interface
+// GetType implements Info interface.
 func (i localInfo) GetType() KeyType {
 	return TypeLocal
 }
 
-// GetType implements Info interface
+// GetType implements Info interface.
 func (i localInfo) GetName() string {
 	return i.Name
 }
 
-// GetType implements Info interface
+// GetType implements Info interface.
 func (i localInfo) GetPubKey() crypto.PubKey {
 	return i.PubKey
 }
 
-// GetType implements Info interface
+// GetType implements Info interface.
 func (i localInfo) GetAddress() crypto.Address {
 	return i.PubKey.Address()
 }
 
-// GetType implements Info interface
+// GetType implements Info interface.
 func (i localInfo) GetPath() (*hd.BIP44Params, error) {
 	return nil, fmt.Errorf("BIP44 Paths are not available for this type")
 }
 
-// ledgerInfo is the public information about a Ledger key
+// ledgerInfo is the public information about a Ledger key.
 type ledgerInfo struct {
 	Name   string         `json:"name"`
 	PubKey crypto.PubKey  `json:"pubkey"`
@@ -154,33 +154,33 @@ func newLedgerInfo(name string, pub crypto.PubKey, path hd.BIP44Params) Info {
 	}
 }
 
-// GetType implements Info interface
+// GetType implements Info interface.
 func (i ledgerInfo) GetType() KeyType {
 	return TypeLedger
 }
 
-// GetName implements Info interface
+// GetName implements Info interface.
 func (i ledgerInfo) GetName() string {
 	return i.Name
 }
 
-// GetPubKey implements Info interface
+// GetPubKey implements Info interface.
 func (i ledgerInfo) GetPubKey() crypto.PubKey {
 	return i.PubKey
 }
 
-// GetAddress implements Info interface
+// GetAddress implements Info interface.
 func (i ledgerInfo) GetAddress() crypto.Address {
 	return i.PubKey.Address()
 }
 
-// GetPath implements Info interface
+// GetPath implements Info interface.
 func (i ledgerInfo) GetPath() (*hd.BIP44Params, error) {
 	tmp := i.Path
 	return &tmp, nil
 }
 
-// offlineInfo is the public information about an offline key
+// offlineInfo is the public information about an offline key.
 type offlineInfo struct {
 	Name   string        `json:"name"`
 	PubKey crypto.PubKey `json:"pubkey"`
@@ -193,27 +193,27 @@ func newOfflineInfo(name string, pub crypto.PubKey) Info {
 	}
 }
 
-// GetType implements Info interface
+// GetType implements Info interface.
 func (i offlineInfo) GetType() KeyType {
 	return TypeOffline
 }
 
-// GetName implements Info interface
+// GetName implements Info interface.
 func (i offlineInfo) GetName() string {
 	return i.Name
 }
 
-// GetPubKey implements Info interface
+// GetPubKey implements Info interface.
 func (i offlineInfo) GetPubKey() crypto.PubKey {
 	return i.PubKey
 }
 
-// GetAddress implements Info interface
+// GetAddress implements Info interface.
 func (i offlineInfo) GetAddress() crypto.Address {
 	return i.PubKey.Address()
 }
 
-// GetPath implements Info interface
+// GetPath implements Info interface.
 func (i offlineInfo) GetPath() (*hd.BIP44Params, error) {
 	return nil, fmt.Errorf("BIP44 Paths are not available for this type")
 }
@@ -223,7 +223,7 @@ type multisigPubKeyInfo struct {
 	Weight uint          `json:"weight"`
 }
 
-// multiInfo is the public information about a multisig key
+// multiInfo is the public information about a multisig key.
 type multiInfo struct {
 	Name      string               `json:"name"`
 	PubKey    crypto.PubKey        `json:"pubkey"`
@@ -231,7 +231,7 @@ type multiInfo struct {
 	PubKeys   []multisigPubKeyInfo `json:"pubkeys"`
 }
 
-// NewMultiInfo creates a new multiInfo instance
+// NewMultiInfo creates a new multiInfo instance.
 func NewMultiInfo(name string, pub crypto.PubKey) Info {
 	multiPK := pub.(multisig.PubKeyMultisigThreshold)
 
@@ -249,37 +249,37 @@ func NewMultiInfo(name string, pub crypto.PubKey) Info {
 	}
 }
 
-// GetType implements Info interface
+// GetType implements Info interface.
 func (i multiInfo) GetType() KeyType {
 	return TypeMulti
 }
 
-// GetName implements Info interface
+// GetName implements Info interface.
 func (i multiInfo) GetName() string {
 	return i.Name
 }
 
-// GetPubKey implements Info interface
+// GetPubKey implements Info interface.
 func (i multiInfo) GetPubKey() crypto.PubKey {
 	return i.PubKey
 }
 
-// GetAddress implements Info interface
+// GetAddress implements Info interface.
 func (i multiInfo) GetAddress() crypto.Address {
 	return i.PubKey.Address()
 }
 
-// GetPath implements Info interface
+// GetPath implements Info interface.
 func (i multiInfo) GetPath() (*hd.BIP44Params, error) {
 	return nil, fmt.Errorf("BIP44 Paths are not available for this type")
 }
 
-// encoding info
+// encoding info.
 func writeInfo(i Info) []byte {
 	return amino.MustMarshalAnySized(i)
 }
 
-// decoding info
+// decoding info.
 func readInfo(bz []byte) (info Info, err error) {
 	err = amino.UnmarshalAnySized(bz, &info)
 	return

@@ -27,7 +27,7 @@ type Tree interface {
 
 //-----------------------------------------------------------------------
 
-// Uvarint length prefixed byteslice
+// Uvarint length prefixed byteslice.
 func encodeByteSlice(w io.Writer, bz []byte) (err error) {
 	return amino.EncodeByteSlice(w, bz)
 }

@@ -3,11 +3,10 @@ package mock_test
 import (
 	"testing"
 
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
-
 	"github.com/gnolang/gno/pkgs/bft/rpc/client/mock"
 	ctypes "github.com/gnolang/gno/pkgs/bft/rpc/core/types"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestStatus(t *testing.T) {

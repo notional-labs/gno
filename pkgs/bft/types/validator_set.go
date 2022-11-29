@@ -780,7 +780,7 @@ func (vals *ValidatorSet) String() string {
 	return vals.StringIndented("")
 }
 
-// String
+// String.
 func (vals *ValidatorSet) StringIndented(indent string) string {
 	if vals == nil {
 		return "nil-ValidatorSet"
@@ -826,7 +826,7 @@ func (valz ValidatorsByAddress) Swap(i, j int) {
 
 // RandValidatorSet returns a randomized validator set, useful for testing.
 // NOTE: PrivValidator are in order.
-// UNSTABLE
+// UNSTABLE.
 func RandValidatorSet(numValidators int, votingPower int64) (*ValidatorSet, []PrivValidator) {
 	valz := make([]*Validator, numValidators)
 	privValidators := make([]PrivValidator, numValidators)

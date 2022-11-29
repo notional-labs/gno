@@ -132,7 +132,7 @@ func makeAddrs() (string, string, string) {
 		fmt.Sprintf("tcp://0.0.0.0:%d", start+2)
 }
 
-// getConfig returns a config for test cases
+// getConfig returns a config for test cases.
 func getConfig(t *testing.T) *cfg.Config {
 	c := cfg.ResetTestRoot(t.Name())
 
@@ -156,7 +156,7 @@ type heightStopWAL struct {
 	logger log.Logger
 }
 
-// needed for determinism
+// needed for determinism.
 var fixedTime, _ = time.Parse(time.RFC3339, "2017-01-02T15:04:05Z")
 
 func newHeightStopWAL(logger log.Logger, enc *walm.WALWriter, nBlocks int64, signalStop chan<- struct{}) *heightStopWAL {

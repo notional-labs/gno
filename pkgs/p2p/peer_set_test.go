@@ -5,13 +5,12 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
-
 	"github.com/gnolang/gno/pkgs/crypto/ed25519"
 	"github.com/gnolang/gno/pkgs/service"
+	"github.com/stretchr/testify/assert"
 )
 
-// mockPeer for testing the PeerSet
+// mockPeer for testing the PeerSet.
 type mockPeer struct {
 	service.BaseService
 	ip net.IP
@@ -33,7 +32,7 @@ func (mp *mockPeer) SocketAddr() *NetAddress                 { return nil }
 func (mp *mockPeer) RemoteAddr() net.Addr                    { return &net.TCPAddr{IP: mp.ip, Port: 8800} }
 func (mp *mockPeer) CloseConn() error                        { return nil }
 
-// Returns a mock peer
+// Returns a mock peer.
 func newMockPeer(ip net.IP) *mockPeer {
 	if ip == nil {
 		ip = net.IP{127, 0, 0, 1}

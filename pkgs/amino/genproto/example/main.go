@@ -9,7 +9,7 @@ import (
 	"github.com/gnolang/gno/pkgs/amino/genproto/example/submodule2"
 )
 
-// amino
+// amino.
 type StructA struct {
 	fieldA int
 	fieldB int
@@ -17,7 +17,7 @@ type StructA struct {
 	FieldD uint32
 }
 
-// amino
+// amino.
 type StructB struct {
 	fieldA int
 	fieldB int

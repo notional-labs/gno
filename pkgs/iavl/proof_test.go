@@ -4,13 +4,12 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
-
 	"github.com/gnolang/gno/pkgs/amino"
 	"github.com/gnolang/gno/pkgs/db"
 	"github.com/gnolang/gno/pkgs/random"
 	"github.com/gnolang/gno/pkgs/testutils"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestTreeGetWithProof(t *testing.T) {
@@ -126,7 +125,7 @@ func TestTreeKeyInRangeProofs(t *testing.T) {
 	// For spacing:
 	T := 10
 	// disable: don't use underscores in Go names; var nil______ should be nil (golint)
-	// nolint
+	//nolint
 	nil______ := []byte(nil)
 
 	cases := []struct {

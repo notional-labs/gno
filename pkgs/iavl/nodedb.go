@@ -28,7 +28,7 @@ var (
 	// of the node being orphaned.
 	orphanKeyFormat = NewKeyFormat('o', int64Size, int64Size, hashSize) // o<last-version><first-version><hash>
 
-	// Root nodes are indexed separately by their version
+	// Root nodes are indexed separately by their version.
 	rootKeyFormat = NewKeyFormat('r', int64Size) // r<version>
 )
 
@@ -352,7 +352,7 @@ func (ndb *nodeDB) getRootsCh() <-chan int64 {
 }
 
 // NOTE Slow, only use for debugging.
-// XXX DEPRECATED
+// XXX DEPRECATED.
 func (ndb *nodeDB) getRoots() (map[int64][]byte, error) {
 	roots := map[int64][]byte{}
 

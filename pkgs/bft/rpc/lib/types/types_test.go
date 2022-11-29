@@ -5,9 +5,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
-
 	"github.com/gnolang/gno/pkgs/errors"
+	"github.com/stretchr/testify/assert"
 )
 
 type SampleResult struct {

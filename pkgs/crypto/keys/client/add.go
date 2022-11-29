@@ -31,7 +31,7 @@ var DefaultAddOptions = AddOptions{
 	MultisigThreshold: 1,
 }
 
-// DryRunKeyPass contains the default key password for genesis transactions
+// DryRunKeyPass contains the default key password for genesis transactions.
 const DryRunKeyPass = "12345678"
 
 /*
@@ -174,7 +174,7 @@ func addApp(cmd *command.Command, args []string, iopts interface{}) error {
 			return err
 		}
 
-		mnemonic, err = bip39.NewMnemonic(entropySeed[:])
+		mnemonic, err = bip39.NewMnemonic(entropySeed)
 		if err != nil {
 			return err
 		}

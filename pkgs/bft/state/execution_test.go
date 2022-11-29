@@ -4,9 +4,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
-
 	"github.com/gnolang/gno/pkgs/amino"
 	"github.com/gnolang/gno/pkgs/async"
 	"github.com/gnolang/gno/pkgs/bft/abci/example/kvstore"
@@ -20,6 +17,8 @@ import (
 	"github.com/gnolang/gno/pkgs/crypto/secp256k1"
 	"github.com/gnolang/gno/pkgs/events"
 	"github.com/gnolang/gno/pkgs/log"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 var (
@@ -94,7 +93,6 @@ func TestBeginBlockValidators(t *testing.T) {
 		for i, v := range app.CommitVotes {
 			if ctr < len(tc.expectedAbsentValidators) &&
 				tc.expectedAbsentValidators[ctr] == i {
-
 				assert.False(t, v.SignedLastBlock)
 				ctr++
 			} else {
@@ -315,7 +313,7 @@ LOOP:
 }
 
 // TestEndBlockValidatorUpdatesResultingInEmptySet checks that processing validator updates that
-// would result in empty set causes no panic, an error is raised and NextValidators is not updated
+// would result in empty set causes no panic, an error is raised and NextValidators is not updated.
 func TestEndBlockValidatorUpdatesResultingInEmptySet(t *testing.T) {
 	app := &testApp{}
 	cc := proxy.NewLocalClientCreator(app)

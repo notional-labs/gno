@@ -20,7 +20,7 @@ import (
 )
 
 const (
-	// see README
+	// see README.
 	defaultPerPage = 30
 	maxPerPage     = 100
 )
@@ -55,17 +55,17 @@ type peers interface {
 // that are expected to be called only once, on startup
 
 var (
-	// external, thread safe interfaces
+	// external, thread safe interfaces.
 	proxyAppQuery proxy.AppConnQuery
 
-	// interfaces defined in types and above
+	// interfaces defined in types and above.
 	stateDB        dbm.DB
 	blockStore     sm.BlockStore
 	consensusState Consensus
 	p2pPeers       peers
 	p2pTransport   transport
 
-	// objects
+	// objects.
 	pubKey           crypto.PubKey
 	genDoc           *types.GenesisDoc // cache the genesis structure
 	txIndexer        txindex.TxIndexer

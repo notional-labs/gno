@@ -56,7 +56,7 @@ func (pvs VersionSet) Get(name string) (pv VersionInfo, ok bool) {
 // Only the Major and Minor versions are returned; Patch, Prerelease, and Build
 // portions of Semver2.0 are discarded in the resulting intersection
 // VersionSet.
-// TODO: test
+// TODO: test.
 func (pvs VersionSet) CompatibleWith(other VersionSet) (res VersionSet, err error) {
 	var errs []string
 	type pvpair [2]*VersionInfo

@@ -11,7 +11,7 @@ var commithash = []byte("FAKE_HASH")
 // commitDBStoreWrapper should only be used for simulation/debugging,
 // as it doesn't compute any commit hash, and it cannot load older state.
 
-// Wrapper type for dbm.Db with implementation of KVStore
+// Wrapper type for dbm.Db with implementation of KVStore.
 type commitDBStoreAdapter struct {
 	dbadapter.Store
 }

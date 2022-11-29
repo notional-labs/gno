@@ -153,7 +153,7 @@ import (
 //	     ...
 //	  }
 //
-// ```
+// ```.
 func NetInfo(ctx *rpctypes.Context) (*ctypes.ResultNetInfo, error) {
 	out, in, _ := p2pPeers.NumPeers()
 	peers := make([]ctypes.Peer, 0, out+in)
@@ -249,7 +249,7 @@ func UnsafeDialPeers(ctx *rpctypes.Context, peers []string, persistent bool) (*c
 //		"jsonrpc": "2.0"
 //	}
 //
-// ```
+// ```.
 func Genesis(ctx *rpctypes.Context) (*ctypes.ResultGenesis, error) {
 	return &ctypes.ResultGenesis{Genesis: genDoc}, nil
 }

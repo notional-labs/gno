@@ -11,11 +11,10 @@ import (
 	"strings"
 	"time"
 
-	"golang.org/x/net/netutil"
-
 	types "github.com/gnolang/gno/pkgs/bft/rpc/lib/types"
 	"github.com/gnolang/gno/pkgs/errors"
 	"github.com/gnolang/gno/pkgs/log"
+	"golang.org/x/net/netutil"
 )
 
 // Config is a RPC server configuration.
@@ -179,7 +178,7 @@ func RecoverAndLogHandler(handler http.Handler, logger log.Logger) http.Handler 
 	})
 }
 
-// Remember the status for logging
+// Remember the status for logging.
 type ResponseWriterWrapper struct {
 	Status int
 	http.ResponseWriter
@@ -190,7 +189,7 @@ func (w *ResponseWriterWrapper) WriteHeader(status int) {
 	w.ResponseWriter.WriteHeader(status)
 }
 
-// implements http.Hijacker
+// implements http.Hijacker.
 func (w *ResponseWriterWrapper) Hijack() (net.Conn, *bufio.ReadWriter, error) {
 	return w.ResponseWriter.(http.Hijacker).Hijack()
 }

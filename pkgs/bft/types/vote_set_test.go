@@ -4,20 +4,19 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
-
 	tmtime "github.com/gnolang/gno/pkgs/bft/types/time"
 	"github.com/gnolang/gno/pkgs/crypto"
 	"github.com/gnolang/gno/pkgs/random"
+	"github.com/stretchr/testify/assert"
 )
 
-// NOTE: privValidators are in order
+// NOTE: privValidators are in order.
 func randVoteSet(height int64, round int, type_ SignedMsgType, numValidators int, votingPower int64) (*VoteSet, *ValidatorSet, []PrivValidator) {
 	valSet, privValidators := RandValidatorSet(numValidators, votingPower)
 	return NewVoteSet("test_chain_id", height, round, type_, valSet), valSet, privValidators
 }
 
-// Convenience: Return new vote with different validator address/index
+// Convenience: Return new vote with different validator address/index.
 func withValidator(vote *Vote, addr crypto.Address, idx int) *Vote {
 	vote = vote.Copy()
 	vote.ValidatorAddress = addr
@@ -25,35 +24,35 @@ func withValidator(vote *Vote, addr crypto.Address, idx int) *Vote {
 	return vote
 }
 
-// Convenience: Return new vote with different height
+// Convenience: Return new vote with different height.
 func withHeight(vote *Vote, height int64) *Vote {
 	vote = vote.Copy()
 	vote.Height = height
 	return vote
 }
 
-// Convenience: Return new vote with different round
+// Convenience: Return new vote with different round.
 func withRound(vote *Vote, round int) *Vote {
 	vote = vote.Copy()
 	vote.Round = round
 	return vote
 }
 
-// Convenience: Return new vote with different type
+// Convenience: Return new vote with different type.
 func withType(vote *Vote, type_ byte) *Vote {
 	vote = vote.Copy()
 	vote.Type = SignedMsgType(type_)
 	return vote
 }
 
-// Convenience: Return new vote with different blockHash
+// Convenience: Return new vote with different blockHash.
 func withBlockHash(vote *Vote, blockHash []byte) *Vote {
 	vote = vote.Copy()
 	vote.BlockID.Hash = blockHash
 	return vote
 }
 
-// Convenience: Return new vote with different blockParts
+// Convenience: Return new vote with different blockParts.
 func withBlockPartsHeader(vote *Vote, blockPartsHeader PartSetHeader) *Vote {
 	vote = vote.Copy()
 	vote.BlockID.PartsHeader = blockPartsHeader

@@ -6,7 +6,6 @@ import (
 	bft "github.com/gnolang/gno/pkgs/bft/types"
 	dbm "github.com/gnolang/gno/pkgs/db"
 	"github.com/gnolang/gno/pkgs/log"
-
 	"github.com/gnolang/gno/pkgs/sdk"
 	authm "github.com/gnolang/gno/pkgs/sdk/auth"
 	bankm "github.com/gnolang/gno/pkgs/sdk/bank"

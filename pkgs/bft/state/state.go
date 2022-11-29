@@ -15,7 +15,7 @@ import (
 	"github.com/gnolang/gno/pkgs/crypto"
 )
 
-// database keys
+// database keys.
 var (
 	stateKey = []byte("stateKey")
 )

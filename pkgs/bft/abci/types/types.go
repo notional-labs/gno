@@ -31,7 +31,7 @@ type RequestInfo struct {
 	RequestBase
 }
 
-// nondeterministic
+// nondeterministic.
 type RequestSetOption struct {
 	RequestBase
 	Key   string
@@ -116,7 +116,7 @@ func (r ResponseBase) IsErr() bool {
 	return r.Error != nil
 }
 
-// nondeterministic
+// nondeterministic.
 type ResponseException struct {
 	ResponseBase
 }
@@ -138,7 +138,7 @@ type ResponseInfo struct {
 	LastBlockAppHash []byte
 }
 
-// nondeterministic
+// nondeterministic.
 type ResponseSetOption struct {
 	ResponseBase
 }
@@ -257,7 +257,7 @@ type LastCommitInfo struct {
 	Votes []VoteInfo
 }
 
-// unstable
+// unstable.
 type VoteInfo struct {
 	Address         crypto.Address
 	Power           int64

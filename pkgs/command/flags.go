@@ -59,7 +59,7 @@ func applyFlagReflect(rv reflect.Value, fname string, fvalue interface{}) (bool,
 			match, err := applyFlagReflect(frv, fname, fvalue)
 			if err != nil {
 				return false, err
-			} else if match { //nolint:staticcheck
+			} else if match { 
 				// found match, done!
 				return true, nil
 			} else { //nolint:staticcheck
@@ -247,7 +247,6 @@ func applyFlagToFieldReflectString(frv reflect.Value, fvalue string) error {
 		panic(fmt.Sprintf(
 			"flag value cannot be applied to field of type %s",
 			frt.String()))
-
 	}
 }
 
@@ -278,7 +277,6 @@ func applyFlagToFieldReflectStringSlice(frv reflect.Value, fvalues []string) err
 		panic(fmt.Sprintf(
 			"flag values cannot be applied to field of type %s",
 			frt.String()))
-
 	}
 }
 

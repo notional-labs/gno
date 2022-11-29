@@ -164,12 +164,10 @@ func UverseNode() *PackageNode {
 			xt := arg0.TV.T
 			argt := arg1.TV.T
 			switch xv := arg0.TV.V.(type) {
-
 			//----------------------------------------------------------------
 			// append(nil, ???)
 			case nil:
 				switch args := arg1.TV.V.(type) {
-
 				//------------------------------------------------------------
 				// append(nil, nil)
 				case nil: // no change
@@ -264,7 +262,6 @@ func UverseNode() *PackageNode {
 				//------------------------------------------------------------
 				default:
 					panic("should not happen")
-
 				}
 
 			//----------------------------------------------------------------
@@ -275,7 +272,6 @@ func UverseNode() *PackageNode {
 				xvc := xv.Maxcap
 				xvb := xv.GetBase(m.Store)
 				switch args := arg1.TV.V.(type) {
-
 				//------------------------------------------------------------
 				// append(*SliceValue, nil)
 				case nil: // no change
@@ -483,7 +479,6 @@ func UverseNode() *PackageNode {
 				//------------------------------------------------------------
 				default:
 					panic("should not happen")
-
 				}
 
 			//----------------------------------------------------------------
@@ -491,7 +486,6 @@ func UverseNode() *PackageNode {
 			case *NativeValue:
 				sv := xv.Value
 				switch args := arg1.TV.V.(type) {
-
 				//------------------------------------------------------------
 				// append(*NativeValue, nil)
 				case nil: // no change
@@ -575,14 +569,12 @@ func UverseNode() *PackageNode {
 					panic(fmt.Sprintf(
 						"cannot append %s to %s",
 						arg1.TV.T.String(), xt.String()))
-
 				}
 
 			//----------------------------------------------------------------
 			// append(?!!, ???)
 			default:
 				panic("should not happen")
-
 			}
 		},
 	)

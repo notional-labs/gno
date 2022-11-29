@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-// Provides a fixed-width lexicographically sortable []byte key format
+// Provides a fixed-width lexicographically sortable []byte key format.
 type KeyFormat struct {
 	prefix byte
 	layout []int

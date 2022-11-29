@@ -53,7 +53,7 @@ import (
 //		"jsonrpc": "2.0"
 //	}
 //
-// ```
+// ```.
 func Validators(ctx *rpctypes.Context, heightPtr *int64) (*ctypes.ResultValidators, error) {
 	// The latest validator that we know is the
 	// NextValidator of the last block.
@@ -211,7 +211,7 @@ func Validators(ctx *rpctypes.Context, heightPtr *int64) (*ctypes.ResultValidato
 //	  }
 //	}
 //
-// ```
+// ```.
 func DumpConsensusState(ctx *rpctypes.Context) (*ctypes.ResultDumpConsensusState, error) {
 	// Get Peer consensus states.
 	peers := p2pPeers.Peers().List()
@@ -292,7 +292,7 @@ func DumpConsensusState(ctx *rpctypes.Context) (*ctypes.ResultDumpConsensusState
 //	 }
 //	}
 //
-// ```
+// ```.
 func ConsensusState(ctx *rpctypes.Context) (*ctypes.ResultConsensusState, error) {
 	// Get self round state.
 	rs := consensusState.GetRoundStateSimple()
@@ -339,7 +339,7 @@ func ConsensusState(ctx *rpctypes.Context) (*ctypes.ResultConsensusState, error)
 //	  }
 //	}
 //
-// ```
+// ```.
 func ConsensusParams(ctx *rpctypes.Context, heightPtr *int64) (*ctypes.ResultConsensusParams, error) {
 	height := consensusState.GetState().LastBlockHeight + 1
 	height, err := getHeight(height, heightPtr)

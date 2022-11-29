@@ -14,7 +14,7 @@ import (
 	p2p "github.com/gnolang/gno/pkgs/p2p/config"
 )
 
-// Config defines the top level configuration for a Tendermint node
+// Config defines the top level configuration for a Tendermint node.
 type Config struct {
 	// Top level options use an anonymous struct
 	BaseConfig `toml:",squash"`
@@ -26,7 +26,7 @@ type Config struct {
 	Consensus *cns.ConsensusConfig `toml:"consensus"`
 }
 
-// DefaultConfig returns a default configuration for a Tendermint node
+// DefaultConfig returns a default configuration for a Tendermint node.
 func DefaultConfig() *Config {
 	return &Config{
 		BaseConfig: DefaultBaseConfig(),
@@ -45,7 +45,7 @@ func LoadOrMakeDefaultConfig(root string) (cfg *Config) {
 type ConfigOptions func(cfg *Config)
 
 // LoadOrMakeConfigWithOptions() loads configuration or saves one
-// made by modifying the default config with override options
+// made by modifying the default config with override options.
 func LoadOrMakeConfigWithOptions(root string, options ConfigOptions) (cfg *Config) {
 	configPath := join(root, defaultConfigFilePath)
 	if osm.FileExists(configPath) {
@@ -65,7 +65,7 @@ func LoadOrMakeConfigWithOptions(root string, options ConfigOptions) (cfg *Confi
 	return cfg
 }
 
-// TestConfig returns a configuration that can be used for testing
+// TestConfig returns a configuration that can be used for testing.
 func TestConfig() *Config {
 	return &Config{
 		BaseConfig: TestBaseConfig(),
@@ -76,7 +76,7 @@ func TestConfig() *Config {
 	}
 }
 
-// SetRootDir sets the RootDir for all Config structs
+// SetRootDir sets the RootDir for all Config structs.
 func (cfg *Config) SetRootDir(root string) *Config {
 	cfg.BaseConfig.RootDir = root
 	cfg.RPC.RootDir = root
@@ -125,9 +125,9 @@ func (cfg *Config) ValidateBasic() error {
 // BaseConfig
 
 const (
-	// LogFormatPlain is a format for colored text
+	// LogFormatPlain is a format for colored text.
 	LogFormatPlain = "plain"
-	// LogFormatJSON is a format for json output
+	// LogFormatJSON is a format for json output.
 	LogFormatJSON = "json"
 )
 
@@ -148,7 +148,7 @@ var (
 	defaultNodeKeyPath      = filepath.Join(defaultConfigDir, defaultNodeKeyName)
 )
 
-// BaseConfig defines the base configuration for a Tendermint node
+// BaseConfig defines the base configuration for a Tendermint node.
 type BaseConfig struct {
 	// chainID is unexposed and immutable but here for convenience
 	chainID string
@@ -223,7 +223,7 @@ type BaseConfig struct {
 	FilterPeers bool `toml:"filter_peers"` // false
 }
 
-// DefaultBaseConfig returns a default base configuration for a Tendermint node
+// DefaultBaseConfig returns a default base configuration for a Tendermint node.
 func DefaultBaseConfig() BaseConfig {
 	return BaseConfig{
 		Genesis:            defaultGenesisJSONPath,
@@ -243,7 +243,7 @@ func DefaultBaseConfig() BaseConfig {
 	}
 }
 
-// TestBaseConfig returns a base configuration for testing a Tendermint node
+// TestBaseConfig returns a base configuration for testing a Tendermint node.
 func TestBaseConfig() BaseConfig {
 	cfg := DefaultBaseConfig()
 	cfg.chainID = "tendermint_test"
@@ -257,27 +257,27 @@ func (cfg BaseConfig) ChainID() string {
 	return cfg.chainID
 }
 
-// GenesisFile returns the full path to the genesis.json file
+// GenesisFile returns the full path to the genesis.json file.
 func (cfg BaseConfig) GenesisFile() string {
 	return join(cfg.RootDir, cfg.Genesis)
 }
 
-// PrivValidatorKeyFile returns the full path to the priv_validator_key.json file
+// PrivValidatorKeyFile returns the full path to the priv_validator_key.json file.
 func (cfg BaseConfig) PrivValidatorKeyFile() string {
 	return join(cfg.RootDir, cfg.PrivValidatorKey)
 }
 
-// PrivValidatorFile returns the full path to the priv_validator_state.json file
+// PrivValidatorFile returns the full path to the priv_validator_state.json file.
 func (cfg BaseConfig) PrivValidatorStateFile() string {
 	return join(cfg.RootDir, cfg.PrivValidatorState)
 }
 
-// NodeKeyFile returns the full path to the node_key.json file
+// NodeKeyFile returns the full path to the node_key.json file.
 func (cfg BaseConfig) NodeKeyFile() string {
 	return join(cfg.RootDir, cfg.NodeKey)
 }
 
-// DBDir returns the full path to the database directory
+// DBDir returns the full path to the database directory.
 func (cfg BaseConfig) DBDir() string {
 	return join(cfg.RootDir, cfg.DBPath)
 }
@@ -293,13 +293,13 @@ func (cfg BaseConfig) ValidateBasic() error {
 	return nil
 }
 
-// DefaultLogLevel returns a default log level of "error"
+// DefaultLogLevel returns a default log level of "error".
 func DefaultLogLevel() string {
 	return "error"
 }
 
 // DefaultPackageLogLevels returns a default log level setting so all packages
-// log at "error", while the `state` and `main` packages log at "info"
+// log at "error", while the `state` and `main` packages log at "info".
 func DefaultPackageLogLevels() string {
 	return fmt.Sprintf("main:info,state:info,*:%s", DefaultLogLevel())
 }

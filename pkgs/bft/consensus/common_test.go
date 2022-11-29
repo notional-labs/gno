@@ -41,7 +41,7 @@ const (
 // test.
 type cleanupFunc func()
 
-// genesis, chain_id, priv_val
+// genesis, chain_id, priv_val.
 var config *cfg.Config // NOTE: must be reset for each _test.go file
 var (
 	consensusReplayConfig *cfg.Config
@@ -92,7 +92,7 @@ func (vs *validatorStub) signVote(voteType types.SignedMsgType, hash []byte, hea
 	return vote, err
 }
 
-// Sign vote for type/hash/header
+// Sign vote for type/hash/header.
 func signVote(vs *validatorStub, voteType types.SignedMsgType, hash []byte, header types.PartSetHeader) *types.Vote {
 	v, err := vs.signVote(voteType, hash, header)
 	if err != nil {
@@ -639,7 +639,7 @@ func randConsensusNet(nValidators int, testName string, tickerFunc func() Timeou
 	}
 }
 
-// nPeers = nValidators + nNotValidator
+// nPeers = nValidators + nNotValidator.
 func randConsensusNetWithPeers(nValidators, nPeers int, testName string, tickerFunc func() TimeoutTicker, appFunc func(string) abci.Application) ([]*ConsensusState, *types.GenesisDoc, *cfg.Config, cleanupFunc) {
 	genDoc, privVals := randGenesisDoc(nValidators, false, testMinPower)
 	css := make([]*ConsensusState, nPeers)
@@ -751,7 +751,7 @@ func newMockTickerFunc(onlyOnce bool) func() TimeoutTicker {
 }
 
 // mock ticker only fires on RoundStepNewHeight
-// and only once if onlyOnce=true
+// and only once if onlyOnce=true.
 type mockTicker struct {
 	c chan timeoutInfo
 

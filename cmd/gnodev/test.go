@@ -320,7 +320,7 @@ func runTestFiles(cmd *command.Command, testStore gno.Store, m *gno.Machine, fil
 	return errs
 }
 
-// mirror of stdlibs/testing.Report
+// mirror of stdlibs/testing.Report.
 type report struct {
 	Name     string
 	Verbose  bool
@@ -400,7 +400,7 @@ func loadTestFuncs(pkgName string, t *testFuncs, tfiles *gno.FileSet) *testFuncs
 }
 
 // parseMemPackageTests is copied from gno.ParseMemPackageTests
-// for except to _filetest.gno
+// for except to _filetest.gno.
 func parseMemPackageTests(memPkg *std.MemPackage) (tset, itset *gno.FileSet) {
 	tset = &gno.FileSet{}
 	itset = &gno.FileSet{}

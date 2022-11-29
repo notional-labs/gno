@@ -4,11 +4,11 @@ package types
 type SignedMsgType byte
 
 const (
-	// Votes
+	// Votes.
 	PrevoteType   SignedMsgType = 0x01
 	PrecommitType SignedMsgType = 0x02
 
-	// Proposals
+	// Proposals.
 	ProposalType SignedMsgType = 0x20
 )
 

@@ -8,7 +8,7 @@ import (
 	"github.com/gnolang/gno/pkgs/colors"
 )
 
-// reuse the same logger across all tests
+// reuse the same logger across all tests.
 var _testingLogger Logger
 
 // TestingLogger returns a TMLogger which writes to STDOUT if testing being run

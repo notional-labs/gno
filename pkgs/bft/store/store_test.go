@@ -9,9 +9,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
-
 	"github.com/gnolang/gno/pkgs/amino"
 	cfg "github.com/gnolang/gno/pkgs/bft/config"
 	sm "github.com/gnolang/gno/pkgs/bft/state"
@@ -20,13 +17,15 @@ import (
 	dbm "github.com/gnolang/gno/pkgs/db"
 	"github.com/gnolang/gno/pkgs/errors"
 	"github.com/gnolang/gno/pkgs/log"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 // A cleanupFunc cleans up any config / test files created for a particular
 // test.
 type cleanupFunc func()
 
-// make a Commit with a single vote containing just the height and a timestamp
+// make a Commit with a single vote containing just the height and a timestamp.
 func makeTestCommit(height int64, timestamp time.Time) *types.Commit {
 	commitSigs := []*types.CommitSig{{Height: height, Timestamp: timestamp}}
 	return types.NewCommit(types.BlockID{}, commitSigs)

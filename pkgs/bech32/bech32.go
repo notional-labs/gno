@@ -6,7 +6,7 @@ import (
 )
 
 // ConvertAndEncode encodes []byte to bech32.
-// DEPRECATED use Encode
+// DEPRECATED use Encode.
 func ConvertAndEncode(hrp string, data []byte) (string, error) {
 	converted, err := bech32.ConvertBits(data, 8, 5, true)
 	if err != nil {
@@ -20,7 +20,7 @@ func Encode(hrp string, data []byte) (string, error) {
 }
 
 // DecodeAndConvert decodes bech32 to []byte.
-// DEPRECATED use Decode
+// DEPRECATED use Decode.
 func DecodeAndConvert(bech string) (string, []byte, error) {
 	hrp, data, err := bech32.DecodeNoLimit(bech)
 	if err != nil {

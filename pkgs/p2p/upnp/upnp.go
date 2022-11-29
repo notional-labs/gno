@@ -24,7 +24,7 @@ type upnpNAT struct {
 	urnDomain  string
 }
 
-// protocol is either "udp" or "tcp"
+// protocol is either "udp" or "tcp".
 type NAT interface {
 	GetExternalAddress() (addr net.IP, err error)
 	AddPortMapping(protocol string, externalPort, internalPort int, description string, timeout int) (mappedExternalPort int, err error)
@@ -198,7 +198,7 @@ func localIPv4() (net.IP, error) {
 }
 
 func getServiceURL(rootURL string) (url, urnDomain string, err error) {
-	r, err := http.Get(rootURL) // nolint: gosec
+	r, err := http.Get(rootURL) //nolint: gosec
 	if err != nil {
 		return
 	}

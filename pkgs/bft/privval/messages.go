@@ -19,23 +19,23 @@ type PubKeyResponse struct {
 	Error  *RemoteSignerError
 }
 
-// SignVoteRequest is a request to sign a vote
+// SignVoteRequest is a request to sign a vote.
 type SignVoteRequest struct {
 	Vote *types.Vote
 }
 
-// SignedVoteResponse is a response containing a signed vote or an error
+// SignedVoteResponse is a response containing a signed vote or an error.
 type SignedVoteResponse struct {
 	Vote  *types.Vote
 	Error *RemoteSignerError
 }
 
-// SignProposalRequest is a request to sign a proposal
+// SignProposalRequest is a request to sign a proposal.
 type SignProposalRequest struct {
 	Proposal *types.Proposal
 }
 
-// SignedProposalResponse is response containing a signed proposal or an error
+// SignedProposalResponse is response containing a signed proposal or an error.
 type SignedProposalResponse struct {
 	Proposal *types.Proposal
 	Error    *RemoteSignerError

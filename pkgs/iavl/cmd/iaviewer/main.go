@@ -90,7 +90,7 @@ func PrintDbStats(db dbm.DB) {
 }
 
 // ReadTree loads an iavl tree from the directory
-// If version is 0, load latest, otherwise, load named version
+// If version is 0, load latest, otherwise, load named version.
 func ReadTree(dir string, version int) (*iavl.MutableTree, error) {
 	db, err := OpenDb(dir)
 	if err != nil {
@@ -113,7 +113,7 @@ func PrintKeys(tree *iavl.MutableTree) {
 }
 
 // parseWeaveKey assumes a separating : where all in front should be ascii,
-// and all afterwards may be ascii or binary
+// and all afterwards may be ascii or binary.
 func parseWeaveKey(key []byte) string {
 	cut := bytes.IndexRune(key, ':')
 	if cut == -1 {
@@ -124,7 +124,7 @@ func parseWeaveKey(key []byte) string {
 	return fmt.Sprintf("%s:%s", encodeId(prefix), encodeId(id))
 }
 
-// casts to a string if it is printable ascii, hex-encodes otherwise
+// casts to a string if it is printable ascii, hex-encodes otherwise.
 func encodeId(id []byte) string {
 	for _, b := range id {
 		if b < 0x20 || b >= 0x80 {

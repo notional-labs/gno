@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-// The wordlist to use
+// The wordlist to use.
 var WordList = EnglishWordList
 
 var ReverseWordMap map[string]int = map[string]int{}
@@ -26,7 +26,7 @@ func init() {
 	}
 }
 
-// Language-specific wordlists
+// Language-specific wordlists.
 var EnglishWordList = strings.Split(strings.TrimSpace(englishWordList), "\n")
 
 var englishWordList = `abandon

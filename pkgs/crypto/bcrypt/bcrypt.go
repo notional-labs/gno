@@ -39,7 +39,7 @@ func (hv HashVersionTooNewError) Error() string {
 	return fmt.Sprintf("crypto/bcrypt: bcrypt algorithm version '%c' requested is newer than current version '%c'", byte(hv), majorVersion)
 }
 
-// The error returned from CompareHashAndPassword when a hash starts with something other than '$'
+// The error returned from CompareHashAndPassword when a hash starts with something other than '$'.
 type InvalidHashPrefixError byte
 
 func (ih InvalidHashPrefixError) Error() string {

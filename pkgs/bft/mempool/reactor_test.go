@@ -7,8 +7,6 @@ import (
 	"time"
 
 	"github.com/fortytw2/leaktest"
-	"github.com/stretchr/testify/assert"
-
 	"github.com/gnolang/gno/pkgs/bft/abci/example/kvstore"
 	memcfg "github.com/gnolang/gno/pkgs/bft/mempool/config"
 	"github.com/gnolang/gno/pkgs/bft/proxy"
@@ -20,6 +18,7 @@ import (
 	p2pcfg "github.com/gnolang/gno/pkgs/p2p/config"
 	"github.com/gnolang/gno/pkgs/p2p/mock"
 	"github.com/gnolang/gno/pkgs/testutils"
+	"github.com/stretchr/testify/assert"
 )
 
 type peerState struct {
@@ -63,7 +62,7 @@ func mempoolLogger() log.Logger {
 	})
 }
 
-// connect N mempool reactors through N switches
+// connect N mempool reactors through N switches.
 func makeAndConnectReactors(mconfig *memcfg.MempoolConfig, pconfig *p2pcfg.P2PConfig, n int) []*Reactor {
 	reactors := make([]*Reactor, n)
 	logger := mempoolLogger()
@@ -122,7 +121,7 @@ func waitForTxsOnReactor(t *testing.T, txs types.Txs, reactor *Reactor, reactorI
 	}
 }
 
-// ensure no txs on reactor after some timeout
+// ensure no txs on reactor after some timeout.
 func ensureNoTxs(t *testing.T, reactor *Reactor, timeout time.Duration) {
 	time.Sleep(timeout) // wait for the txs in all mempools
 	assert.Zero(t, reactor.mempool.Size())

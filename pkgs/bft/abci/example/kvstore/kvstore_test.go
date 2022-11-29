@@ -4,9 +4,8 @@ import (
 	"sort"
 	"testing"
 
-	"github.com/stretchr/testify/require"
-
 	abci "github.com/gnolang/gno/pkgs/bft/abci/types"
+	"github.com/stretchr/testify/require"
 )
 
 const (
@@ -90,7 +89,7 @@ func TestPersistentKVStoreInfo(t *testing.T) {
 	}
 }
 
-// add a validator, remove a validator, update a validator
+// add a validator, remove a validator, update a validator.
 func TestValUpdates(t *testing.T) {
 	dir := t.TempDir()
 	kvstore := NewPersistentKVStoreApplication(dir)
@@ -132,7 +131,7 @@ func TestValUpdates(t *testing.T) {
 
 	makeApplyBlock(t, kvstore, 2, diff, tx1, tx2, tx3)
 
-	vals1 = append(vals[:nInit-2], vals[nInit+1]) // nolint: gocritic
+	vals1 = append(vals[:nInit-2], vals[nInit+1]) //nolint: gocritic
 	vals2 = kvstore.Validators()
 	valsEqual(t, vals1, vals2)
 
@@ -172,7 +171,7 @@ func makeApplyBlock(t *testing.T, kvstore abci.Application, heightInt int, diff 
 	valsEqual(t, diff, resEndBlock.ValidatorUpdates)
 }
 
-// order doesn't matter
+// order doesn't matter.
 func valsEqual(t *testing.T, vals1, vals2 []abci.ValidatorUpdate) {
 	if len(vals1) != len(vals2) {
 		t.Fatalf("vals dont match in len. got %d, expected %d", len(vals2), len(vals1))

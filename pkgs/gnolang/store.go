@@ -16,7 +16,7 @@ const iavlCacheSize = 1024 * 1024 // TODO increase and parameterize.
 // return nil if package doesn't exist.
 type PackageGetter func(pkgPath string) (*PackageNode, *PackageValue)
 
-// inject natives into a new or loaded package (value and node)
+// inject natives into a new or loaded package (value and node).
 type PackageInjector func(store Store, pn *PackageNode)
 
 type Store interface {
@@ -559,7 +559,7 @@ func (ds *defaultStore) IterMemPackage() <-chan *std.MemPackage {
 		if err != nil {
 			panic(err)
 		}
-		ch := make(chan *std.MemPackage, 0)
+		ch := make(chan *std.MemPackage)
 		go func() {
 			for i := uint64(1); i <= uint64(ctr); i++ {
 				idxkey := []byte(backendPackageIndexKey(i))
@@ -703,7 +703,7 @@ func (ds *defaultStore) ClearCache() {
 	InitStoreCaches(ds)
 }
 
-// for debugging
+// for debugging.
 func (ds *defaultStore) Print() {
 	fmt.Println("//----------------------------------------")
 	fmt.Println("defaultStore:baseStore...")

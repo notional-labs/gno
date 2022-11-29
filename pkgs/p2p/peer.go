@@ -68,7 +68,7 @@ func (pc peerConn) ID() ID {
 	return (pc.conn.(*connm.SecretConnection).RemotePubKey()).Address().ID()
 }
 
-// Return the IP from the connection RemoteAddr
+// Return the IP from the connection RemoteAddr.
 func (pc peerConn) RemoteIP() net.IP {
 	if pc.ip != nil {
 		return pc.ip
@@ -289,7 +289,7 @@ func (p *peer) CloseConn() error {
 // methods only used for testing
 // TODO: can we remove these?
 
-// CloseConn closes the underlying connection
+// CloseConn closes the underlying connection.
 func (pc *peerConn) CloseConn() {
 	pc.conn.Close() // nolint: errcheck
 }

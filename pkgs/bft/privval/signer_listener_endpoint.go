@@ -14,7 +14,7 @@ import (
 type SignerValidatorEndpointOption func(*SignerListenerEndpoint)
 
 // SignerListenerEndpoint listens for an external process to dial in
-// and keeps the connection alive by dropping and reconnecting
+// and keeps the connection alive by dropping and reconnecting.
 type SignerListenerEndpoint struct {
 	signerEndpoint
 
@@ -58,7 +58,7 @@ func (sl *SignerListenerEndpoint) OnStart() error {
 	return nil
 }
 
-// OnStop implements service.Service
+// OnStop implements service.Service.
 func (sl *SignerListenerEndpoint) OnStop() {
 	sl.instanceMtx.Lock()
 	defer sl.instanceMtx.Unlock()
@@ -75,14 +75,14 @@ func (sl *SignerListenerEndpoint) OnStop() {
 	sl.pingTimer.Stop()
 }
 
-// WaitForConnection waits maxWait for a connection or returns a timeout error
+// WaitForConnection waits maxWait for a connection or returns a timeout error.
 func (sl *SignerListenerEndpoint) WaitForConnection(maxWait time.Duration) error {
 	sl.instanceMtx.Lock()
 	defer sl.instanceMtx.Unlock()
 	return sl.ensureConnection(maxWait)
 }
 
-// SendRequest ensures there is a connection, sends a request and waits for a response
+// SendRequest ensures there is a connection, sends a request and waits for a response.
 func (sl *SignerListenerEndpoint) SendRequest(request SignerMessage) (SignerMessage, error) {
 	sl.instanceMtx.Lock()
 	defer sl.instanceMtx.Unlock()

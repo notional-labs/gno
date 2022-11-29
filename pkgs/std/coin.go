@@ -51,7 +51,7 @@ func (coin *Coin) UnmarshalAmino(coinstr string) (err error) {
 	return nil
 }
 
-// String provides a human-readable representation of a coin
+// String provides a human-readable representation of a coin.
 func (coin Coin) String() string {
 	if coin.IsZero() {
 		return ""
@@ -82,13 +82,13 @@ func (coin Coin) IsValid() bool {
 	return true
 }
 
-// IsZero returns if this represents no money
+// IsZero returns if this represents no money.
 func (coin Coin) IsZero() bool {
 	return coin.Amount == 0
 }
 
 // IsGTE returns true if they are the same type and the receiver is
-// an equal or greater value
+// an equal or greater value.
 func (coin Coin) IsGTE(other Coin) bool {
 	if coin.Denom != other.Denom {
 		panic(fmt.Sprintf("invalid coin denominations; %s, %s", coin.Denom, other.Denom))
@@ -97,7 +97,7 @@ func (coin Coin) IsGTE(other Coin) bool {
 }
 
 // IsLT returns true if they are the same type and the receiver is
-// a smaller value
+// a smaller value.
 func (coin Coin) IsLT(other Coin) bool {
 	if coin.Denom != other.Denom {
 		panic(fmt.Sprintf("invalid coin denominations; %s, %s", coin.Denom, other.Denom))
@@ -105,7 +105,7 @@ func (coin Coin) IsLT(other Coin) bool {
 	return coin.Amount < other.Amount
 }
 
-// IsEqual returns true if the two sets of Coins have the same value
+// IsEqual returns true if the two sets of Coins have the same value.
 func (coin Coin) IsEqual(other Coin) bool {
 	if coin.Denom != other.Denom {
 		panic(fmt.Sprintf("invalid coin denominations; %s, %s", coin.Denom, other.Denom))
@@ -172,7 +172,7 @@ func (coin Coin) IsNegative() bool {
 //-----------------------------------------------------------------------------
 // Coins
 
-// Coins is a set of Coin, one per currency
+// Coins is a set of Coin, one per currency.
 type Coins []Coin
 
 // NewCoins constructs a new coin set.
@@ -433,7 +433,7 @@ func (coins Coins) IsAllLTE(coinsB Coins) bool {
 // {2A, 3B}.IsAnyGT{A} = true
 // {2A, 3B}.IsAnyGT{5C} = false
 // {}.IsAnyGT{5C} = false
-// {2A, 3B}.IsAnyGT{} = false
+// {2A, 3B}.IsAnyGT{} = false.
 func (coins Coins) IsAnyGT(coinsB Coins) bool {
 	if len(coinsB) == 0 {
 		return false
@@ -479,7 +479,7 @@ func (coins Coins) IsZero() bool {
 	return true
 }
 
-// IsEqual returns true if the two sets of Coins have the same value
+// IsEqual returns true if the two sets of Coins have the same value.
 func (coins Coins) IsEqual(coinsB Coins) bool {
 	if len(coins) != len(coinsB) {
 		return false
@@ -600,14 +600,14 @@ func removeZeroCoins(coins Coins) Coins {
 //-----------------------------------------------------------------------------
 // Sort interface
 
-// nolint
+//nolint
 func (coins Coins) Len() int           { return len(coins) }
 func (coins Coins) Less(i, j int) bool { return coins[i].Denom < coins[j].Denom }
 func (coins Coins) Swap(i, j int)      { coins[i], coins[j] = coins[j], coins[i] }
 
 var _ sort.Interface = Coins{}
 
-// Sort is a helper function to sort the set of coins inplace
+// Sort is a helper function to sort the set of coins inplace.
 func (coins Coins) Sort() Coins {
 	sort.Sort(coins)
 	return coins
@@ -711,7 +711,7 @@ func ParseCoins(coinsStr string) (Coins, error) {
 	return coins, nil
 }
 
-// findDup works on the assumption that coins is sorted
+// findDup works on the assumption that coins is sorted.
 func findDup(coins Coins) int {
 	if len(coins) <= 1 {
 		return -1

@@ -5,11 +5,10 @@ import (
 	"crypto/subtle"
 	"io"
 
-	"golang.org/x/crypto/ed25519"
-
 	"github.com/gnolang/gno/pkgs/amino"
 	"github.com/gnolang/gno/pkgs/crypto"
 	"github.com/gnolang/gno/pkgs/crypto/tmhash"
+	"golang.org/x/crypto/ed25519"
 )
 
 //-------------------------------------
@@ -141,7 +140,7 @@ func (pubKey PubKeyEd25519) String() string {
 	return crypto.PubKeyToBech32(pubKey)
 }
 
-// nolint: golint
+//nolint: golint
 func (pubKey PubKeyEd25519) Equals(other crypto.PubKey) bool {
 	if otherEd, ok := other.(PubKeyEd25519); ok {
 		return bytes.Equal(pubKey[:], otherEd[:])

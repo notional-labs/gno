@@ -4,16 +4,14 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/stretchr/testify/require"
-
 	"github.com/gnolang/gno/pkgs/amino"
 	abci "github.com/gnolang/gno/pkgs/bft/abci/types"
 	dbm "github.com/gnolang/gno/pkgs/db"
 	"github.com/gnolang/gno/pkgs/iavl"
 	"github.com/gnolang/gno/pkgs/random"
 
-	//"github.com/gnolang/gno/pkgs/store/errors"
 	"github.com/gnolang/gno/pkgs/store/types"
+	"github.com/stretchr/testify/require"
 )
 
 var (
@@ -30,7 +28,7 @@ var (
 	nMoreData = 0
 )
 
-// make a tree with data from above and save it
+// make a tree with data from above and save it.
 func newAlohaTree(t *testing.T, db dbm.DB) (*iavl.MutableTree, types.CommitID) {
 	tree := iavl.NewMutableTree(db, cacheSize)
 	for k, v := range treeData {

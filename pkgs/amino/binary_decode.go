@@ -15,7 +15,7 @@ const bd_option_byte = 0x01
 var ErrOverflowInt = errors.New("encoded integer value overflows int(32)")
 
 const (
-	// architecture dependent int limits:
+	// architecture dependent int limits:.
 	maxInt = int(^uint(0) >> 1)
 	minInt = -maxInt - 1
 )
@@ -87,7 +87,6 @@ func (cdc *Codec) decodeReflectBinary(bz []byte, info *TypeInfo,
 	}
 
 	switch info.Type.Kind() {
-
 	//----------------------------------------
 	// Complex
 
@@ -626,7 +625,6 @@ func (cdc *Codec) decodeReflectBinaryArray(bz []byte, info *TypeInfo, rv reflect
 			//    - field option has NilElements set
 			if (len(bz) > 0 && bz[0] == 0x00) &&
 				(!isErtStructPointer || fopts.NilElements) {
-
 				slide(&bz, &n, 1)
 				erv.Set(defaultValue(erv.Type()))
 				continue
@@ -836,7 +834,6 @@ func (cdc *Codec) decodeReflectBinarySlice(bz []byte, info *TypeInfo, rv reflect
 			//    - field option has NilElements set
 			if (len(bz) > 0 && bz[0] == 0x00) &&
 				(!isErtStructPointer || fopts.NilElements) {
-
 				slide(&bz, &n, 1)
 				erv.Set(defaultValue(erv.Type()))
 				srv = reflect.Append(srv, erv)

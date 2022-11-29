@@ -4,14 +4,12 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/stretchr/testify/require"
-
 	abci "github.com/gnolang/gno/pkgs/bft/abci/types"
 	"github.com/gnolang/gno/pkgs/crypto/merkle"
 	dbm "github.com/gnolang/gno/pkgs/db"
-
 	"github.com/gnolang/gno/pkgs/store/iavl"
 	"github.com/gnolang/gno/pkgs/store/types"
+	"github.com/stretchr/testify/require"
 )
 
 func TestStoreType(t *testing.T) {

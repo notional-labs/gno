@@ -5,7 +5,7 @@ import "github.com/gnolang/gno/pkgs/errors"
 //-----------------------------------------------------------------------------
 // MempoolConfig
 
-// MempoolConfig defines the configuration options for the Tendermint mempool
+// MempoolConfig defines the configuration options for the Tendermint mempool.
 type MempoolConfig struct {
 	RootDir            string `toml:"home"`
 	Recheck            bool   `toml:"recheck"`
@@ -16,7 +16,7 @@ type MempoolConfig struct {
 	CacheSize          int    `toml:"cache_size"`
 }
 
-// DefaultMempoolConfig returns a default configuration for the Tendermint mempool
+// DefaultMempoolConfig returns a default configuration for the Tendermint mempool.
 func DefaultMempoolConfig() *MempoolConfig {
 	return &MempoolConfig{
 		Recheck:   true,
@@ -30,14 +30,14 @@ func DefaultMempoolConfig() *MempoolConfig {
 	}
 }
 
-// TestMempoolConfig returns a configuration for testing the Tendermint mempool
+// TestMempoolConfig returns a configuration for testing the Tendermint mempool.
 func TestMempoolConfig() *MempoolConfig {
 	cfg := DefaultMempoolConfig()
 	cfg.CacheSize = 1000
 	return cfg
 }
 
-// WalDir returns the full path to the mempool's write-ahead log
+// WalDir returns the full path to the mempool's write-ahead log.
 func (cfg *MempoolConfig) WalDir() string {
 	return join(cfg.RootDir, cfg.WalPath)
 }

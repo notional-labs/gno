@@ -62,7 +62,7 @@ func (app *PersistentKVStoreApplication) SetOption(req abci.RequestSetOption) ab
 	return app.app.SetOption(req)
 }
 
-// tx is either "val:pubkey!power" or "key=value" or just arbitrary bytes
+// tx is either "val:pubkey!power" or "key=value" or just arbitrary bytes.
 func (app *PersistentKVStoreApplication) DeliverTx(req abci.RequestDeliverTx) abci.ResponseDeliverTx {
 	// if it starts with "val:", update the validator set
 	// format is "val:pubkey!power"
@@ -80,7 +80,7 @@ func (app *PersistentKVStoreApplication) CheckTx(req abci.RequestCheckTx) abci.R
 	return app.app.CheckTx(req)
 }
 
-// Commit will panic if InitChain was not called
+// Commit will panic if InitChain was not called.
 func (app *PersistentKVStoreApplication) Commit() abci.ResponseCommit {
 	return app.app.Commit()
 }
@@ -101,7 +101,7 @@ func (app *PersistentKVStoreApplication) Query(reqQuery abci.RequestQuery) (resQ
 	}
 }
 
-// Save the validators in the merkle tree
+// Save the validators in the merkle tree.
 func (app *PersistentKVStoreApplication) InitChain(req abci.RequestInitChain) abci.ResponseInitChain {
 	for _, v := range req.Validators {
 		r := app.updateValidator(v)
@@ -112,7 +112,7 @@ func (app *PersistentKVStoreApplication) InitChain(req abci.RequestInitChain) ab
 	return abci.ResponseInitChain{}
 }
 
-// Track the block hash and header information
+// Track the block hash and header information.
 func (app *PersistentKVStoreApplication) BeginBlock(req abci.RequestBeginBlock) abci.ResponseBeginBlock {
 	// reset valset changes
 	app.ValSetChanges = make([]abci.ValidatorUpdate, 0)
@@ -137,7 +137,7 @@ func (app *PersistentKVStoreApplication) BeginBlock(req abci.RequestBeginBlock) 
 	return abci.ResponseBeginBlock{}
 }
 
-// Update the validator set
+// Update the validator set.
 func (app *PersistentKVStoreApplication) EndBlock(req abci.RequestEndBlock) abci.ResponseEndBlock {
 	return abci.ResponseEndBlock{ValidatorUpdates: app.ValSetChanges}
 }
@@ -175,7 +175,7 @@ func isValidatorTx(tx []byte) bool {
 }
 
 // format is "val:pubkey!power"
-// pubkey is a base64-encoded 32-byte ed25519 key
+// pubkey is a base64-encoded 32-byte ed25519 key.
 func (app *PersistentKVStoreApplication) execValidatorTx(tx []byte) (res abci.ResponseDeliverTx) {
 	tx = tx[len(ValidatorUpdatePrefix):]
 
@@ -210,7 +210,7 @@ func (app *PersistentKVStoreApplication) execValidatorTx(tx []byte) (res abci.Re
 	return app.updateValidator(abci.ValidatorUpdate{pubkey.Address(), pubkey, power})
 }
 
-// add, update, or remove a validator
+// add, update, or remove a validator.
 func (app *PersistentKVStoreApplication) updateValidator(val abci.ValidatorUpdate) (res abci.ResponseDeliverTx) {
 	if val.Power == 0 {
 		// remove validator

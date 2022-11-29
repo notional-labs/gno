@@ -9,13 +9,12 @@ import (
 	"time"
 
 	"github.com/davecgh/go-spew/spew"
+	"github.com/gnolang/gno/pkgs/amino"
+	"github.com/gnolang/gno/pkgs/amino/tests"
 	fuzz "github.com/google/gofuzz"
 	"github.com/jaekwon/testify/assert"
 	"github.com/jaekwon/testify/require"
 	proto "google.golang.org/protobuf/proto"
-
-	"github.com/gnolang/gno/pkgs/amino"
-	"github.com/gnolang/gno/pkgs/amino/tests"
 )
 
 //-------------------------------------
@@ -117,7 +116,6 @@ func _testCodec(t *testing.T, rt reflect.Type, codecType string) {
 			spw(ptr), spw(ptr2), bz, bz)
 
 		if codecType == "binary" {
-
 			// Get pbo from rv. (go -> p3go)
 			pbm, ok := rv.Interface().(amino.PBMessager)
 			if !ok {

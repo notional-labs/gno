@@ -10,10 +10,10 @@ import (
 //-----------------------------------------------------------------------------
 // RoundStepType enum type
 
-// RoundStepType enumerates the state of the consensus state machine
+// RoundStepType enumerates the state of the consensus state machine.
 type RoundStepType uint8 // These must be numeric, ordered.
 
-// RoundStepType
+// RoundStepType.
 const (
 	RoundStepInvalid       = RoundStepType(0x00) // Invalid
 	RoundStepNewHeight     = RoundStepType(0x01) // Wait til CommitTime + timeoutCommit
@@ -34,7 +34,7 @@ func (rs RoundStepType) IsValid() bool {
 	return RoundStepNewHeight <= rs && rs <= RoundStepCommit
 }
 
-// String returns a string
+// String returns a string.
 func (rs RoundStepType) String() string {
 	switch rs {
 	case RoundStepInvalid:
@@ -64,7 +64,7 @@ func (rs RoundStepType) String() string {
 
 // RoundState defines the internal consensus state.
 // NOTE: Not thread safe. Should only be manipulated by functions downstream
-// of the cs.receiveRoutine
+// of the cs.receiveRoutine.
 type RoundState struct {
 	// TODO replace w/ HRS
 	Height                    int64               `json:"height"` // Height we are working on
@@ -131,7 +131,7 @@ func (rs *RoundState) GetHRS() HRS {
 	return HRS{rs.Height, rs.Round, rs.Step}
 }
 
-// Compressed version of the RoundState for use in RPC
+// Compressed version of the RoundState for use in RPC.
 type RoundStateSimple struct {
 	HeightRoundStep   string         `json:"height/round/step"`
 	StartTime         time.Time      `json:"start_time"`
@@ -141,7 +141,7 @@ type RoundStateSimple struct {
 	Votes             *HeightVoteSet `json:"height_vote_set"`
 }
 
-// Compress the RoundState to RoundStateSimple
+// Compress the RoundState to RoundStateSimple.
 func (rs *RoundState) RoundStateSimple() RoundStateSimple {
 	return RoundStateSimple{
 		HeightRoundStep:   rs.GetHRS().String(),
@@ -197,12 +197,12 @@ func (rs *RoundState) EventNewValidBlock() EventNewValidBlock {
 	}
 }
 
-// String returns a string
+// String returns a string.
 func (rs *RoundState) String() string {
 	return rs.StringIndented("")
 }
 
-// StringIndented returns a string
+// StringIndented returns a string.
 func (rs *RoundState) StringIndented(indent string) string {
 	return fmt.Sprintf(`RoundState{
 %s  H:%v R:%v S:%v
@@ -235,7 +235,7 @@ func (rs *RoundState) StringIndented(indent string) string {
 		indent)
 }
 
-// StringShort returns a string
+// StringShort returns a string.
 func (rs *RoundState) StringShort() string {
 	return fmt.Sprintf(`RoundState{H:%v R:%v S:%v ST:%v}`,
 		rs.Height, rs.Round, rs.Step, rs.StartTime)

@@ -11,9 +11,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
-
 	"github.com/gnolang/gno/pkgs/bft/abci/example/counter"
 	"github.com/gnolang/gno/pkgs/bft/abci/example/kvstore"
 	abci "github.com/gnolang/gno/pkgs/bft/abci/types"
@@ -22,6 +19,8 @@ import (
 	"github.com/gnolang/gno/pkgs/bft/types"
 	"github.com/gnolang/gno/pkgs/log"
 	"github.com/gnolang/gno/pkgs/random"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 // A cleanupFunc cleans up any config / test files created for a particular
@@ -272,7 +271,6 @@ func TestSerialReap(t *testing.T) {
 	deliverTxsRange := func(start, end int) {
 		// Deliver some txs.
 		for i := start; i < end; i++ {
-
 			// This will succeed
 			txBytes := make([]byte, 8)
 			binary.BigEndian.PutUint64(txBytes, uint64(i))

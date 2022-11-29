@@ -7,9 +7,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stretchr/testify/require"
-
 	osm "github.com/gnolang/gno/pkgs/os"
+	"github.com/stretchr/testify/require"
 )
 
 func TestSIGHUP(t *testing.T) {

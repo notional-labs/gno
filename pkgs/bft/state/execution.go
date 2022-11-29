@@ -84,7 +84,7 @@ func (blockExec *BlockExecutor) CreateProposalBlock(
 
 // ValidateBlock validates the given block against the given state.
 // If the block is invalid, it returns an error.
-// Validation does not mutate state, but does require historical information from the stateDB
+// Validation does not mutate state, but does require historical information from the stateDB.
 func (blockExec *BlockExecutor) ValidateBlock(state State, block *types.Block) error {
 	return validateBlock(blockExec.db, state, block)
 }
@@ -204,7 +204,7 @@ func (blockExec *BlockExecutor) Commit(
 // Helper functions for executing blocks and updating state
 
 // Executes block's transactions on proxyAppConn.
-// Returns a list of transaction results and updates to the validator set
+// Returns a list of transaction results and updates to the validator set.
 func execBlockOnProxyApp(
 	logger log.Logger,
 	proxyAppConn proxy.AppConnConsensus,

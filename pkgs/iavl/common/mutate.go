@@ -1,6 +1,6 @@
 package common
 
-// Contract: !bytes.Equal(input, output) && len(input) >= len(output)
+// Contract: !bytes.Equal(input, output) && len(input) >= len(output).
 func MutateByteSlice(bytez []byte) []byte {
 	// If bytez is empty, panic
 	if len(bytez) == 0 {

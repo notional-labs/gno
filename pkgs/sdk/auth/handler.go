@@ -31,7 +31,7 @@ func (ah authHandler) Process(ctx sdk.Context, msg std.Msg) sdk.Result {
 //----------------------------------------
 // Query
 
-// query account path
+// query account path.
 const QueryAccount = "accounts"
 
 func (ah authHandler) Query(ctx sdk.Context, req abci.RequestQuery) (res abci.ResponseQuery) {

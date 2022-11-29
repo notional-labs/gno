@@ -4,7 +4,7 @@ import (
 	"bytes"
 )
 
-// Iterator over all the keys with a certain prefix in ascending order
+// Iterator over all the keys with a certain prefix in ascending order.
 func PrefixIterator(kvs Store, prefix []byte) Iterator {
 	return kvs.Iterator(prefix, PrefixEndBytes(prefix))
 }
@@ -16,7 +16,7 @@ func ReversePrefixIterator(kvs Store, prefix []byte) Iterator {
 
 // Compare two stores, return either the first key/value pair
 // at which they differ and whether or not they are equal, skipping
-// value comparison for a set of provided prefixes
+// value comparison for a set of provided prefixes.
 func DiffStores(a Store, b Store, prefixesToSkip [][]byte) (kvA KVPair, kvB KVPair, count int64, equal bool) {
 	iterA := a.Iterator(nil, nil)
 	iterB := b.Iterator(nil, nil)
@@ -54,7 +54,7 @@ func DiffStores(a Store, b Store, prefixesToSkip [][]byte) (kvA KVPair, kvB KVPa
 
 // PrefixEndBytes returns the []byte that would end a
 // range query for all []byte with a certain prefix
-// Deals with last byte of prefix being FF without overflowing
+// Deals with last byte of prefix being FF without overflowing.
 func PrefixEndBytes(prefix []byte) []byte {
 	if len(prefix) == 0 {
 		return nil
@@ -79,13 +79,13 @@ func PrefixEndBytes(prefix []byte) []byte {
 }
 
 // InclusiveEndBytes returns the []byte that would end a
-// range query such that the input would be included
+// range query such that the input would be included.
 func InclusiveEndBytes(inclusiveBytes []byte) (exclusiveBytes []byte) {
 	exclusiveBytes = append(inclusiveBytes, byte(0x00))
 	return exclusiveBytes
 }
 
-// ----------------------------------------
+// ----------------------------------------.
 func Cp(bz []byte) (ret []byte) {
 	if bz == nil {
 		return nil

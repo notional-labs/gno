@@ -103,7 +103,7 @@ func (pool *BlockPool) OnStart() error {
 	return nil
 }
 
-// spawns requesters as needed
+// spawns requesters as needed.
 func (pool *BlockPool) makeRequestersRoutine() {
 	for {
 		if !pool.IsRunning() {
@@ -577,7 +577,7 @@ func (bpr *bpRequester) redo(peerID p2p.ID) {
 }
 
 // Responsible for making more requests as necessary
-// Returns only when a block is found (e.g. AddBlock() is called)
+// Returns only when a block is found (e.g. AddBlock() is called).
 func (bpr *bpRequester) requestRoutine() {
 OUTER_LOOP:
 	for {
@@ -627,7 +627,7 @@ OUTER_LOOP:
 }
 
 // BlockRequest stores a block request identified by the block Height and the PeerID responsible for
-// delivering the block
+// delivering the block.
 type BlockRequest struct {
 	Height int64
 	PeerID p2p.ID

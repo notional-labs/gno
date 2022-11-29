@@ -21,7 +21,7 @@ import (
 	"github.com/gnolang/gno/pkgs/std"
 )
 
-// url & struct for verify captcha
+// url & struct for verify captcha.
 const siteVerifyURL = "https://www.google.com/recaptcha/api/siteverify"
 
 type SiteVerifyResponse struct {
@@ -254,7 +254,6 @@ func serveApp(cmd *command.Command, args []string, iopts interface{}) error {
 				w.Write([]byte("Unauthorized"))
 				return
 			}
-
 		}
 
 		passedAddr := r.Form["toaddr"]

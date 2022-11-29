@@ -38,7 +38,7 @@ const (
 )
 
 // color the string s with color 'color'
-// unless s is already colored
+// unless s is already colored.
 func treat(s string, color string) string {
 	if len(s) > 2 && s[:2] == "\x1b[" {
 		return s

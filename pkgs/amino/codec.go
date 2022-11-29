@@ -239,7 +239,7 @@ func (cdc *Codec) RegisterPackage(pkg *Package) {
 // You may want to use RegisterPackage() instead which registers everything in
 // a package.
 // Usage:
-// `amino.RegisterTypeFrom(MyStruct1{}, "/tm.cryp.MyStruct1")`
+// `amino.RegisterTypeFrom(MyStruct1{}, "/tm.cryp.MyStruct1")`.
 func (cdc *Codec) RegisterTypeFrom(rt reflect.Type, pkg *Package) {
 	cdc.assertNotSealed()
 
@@ -271,7 +271,7 @@ func (cdc *Codec) registerType(pkg *Package, rt reflect.Type, typeURL string, po
 	info, ok := cdc.typeInfos[rt]
 	if ok {
 		if info.Registered {
-			// If idempotent operation, ignore silenty.
+			// If idempotent operation, ignore silently.
 			// Otherwise, panic.
 			if info.Package != pkg {
 				panic(fmt.Sprintf("type %v already registered with different package %v", rt, info.Package))
@@ -428,7 +428,7 @@ func (cdc *Codec) doAutoseal() {
 // and info.Registered, the name must already be
 // registered, and no side effects occur.
 // CONTRACT: info.Type is set
-// CONTRACT: if info.Registered, info.TypeURL is set
+// CONTRACT: if info.Registered, info.TypeURL is set.
 func (cdc *Codec) registerTypeInfoWLocked(info *TypeInfo, primary bool) {
 	if info.Type.Kind() == reflect.Ptr {
 		panic(fmt.Sprintf("unexpected pointer type"))

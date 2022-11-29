@@ -236,7 +236,7 @@ func (app *BaseApp) IsSealed() bool { return app.sealed }
 
 // setCheckState sets checkState with the cached multistore and
 // the context wrapping it.
-// It is called by InitChain() and Commit()
+// It is called by InitChain() and Commit().
 func (app *BaseApp) setCheckState(header abci.Header) {
 	ms := app.cms.MultiCacheWrap()
 	app.checkState = &state{
@@ -360,7 +360,7 @@ func (app *BaseApp) InitChain(req abci.RequestInitChain) (res abci.ResponseInitC
 }
 
 // Splits a string path using the delimiter '/'.
-// e.g. "this/is/funny" becomes []string{"this", "is", "funny"}
+// e.g. "this/is/funny" becomes []string{"this", "is", "funny"}.
 func splitPath(requestPath string) (path []string) {
 	path = strings.Split(requestPath, "/")
 	// first element is empty string
@@ -925,7 +925,7 @@ func (app *BaseApp) halt() {
 	os.Exit(0)
 }
 
-// TODO implement cleanup
+// TODO implement cleanup.
 func (app *BaseApp) Close() error {
 	return nil // XXX
 }

@@ -17,42 +17,42 @@ func New(parent types.Store) immutStore {
 	}
 }
 
-// Implements Store
+// Implements Store.
 func (is immutStore) Get(key []byte) []byte {
 	return is.parent.Get(key)
 }
 
-// Implements Store
+// Implements Store.
 func (is immutStore) Has(key []byte) bool {
 	return is.parent.Has(key)
 }
 
-// Implements Store
+// Implements Store.
 func (is immutStore) Set(key, value []byte) {
 	panic("unexpected .Set() on immutStore")
 }
 
-// Implements Store
+// Implements Store.
 func (is immutStore) Delete(key []byte) {
 	panic("unexpected .Delete() on immutStore")
 }
 
-// Implements Store
+// Implements Store.
 func (is immutStore) Iterator(start, end []byte) types.Iterator {
 	return is.parent.Iterator(start, end)
 }
 
-// Implements Store
+// Implements Store.
 func (is immutStore) ReverseIterator(start, end []byte) types.Iterator {
 	return is.parent.ReverseIterator(start, end)
 }
 
-// Implements Store
+// Implements Store.
 func (is immutStore) CacheWrap() types.Store {
 	return cache.New(is)
 }
 
-// Implements Store
+// Implements Store.
 func (s immutStore) Write() {
 	panic("unexpected .Write() on immutStore")
 }

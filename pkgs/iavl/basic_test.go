@@ -6,10 +6,9 @@ import (
 	"sort"
 	"testing"
 
+	"github.com/gnolang/gno/pkgs/db"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-
-	"github.com/gnolang/gno/pkgs/db"
 )
 
 func TestBasic(t *testing.T) {

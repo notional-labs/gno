@@ -10,7 +10,7 @@ import (
 	"github.com/gnolang/gno/pkgs/iavl"
 )
 
-// MultiStoreProof defines a collection of store proofs in a multi-store
+// MultiStoreProof defines a collection of store proofs in a multi-store.
 type MultiStoreProof struct {
 	StoreInfos []storeInfo
 }
@@ -41,10 +41,10 @@ func RequireProof(subpath string) bool {
 
 var _ merkle.ProofOperator = MultiStoreProofOp{}
 
-// the multi-store proof operation constant value
+// the multi-store proof operation constant value.
 const ProofOpMultiStore = "multistore"
 
-// TODO: document
+// TODO: document.
 type MultiStoreProofOp struct {
 	// Encoded in ProofOp.Key
 	key []byte

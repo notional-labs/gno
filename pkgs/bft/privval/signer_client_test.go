@@ -5,12 +5,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
-
 	"github.com/gnolang/gno/pkgs/bft/types"
 	"github.com/gnolang/gno/pkgs/random"
 	"github.com/gnolang/gno/pkgs/testutils"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 type signerTestCase struct {
@@ -222,7 +221,6 @@ func brokenHandler(privVal types.PrivValidator, request SignerMessage, chainID s
 	var err error
 
 	switch r := request.(type) {
-
 	// This is broken and will answer most requests with a pubkey response
 	case *PubKeyRequest:
 		res = &PubKeyResponse{nil, nil}

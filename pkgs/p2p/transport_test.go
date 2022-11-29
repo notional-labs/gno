@@ -559,7 +559,7 @@ func TestTransportHandshake(t *testing.T) {
 	}
 }
 
-// create listener
+// create listener.
 func testSetupMultiplexTransport(t *testing.T) *MultiplexTransport {
 	var (
 		pv = ed25519.GenPrivKey()

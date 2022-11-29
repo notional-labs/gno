@@ -4,7 +4,7 @@ import (
 	"github.com/gnolang/gno/pkgs/sdk"
 )
 
-// RegisterInvariants registers the vm module invariants
+// RegisterInvariants registers the vm module invariants.
 func RegisterInvariants(ir sdk.InvariantRegistry, vmk VMKeeper) {
 	// ir.RegisterRoute(ModuleName, "nonnegative-outstanding",
 	//	NonnegativeBalanceInvariant(acck))

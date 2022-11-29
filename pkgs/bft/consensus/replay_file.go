@@ -24,14 +24,14 @@ import (
 )
 
 const (
-	// event bus subscriber
+	// event bus subscriber.
 	subscriber = "replay-file"
 )
 
 //--------------------------------------------------------
 // replay messages interactively or all at once
 
-// replay the wal file
+// replay the wal file.
 func RunReplayFile(config cfg.BaseConfig, csConfig *cnscfg.ConsensusConfig, console bool) {
 	consensusState := newConsensusStateForReplay(config, csConfig)
 
@@ -40,7 +40,7 @@ func RunReplayFile(config cfg.BaseConfig, csConfig *cnscfg.ConsensusConfig, cons
 	}
 }
 
-// Replay msgs in file or start the console
+// Replay msgs in file or start the console.
 func (cs *ConsensusState) ReplayFile(file string, console bool) error {
 	if cs.IsRunning() {
 		return errors.New("cs is already running, cannot replay")
@@ -116,7 +116,7 @@ func newPlayback(fileName string, fp *os.File, cs *ConsensusState, genState sm.S
 	}
 }
 
-// go back count steps by resetting the state and running (pb.count - count) steps
+// go back count steps by resetting the state and running (pb.count - count) steps.
 func (pb *playback) replayReset(count int, newStepSub <-chan events.Event) error {
 	pb.cs.Stop()
 	pb.cs.Wait()
@@ -171,7 +171,7 @@ func (cs *ConsensusState) startForReplay() {
 		}()*/
 }
 
-// console function for parsing input and running commands
+// console function for parsing input and running commands.
 func (pb *playback) replayConsoleLoop() int {
 	for {
 		fmt.Printf("> ")
@@ -267,7 +267,7 @@ func (pb *playback) replayConsoleLoop() int {
 
 //--------------------------------------------------------------------------------
 
-// convenience for replay mode
+// convenience for replay mode.
 func newConsensusStateForReplay(config cfg.BaseConfig, csConfig *cnscfg.ConsensusConfig) *ConsensusState {
 	dbType := dbm.BackendType(config.DBBackend)
 	// Get BlockStore

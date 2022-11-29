@@ -9,7 +9,7 @@ import (
 	abci "github.com/gnolang/gno/pkgs/bft/abci/types"
 )
 
-// NewABCIClient returns newly connected client
+// NewABCIClient returns newly connected client.
 type ClientCreator interface {
 	NewABCIClient() (abcicli.Client, error)
 }

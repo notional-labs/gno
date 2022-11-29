@@ -259,7 +259,6 @@ func go2pbStmts(rootPkg *amino.Package, isRoot bool, imports *ast.GenDecl, scope
 		gooType.Registered && hasPBBindings(gooType) &&
 		gooType.ReprType.Type.Kind() == reflect.Struct &&
 		(options&option_bytes == 0) {
-
 		// Call ToPBMessage().
 		pbote_ := p3goTypeExprString(rootPkg, imports, scope, gooType, fopts)
 		pbom_ := addVarUniq(scope, "pbom")
@@ -324,7 +323,6 @@ func go2pbStmts(rootPkg *amino.Package, isRoot bool, imports *ast.GenDecl, scope
 		if isRoot &&
 			gooType.ReprType.Type.Kind() != reflect.Struct &&
 			options&option_bytes == 0 {
-
 			if gooType.ReprType.Type.Kind() == reflect.Interface {
 				panic("not yet tested")
 			}
@@ -339,7 +337,6 @@ func go2pbStmts(rootPkg *amino.Package, isRoot bool, imports *ast.GenDecl, scope
 		if isRoot &&
 			gooType.Type.Kind() != reflect.Struct &&
 			gooType.Type.Kind() != reflect.Interface {
-
 			wrapImplicitStruct = true
 		}
 		// Assign *goor*.
@@ -412,7 +409,6 @@ func go2pbStmts(rootPkg *amino.Package, isRoot bool, imports *ast.GenDecl, scope
 
 	// General case
 	switch goork := goorType.Type.Kind(); goork {
-
 	case reflect.Interface:
 		typeUrl_ := addVarUniq(scope, "typeUrl")
 		bz_ := addVarUniq(scope, "bz")
@@ -537,7 +533,6 @@ func go2pbStmts(rootPkg *amino.Package, isRoot bool, imports *ast.GenDecl, scope
 		// General translation.
 		b = append(b,
 			_a(pbo, "=", maybeWrap(_call(_i(goork.String()), goor))))
-
 	}
 	return b
 }
@@ -594,7 +589,6 @@ func pb2goStmts(rootPkg *amino.Package, isRoot bool, imports *ast.GenDecl, scope
 		if gooType.Registered && hasPBBindings(gooType) &&
 			gooType.ReprType.Type.Kind() == reflect.Struct &&
 			(options&option_bytes == 0) {
-
 			b = append(b,
 				_a(_i("err"), "=", _call(_sel(goo, "FromPBMessage"), _i("cdc"), pbo)),
 				_if(_x("err__!=__nil"),
@@ -644,7 +638,6 @@ func pb2goStmts(rootPkg *amino.Package, isRoot bool, imports *ast.GenDecl, scope
 		if isRoot &&
 			gooType.ReprType.Type.Kind() != reflect.Struct &&
 			options&option_bytes == 0 {
-
 			if gooType.ReprType.Type.Kind() == reflect.Interface {
 				panic("not yet tested")
 			}
@@ -660,7 +653,6 @@ func pb2goStmts(rootPkg *amino.Package, isRoot bool, imports *ast.GenDecl, scope
 		if isRoot &&
 			gooType.Type.Kind() != reflect.Struct &&
 			gooType.Type.Kind() != reflect.Interface {
-
 			unwrapImplicitStruct = true
 		}
 		// Assign *goor*
@@ -686,7 +678,6 @@ func pb2goStmts(rootPkg *amino.Package, isRoot bool, imports *ast.GenDecl, scope
 
 	// General case
 	switch goorType.Type.Kind() {
-
 	case reflect.Interface:
 		typeUrl_ := addVarUniq(scope, "typeUrl")
 		bz_ := addVarUniq(scope, "bz")
@@ -929,7 +920,6 @@ func isReprEmptyStmts(rootPkg *amino.Package, isRoot bool, imports *ast.GenDecl,
 
 	// General case
 	switch goorType.Type.Kind() {
-
 	case reflect.Interface:
 		b = append(b,
 			_return(_i("false")))
@@ -1904,7 +1894,7 @@ OUTER:
 	}
 }
 
-// If rt.PkgPath() is "",
+// If rt.PkgPath() is "",.
 func goPkgPrefix(rootPkg *amino.Package, rt reflect.Type, info *amino.TypeInfo, imports *ast.GenDecl, scope *ast.Scope) (pkgPrefix string) {
 	if rt.Name() == "" {
 		panic("expected rt to have name")

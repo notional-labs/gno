@@ -20,7 +20,7 @@ import (
 )
 
 const (
-	// how often the WAL should be sync'd during period sync'ing
+	// how often the WAL should be sync'd during period sync'ing.
 	walDefaultFlushInterval = 2 * time.Second
 )
 
@@ -160,7 +160,7 @@ func (wal *baseWAL) processFlushTicks() {
 }
 
 // FlushAndSync flushes and fsync's the underlying group's data to disk.
-// See auto#FlushAndSync
+// See auto#FlushAndSync.
 func (wal *baseWAL) FlushAndSync() error {
 	return wal.group.FlushAndSync()
 }
@@ -183,7 +183,7 @@ func (wal *baseWAL) Wait() {
 
 // Write is called in newStep and for each receive on the
 // peerMsgQueue and the timeoutTicker.
-// NOTE: does not call fsync()
+// NOTE: does not call fsync().
 func (wal *baseWAL) Write(msg WALMessage) error {
 	if wal == nil {
 		return nil
@@ -224,7 +224,7 @@ func (wal *baseWAL) WriteMetaSync(meta MetaMessage) error {
 
 // WriteSync is called when we receive a msg from ourselves
 // so that we write to disk before sending signed messages.
-// NOTE: calls fsync()
+// NOTE: calls fsync().
 func (wal *baseWAL) WriteSync(msg WALMessage) error {
 	if wal == nil {
 		return nil
@@ -293,7 +293,6 @@ func (wal *baseWAL) SearchForHeight(height int64, options *WALSearchOptions) (rd
 
 OUTER_LOOP:
 	for min <= max {
-
 		var index int
 
 		// set index depending on mode.
@@ -469,7 +468,7 @@ OUTER_LOOP:
 // ABCDEFGHIJKLMNOPQRSTUV02
 // #{"h":"123"}
 // ABCDEFGHIJKLMNOPQRSTUV03
-// ABCDEFGHIJKLMNOPQRSTUV04
+// ABCDEFGHIJKLMNOPQRSTUV04.
 type WALWriter struct {
 	wr      io.Writer
 	maxSize int64 // max WALMessage amino size excluding time/crc/base64.

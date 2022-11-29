@@ -61,7 +61,7 @@ func cp(bz []byte) (ret []byte) {
 // Returns a slice of the same length (big endian)
 // except incremented by one.
 // Appends 0x00 if bz is all 0xFF.
-// CONTRACT: len(bz) > 0
+// CONTRACT: len(bz) > 0.
 func cpIncr(bz []byte) (ret []byte) {
 	ret = cp(bz)
 	for i := len(bz) - 1; i >= 0; i-- {
@@ -116,7 +116,7 @@ const (
 )
 
 // color the string s with color 'color'
-// unless s is already colored
+// unless s is already colored.
 func treat(s string, color string) string {
 	if len(s) > 2 && s[:2] == "\x1b[" {
 		return s

@@ -5,11 +5,9 @@ import (
 	"testing"
 
 	dbm "github.com/gnolang/gno/pkgs/db"
-
 	"github.com/gnolang/gno/pkgs/store/dbadapter"
 	"github.com/gnolang/gno/pkgs/store/gas"
 	"github.com/gnolang/gno/pkgs/store/types"
-
 	"github.com/stretchr/testify/require"
 )
 

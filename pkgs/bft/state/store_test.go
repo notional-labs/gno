@@ -5,13 +5,12 @@ import (
 	"os"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
-
 	cfg "github.com/gnolang/gno/pkgs/bft/config"
 	sm "github.com/gnolang/gno/pkgs/bft/state"
 	"github.com/gnolang/gno/pkgs/bft/types"
 	dbm "github.com/gnolang/gno/pkgs/db"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestStoreLoadValidators(t *testing.T) {

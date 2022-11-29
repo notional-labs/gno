@@ -11,14 +11,13 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
-
 	"github.com/gnolang/gno/pkgs/crypto/ed25519"
 	"github.com/gnolang/gno/pkgs/log"
 	"github.com/gnolang/gno/pkgs/p2p/config"
 	"github.com/gnolang/gno/pkgs/p2p/conn"
 	"github.com/gnolang/gno/pkgs/testutils"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 var cfg *config.P2PConfig
@@ -83,7 +82,7 @@ func (tr *TestReactor) getMsgs(chID byte) []PeerMessage {
 //-----------------------------------------------------------------------------
 
 // convenience method for creating two switches connected to each other.
-// XXX: note this uses net.Pipe and not a proper TCP conn
+// XXX: note this uses net.Pipe and not a proper TCP conn.
 func MakeSwitchPair(t testing.TB, initSwitch func(int, *Switch) *Switch) (*Switch, *Switch) {
 	// Create two switches that will be interconnected.
 	switches := MakeConnectedSwitches(cfg, 2, initSwitch, Connect2Switches)
@@ -593,7 +592,7 @@ func (r *mockReactor) InitCalledBeforeRemoveFinished() bool {
 	return atomic.LoadUint32(&r.initCalledBeforeRemoveFinished) == 1
 }
 
-// see stopAndRemovePeer
+// see stopAndRemovePeer.
 func TestFlappySwitchInitPeerIsNotCalledBeforeRemovePeer(t *testing.T) {
 	testutils.FilterStability(t, testutils.Flappy)
 

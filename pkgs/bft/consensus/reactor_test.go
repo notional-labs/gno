@@ -6,8 +6,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stretchr/testify/assert"
-
 	"github.com/gnolang/gno/pkgs/amino"
 	"github.com/gnolang/gno/pkgs/bft/abci/example/kvstore"
 	cfg "github.com/gnolang/gno/pkgs/bft/config"
@@ -22,6 +20,7 @@ import (
 	"github.com/gnolang/gno/pkgs/p2p"
 	"github.com/gnolang/gno/pkgs/p2p/mock"
 	"github.com/gnolang/gno/pkgs/testutils"
+	"github.com/stretchr/testify/assert"
 )
 
 //----------------------------------------------
@@ -89,7 +88,7 @@ func stopConsensusNet(logger log.Logger, reactors []*ConsensusReactor, eventSwit
 	logger.Info("stopConsensusNet: DONE", "n", len(reactors))
 }
 
-// Ensure a testnet makes blocks
+// Ensure a testnet makes blocks.
 func TestReactorBasic(t *testing.T) {
 	N := 4
 	css, cleanup := randConsensusNet(N, "consensus_reactor_test", newMockTickerFunc(true), newCounter)
@@ -104,7 +103,7 @@ func TestReactorBasic(t *testing.T) {
 
 //------------------------------------
 
-// Ensure a testnet makes blocks when there are txs
+// Ensure a testnet makes blocks when there are txs.
 func TestReactorCreatesBlockWhenEmptyBlocksFalse(t *testing.T) {
 	N := 4
 	css, cleanup := randConsensusNet(N, "consensus_reactor_test", newMockTickerFunc(true), newCounter,
@@ -353,7 +352,7 @@ func TestReactorValidatorSetChanges(t *testing.T) {
 	waitForBlockWithUpdatedValsAndValidateIt(t, nPeers, activeVals, blocksSubs, css)
 }
 
-// Check we can make blocks with skip_timeout_commit=false
+// Check we can make blocks with skip_timeout_commit=false.
 func TestReactorWithTimeoutCommit(t *testing.T) {
 	N := 4
 	css, cleanup := randConsensusNet(N, "consensus_reactor_with_timeout_commit_test", newMockTickerFunc(false), newCounter)

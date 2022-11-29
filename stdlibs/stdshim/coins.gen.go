@@ -23,7 +23,7 @@ func (c Coin) IsGTE(other Coin) bool {
 	return c.Amount >= other.Amount
 }
 
-// Coins is a set of Coin, one per currency
+// Coins is a set of Coin, one per currency.
 type Coins []Coin
 
 func (cz Coins) String() string {

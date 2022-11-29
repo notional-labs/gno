@@ -16,7 +16,7 @@ import (
 )
 
 var (
-	// simulation signature values used to estimate gas consumption
+	// simulation signature values used to estimate gas consumption.
 	simSecp256k1Pubkey secp256k1.PubKeySecp256k1
 	simSecp256k1Sig    [64]byte
 )
@@ -28,7 +28,7 @@ func init() {
 }
 
 // SignatureVerificationGasConsumer is the type of function that is used to both consume gas when verifying signatures
-// and also to accept or reject different types of PubKey's. This is where apps can define their own PubKey
+// and also to accept or reject different types of PubKey's. This is where apps can define their own PubKey.
 type SignatureVerificationGasConsumer = func(meter store.GasMeter, sig []byte, pubkey crypto.PubKey, params Params) sdk.Result
 
 type AnteOptions struct {
@@ -381,7 +381,6 @@ func EnsureSufficientMempoolFees(ctx sdk.Context, fee std.Fee) sdk.Result {
 		// TODO: allow for selective filtering of 0 fee txs.
 		return sdk.Result{}
 	} else {
-
 		fgw := big.NewInt(fee.GasWanted)
 		fga := big.NewInt(fee.GasFee.Amount)
 		fgd := fee.GasFee.Denom

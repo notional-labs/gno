@@ -69,7 +69,7 @@ func SimpleProofsFromMap(m map[string][]byte) (rootHash []byte, proofs map[strin
 }
 
 // Verify that the SimpleProof proves the root hash.
-// Check sp.Index/sp.Total manually if needed
+// Check sp.Index/sp.Total manually if needed.
 func (sp *SimpleProof) Verify(rootHash []byte, leaf []byte) error {
 	leafHash := leafHash(leaf)
 	if sp.Total < 0 {

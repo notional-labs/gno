@@ -49,7 +49,7 @@ func (err *ErrEvidenceOverflow) Error() string {
 
 //-------------------------------------------
 
-// Evidence represents any provable malicious activity by a validator
+// Evidence represents any provable malicious activity by a validator.
 type Evidence interface {
 	Bytes() []byte                                     // bytes which compromise the evidence
 	Hash() []byte                                      // hash of the evidence
@@ -178,7 +178,7 @@ func (dve *DuplicateVoteEvidence) ValidateBasic() error {
 
 //-----------------------------------------------------------------
 
-// UNSTABLE
+// UNSTABLE.
 type MockRandomGoodEvidence struct {
 	MockGoodEvidence
 	randBytes []byte
@@ -186,7 +186,7 @@ type MockRandomGoodEvidence struct {
 
 var _ Evidence = &MockRandomGoodEvidence{}
 
-// UNSTABLE
+// UNSTABLE.
 func NewMockRandomGoodEvidence(height int64, address crypto.Address, randBytes []byte) MockRandomGoodEvidence {
 	return MockRandomGoodEvidence{
 		MockGoodEvidence{height, address}, randBytes,
@@ -199,7 +199,7 @@ func (e MockRandomGoodEvidence) Hash() []byte {
 	return []byte(fmt.Sprintf("%d-%x", e.Height, e.randBytes))
 }
 
-// UNSTABLE
+// UNSTABLE.
 type MockGoodEvidence struct {
 	Height  int64
 	Address crypto.Address
@@ -207,7 +207,7 @@ type MockGoodEvidence struct {
 
 var _ Evidence = &MockGoodEvidence{}
 
-// UNSTABLE
+// UNSTABLE.
 func NewMockGoodEvidence(height int64, idx int, address crypto.Address) MockGoodEvidence {
 	return MockGoodEvidence{height, address}
 }
@@ -230,7 +230,7 @@ func (e MockGoodEvidence) String() string {
 	return fmt.Sprintf("GoodEvidence: %d/%s", e.Height, e.Address)
 }
 
-// UNSTABLE
+// UNSTABLE.
 type MockBadEvidence struct {
 	MockGoodEvidence
 }

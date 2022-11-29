@@ -9,9 +9,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/stretchr/testify/require"
-
 	"github.com/gnolang/gno/pkgs/random"
+	"github.com/stretchr/testify/require"
 )
 
 func TestWriteFileAtomic(t *testing.T) {

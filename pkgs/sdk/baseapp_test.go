@@ -8,9 +8,6 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
-
 	"github.com/gnolang/gno/pkgs/amino"
 	abci "github.com/gnolang/gno/pkgs/bft/abci/types"
 	bft "github.com/gnolang/gno/pkgs/bft/types"
@@ -21,6 +18,8 @@ import (
 	"github.com/gnolang/gno/pkgs/store/dbadapter"
 	"github.com/gnolang/gno/pkgs/store/iavl"
 	store "github.com/gnolang/gno/pkgs/store/types"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 var (
@@ -41,7 +40,7 @@ const (
 
 // txInt: used as counter in incrementing counter tests,
 // or as how much gas will be consumed in antehandler
-// (depending on anteHandler used in tests)
+// (depending on anteHandler used in tests).
 func newTxCounter(txInt int64, msgInts ...int64) std.Tx {
 	var msgs []std.Msg
 	for _, msgInt := range msgInts {
@@ -65,7 +64,7 @@ func newBaseApp(name string, db dbm.DB, options ...func(*BaseApp)) *BaseApp {
 	return app
 }
 
-// simple one store baseapp
+// simple one store baseapp.
 func setupBaseApp(t *testing.T, options ...func(*BaseApp)) *BaseApp {
 	db := dbm.NewMemDB()
 	app := newBaseApp(t.Name(), db, options...)
@@ -457,7 +456,7 @@ func setIntOnStore(store store.Store, key []byte, i int64) {
 }
 
 // check counter matches what's in store.
-// increment and store
+// increment and store.
 func incrementingCounter(t *testing.T, store store.Store, counterKey []byte, counter int64) (res Result) {
 	storedCounter := getIntFromStore(store, counterKey)
 	require.Equal(t, storedCounter, counter)
@@ -473,7 +472,7 @@ func incrementingCounter(t *testing.T, store store.Store, counterKey []byte, cou
 
 // Test that successive CheckTx can see each others' effects
 // on the store within a block, and that the CheckTx state
-// gets reset to the latest committed state during Commit
+// gets reset to the latest committed state during Commit.
 func TestCheckTx(t *testing.T) {
 	// This ante handler reads the key and checks that the value matches the current counter.
 	// This ensures changes to the kvstore persist across successive CheckTx.
@@ -765,7 +764,7 @@ func TestRunInvalidTransaction(t *testing.T) {
 	}
 }
 
-// Test that transactions exceeding gas limits fail
+// Test that transactions exceeding gas limits fail.
 func TestTxGasLimits(t *testing.T) {
 	gasGranted := int64(10)
 	anteOpt := func(bapp *BaseApp) {
@@ -839,7 +838,7 @@ func TestTxGasLimits(t *testing.T) {
 	}
 }
 
-// Test that transactions exceeding gas limits fail
+// Test that transactions exceeding gas limits fail.
 func TestMaxBlockGasLimits(t *testing.T) {
 	gasGranted := int64(10)
 	anteOpt := func(bapp *BaseApp) {

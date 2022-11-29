@@ -5,12 +5,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
-
 	auto "github.com/gnolang/gno/pkgs/autofile"
 	walm "github.com/gnolang/gno/pkgs/bft/wal"
 	"github.com/gnolang/gno/pkgs/log"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 const (

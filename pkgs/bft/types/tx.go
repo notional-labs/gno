@@ -40,7 +40,7 @@ func (txs Txs) Hash() []byte {
 	return merkle.SimpleHashFromByteSlices(txBzs)
 }
 
-// Index returns the index of this transaction in the list, or -1 if not found
+// Index returns the index of this transaction in the list, or -1 if not found.
 func (txs Txs) Index(tx Tx) int {
 	for i := range txs {
 		if bytes.Equal(txs[i], tx) {
@@ -50,7 +50,7 @@ func (txs Txs) Index(tx Tx) int {
 	return -1
 }
 
-// IndexByHash returns the index of this transaction hash in the list, or -1 if not found
+// IndexByHash returns the index of this transaction hash in the list, or -1 if not found.
 func (txs Txs) IndexByHash(hash []byte) int {
 	for i := range txs {
 		if bytes.Equal(txs[i].Hash(), hash) {

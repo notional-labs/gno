@@ -7,13 +7,13 @@ import (
 	"github.com/gnolang/gno/pkgs/sdk/auth"
 )
 
-// RegisterInvariants registers the bank module invariants
+// RegisterInvariants registers the bank module invariants.
 func RegisterInvariants(ir sdk.InvariantRegistry, acck auth.AccountKeeper) {
 	ir.RegisterRoute(ModuleName, "nonnegative-outstanding",
 		NonnegativeBalanceInvariant(acck))
 }
 
-// NonnegativeBalanceInvariant checks that all accounts in the application have non-negative balances
+// NonnegativeBalanceInvariant checks that all accounts in the application have non-negative balances.
 func NonnegativeBalanceInvariant(acck auth.AccountKeeper) sdk.Invariant {
 	return func(ctx sdk.Context) (string, bool) {
 		var msg string

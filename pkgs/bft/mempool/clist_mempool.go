@@ -105,7 +105,7 @@ func NewCListMempool(
 	return mempool
 }
 
-// NOTE: not thread safe - should only be called once, on startup
+// NOTE: not thread safe - should only be called once, on startup.
 func (mem *CListMempool) EnableTxsAvailable() {
 	mem.txsAvailable = make(chan struct{}, 1)
 }
@@ -122,7 +122,7 @@ func WithPreCheck(f PreCheckFunc) CListMempoolOption {
 }
 
 // *panics* if can't create directory or open file.
-// *not thread safe*
+// *not thread safe*.
 func (mem *CListMempool) InitWAL() {
 	walDir := mem.config.WalDir()
 	err := osm.EnsureDir(walDir, 0o700)
@@ -196,7 +196,7 @@ func (mem *CListMempool) TxsFront() *clist.CElement {
 
 // TxsWaitChan returns a channel to wait on transactions. It will be closed
 // once the mempool is not empty (ie. the internal `mem.txs` has at least one
-// element)
+// element).
 func (mem *CListMempool) TxsWaitChan() <-chan struct{} {
 	return mem.txs.WaitChan()
 }
@@ -255,7 +255,6 @@ func (mem *CListMempool) CheckTxWithInfo(tx types.Tx, cb func(abci.Response), tx
 			// TODO: consider punishing peer for dups,
 			// its non-trivial since invalid txs can become valid,
 			// but they can spam the same tx with little cost to them atm.
-
 		}
 
 		return ErrTxInCache
@@ -601,7 +600,7 @@ func (mem *CListMempool) recheckTxs() {
 
 //--------------------------------------------------------------------------------
 
-// mempoolTx is a transaction that successfully ran
+// mempoolTx is a transaction that successfully ran.
 type mempoolTx struct {
 	height    int64    // height that this tx had been validated in
 	gasWanted int64    // amount of gas this tx states it will require
@@ -612,7 +611,7 @@ type mempoolTx struct {
 	senders sync.Map
 }
 
-// Height returns the height for this transaction
+// Height returns the height for this transaction.
 func (memTx *mempoolTx) Height() int64 {
 	return atomic.LoadInt64(&memTx.height)
 }

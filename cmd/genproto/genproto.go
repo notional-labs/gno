@@ -3,7 +3,6 @@ package main
 import (
 	"github.com/gnolang/gno/pkgs/amino"
 	"github.com/gnolang/gno/pkgs/amino/genproto"
-
 	// TODO: move these out.
 	abci "github.com/gnolang/gno/pkgs/bft/abci/types"
 	"github.com/gnolang/gno/pkgs/bft/blockchain"

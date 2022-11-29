@@ -75,7 +75,7 @@ func makeValidCommit(height int64, blockID types.BlockID, vals *types.ValidatorS
 	return types.NewCommit(blockID, sigs), nil
 }
 
-// make some bogus txs
+// make some bogus txs.
 func makeTxs(height int64) (txs []types.Tx) {
 	for i := 0; i < nTxsPerBlock; i++ {
 		txs = append(txs, types.Tx([]byte{byte(height), byte(i)}))

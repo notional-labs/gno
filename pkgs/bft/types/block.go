@@ -124,7 +124,7 @@ func (b *Block) ValidateBasic() error {
 	return nil
 }
 
-// fillHeader fills in any remaining header fields that are a function of the block data
+// fillHeader fills in any remaining header fields that are a function of the block data.
 func (b *Block) fillHeader() {
 	if b.LastCommitHash == nil {
 		b.LastCommitHash = b.LastCommit.Hash()
@@ -190,12 +190,12 @@ func (b *Block) Size() int {
 	return len(bz)
 }
 
-// String returns a string representation of the block
+// String returns a string representation of the block.
 func (b *Block) String() string {
 	return b.StringIndented("")
 }
 
-// StringIndented returns a string representation of the block
+// StringIndented returns a string representation of the block.
 func (b *Block) StringIndented(indent string) string {
 	if b == nil {
 		return "nil-Block"
@@ -211,7 +211,7 @@ func (b *Block) StringIndented(indent string) string {
 		indent, b.Hash())
 }
 
-// StringShort returns a shortened string representation of the block
+// StringShort returns a shortened string representation of the block.
 func (b *Block) StringShort() string {
 	if b == nil {
 		return "nil-Block"
@@ -225,7 +225,7 @@ func (b *Block) StringShort() string {
 // NOTE: changes to the Header should be duplicated in:
 // - header.Hash()
 // - abci.Header
-// - /docs/spec/blockchain/blockchain.md
+// - /docs/spec/blockchain/blockchain.md.
 type Header struct {
 	// basic block info
 	Version    string    `json:"version"`
@@ -254,7 +254,7 @@ type Header struct {
 	ProposerAddress Address `json:"proposer_address"` // original proposer of the block
 }
 
-// Implements abci.Header
+// Implements abci.Header.
 func (h *Header) AssertABCIHeader()  {}
 func (h *Header) GetChainID() string { return h.ChainID }
 func (h *Header) GetHeight() int64   { return h.Height }
@@ -336,7 +336,7 @@ func (h *Header) Hash() []byte {
 	})
 }
 
-// StringIndented returns a string representation of the header
+// StringIndented returns a string representation of the header.
 func (h *Header) StringIndented(indent string) string {
 	if h == nil {
 		return "nil-Header"
@@ -387,7 +387,7 @@ func (h *Header) StringIndented(indent string) string {
 // See https://github.com/tendermint/classic/issues/1648.
 type CommitSig Vote
 
-// String returns the underlying Vote.String()
+// String returns the underlying Vote.String().
 func (cs *CommitSig) String() string {
 	return cs.toVote().String()
 }
@@ -504,24 +504,24 @@ func (commit *Commit) memoizeHeightRound() {
 	}
 }
 
-// Height returns the height of the commit
+// Height returns the height of the commit.
 func (commit *Commit) Height() int64 {
 	commit.memoizeHeightRound()
 	return commit.height
 }
 
-// Round returns the round of the commit
+// Round returns the round of the commit.
 func (commit *Commit) Round() int {
 	commit.memoizeHeightRound()
 	return commit.round
 }
 
-// Type returns the vote type of the commit, which is always VoteTypePrecommit
+// Type returns the vote type of the commit, which is always VoteTypePrecommit.
 func (commit *Commit) Type() byte {
 	return byte(PrecommitType)
 }
 
-// Size returns the number of votes in the commit
+// Size returns the number of votes in the commit.
 func (commit *Commit) Size() int {
 	if commit == nil {
 		return 0
@@ -529,7 +529,7 @@ func (commit *Commit) Size() int {
 	return len(commit.Precommits)
 }
 
-// BitArray returns a BitArray of which validators voted in this commit
+// BitArray returns a BitArray of which validators voted in this commit.
 func (commit *Commit) BitArray() *bitarray.BitArray {
 	if commit.bitArray == nil {
 		commit.bitArray = bitarray.NewBitArray(len(commit.Precommits))
@@ -590,7 +590,7 @@ func (commit *Commit) ValidateBasic() error {
 	return nil
 }
 
-// Hash returns the hash of the commit
+// Hash returns the hash of the commit.
 func (commit *Commit) Hash() []byte {
 	if commit == nil {
 		return nil
@@ -605,7 +605,7 @@ func (commit *Commit) Hash() []byte {
 	return commit.hash
 }
 
-// StringIndented returns a string representation of the commit
+// StringIndented returns a string representation of the commit.
 func (commit *Commit) StringIndented(indent string) string {
 	if commit == nil {
 		return "nil-Commit"
@@ -691,7 +691,7 @@ func (sh SignedHeader) StringIndented(indent string) string {
 
 //-----------------------------------------------------------------------------
 
-// Data contains the set of transactions included in the block
+// Data contains the set of transactions included in the block.
 type Data struct {
 	// Txs that will be applied by state @ block.Height+1.
 	// NOTE: not all txs here are valid.  We're just agreeing on the order first.
@@ -702,7 +702,7 @@ type Data struct {
 	hash []byte
 }
 
-// Hash returns the hash of the data
+// Hash returns the hash of the data.
 func (data *Data) Hash() []byte {
 	if data == nil {
 		return (Txs{}).Hash()
@@ -713,7 +713,7 @@ func (data *Data) Hash() []byte {
 	return data.hash
 }
 
-// StringIndented returns a string representation of the transactions
+// StringIndented returns a string representation of the transactions.
 func (data *Data) StringIndented(indent string) string {
 	if data == nil {
 		return "nil-Data"
@@ -735,19 +735,19 @@ func (data *Data) StringIndented(indent string) string {
 
 //--------------------------------------------------------------------------------
 
-// BlockID defines the unique ID of a block as its Hash and its PartSetHeader
+// BlockID defines the unique ID of a block as its Hash and its PartSetHeader.
 type BlockID struct {
 	Hash        []byte        `json:"hash"`
 	PartsHeader PartSetHeader `json:"parts"`
 }
 
-// Equals returns true if the BlockID matches the given BlockID
+// Equals returns true if the BlockID matches the given BlockID.
 func (blockID BlockID) Equals(other BlockID) bool {
 	return bytes.Equal(blockID.Hash, other.Hash) &&
 		blockID.PartsHeader.Equals(other.PartsHeader)
 }
 
-// Key returns a machine-readable string representation of the BlockID
+// Key returns a machine-readable string representation of the BlockID.
 func (blockID BlockID) Key() string {
 	bz, err := amino.Marshal(blockID.PartsHeader)
 	if err != nil {
@@ -781,7 +781,7 @@ func (blockID BlockID) IsComplete() bool {
 		len(blockID.PartsHeader.Hash) == tmhash.Size
 }
 
-// String returns a human readable string representation of the BlockID
+// String returns a human readable string representation of the BlockID.
 func (blockID BlockID) String() string {
 	return fmt.Sprintf(`%X:%v`, blockID.Hash, blockID.PartsHeader)
 }

@@ -7,8 +7,6 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/stretchr/testify/require"
-
 	"github.com/gnolang/gno/pkgs/amino"
 	abci "github.com/gnolang/gno/pkgs/bft/abci/types"
 	bft "github.com/gnolang/gno/pkgs/bft/types"
@@ -20,9 +18,10 @@ import (
 	tu "github.com/gnolang/gno/pkgs/sdk/testutils"
 	"github.com/gnolang/gno/pkgs/std"
 	"github.com/gnolang/gno/pkgs/store"
+	"github.com/stretchr/testify/require"
 )
 
-// run the tx through the anteHandler and ensure its valid
+// run the tx through the anteHandler and ensure its valid.
 func checkValidTx(t *testing.T, anteHandler sdk.AnteHandler, ctx sdk.Context, tx std.Tx, simulate bool) {
 	_, result, abort := anteHandler(ctx, tx, simulate)
 	require.Equal(t, "", result.Log)
@@ -31,7 +30,7 @@ func checkValidTx(t *testing.T, anteHandler sdk.AnteHandler, ctx sdk.Context, tx
 	require.True(t, result.IsOK())
 }
 
-// run the tx through the anteHandler and ensure it fails with the given code
+// run the tx through the anteHandler and ensure it fails with the given code.
 func checkInvalidTx(t *testing.T, anteHandler sdk.AnteHandler, ctx sdk.Context, tx std.Tx, simulate bool, err abci.Error) {
 	newCtx, result, abort := anteHandler(ctx, tx, simulate)
 	require.True(t, abort)
@@ -769,7 +768,7 @@ func TestEnsureSufficientMempoolFees(t *testing.T) {
 	}
 }
 
-// Test custom SignatureVerificationGasConsumer
+// Test custom SignatureVerificationGasConsumer.
 func TestCustomSignatureVerificationGasConsumer(t *testing.T) {
 	// setup
 	env := setupTestEnv()

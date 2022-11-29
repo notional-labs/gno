@@ -30,7 +30,7 @@ func NewCompactBitArray(bits int) *CompactBitArray {
 	}
 }
 
-// Size returns the number of bits in the bitarray
+// Size returns the number of bits in the bitarray.
 func (bA *CompactBitArray) Size() int {
 	if bA == nil {
 		return 0
@@ -43,7 +43,7 @@ func (bA *CompactBitArray) Size() int {
 }
 
 // GetIndex returns the bit at index i within the bit array.
-// The behavior is undefined if i >= bA.Size()
+// The behavior is undefined if i >= bA.Size().
 func (bA *CompactBitArray) GetIndex(i int) bool {
 	if bA == nil {
 		return false
@@ -55,7 +55,7 @@ func (bA *CompactBitArray) GetIndex(i int) bool {
 }
 
 // SetIndex sets the bit at index i within the bit array.
-// The behavior is undefined if i >= bA.Size()
+// The behavior is undefined if i >= bA.Size().
 func (bA *CompactBitArray) SetIndex(i int, v bool) bool {
 	if bA == nil {
 		return false

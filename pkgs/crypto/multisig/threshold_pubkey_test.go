@@ -4,16 +4,15 @@ import (
 	"math/rand"
 	"testing"
 
-	"github.com/stretchr/testify/require"
-
 	"github.com/gnolang/gno/pkgs/amino"
 	"github.com/gnolang/gno/pkgs/crypto"
 	"github.com/gnolang/gno/pkgs/crypto/ed25519"
 	"github.com/gnolang/gno/pkgs/crypto/secp256k1"
+	"github.com/stretchr/testify/require"
 )
 
 // This tests multisig functionality, but it expects the first k signatures to be valid
-// TODO: Adapt it to give more flexibility about first k signatures being valid
+// TODO: Adapt it to give more flexibility about first k signatures being valid.
 func TestThresholdMultisigValidCases(t *testing.T) {
 	pkSet1, sigSet1 := generatePubKeysAndSignatures(5, []byte{1, 2, 3, 4})
 	cases := []struct {
@@ -103,7 +102,7 @@ func TestThresholdMultisigValidCases(t *testing.T) {
 	}
 }
 
-// TODO: Fully replace this test with table driven tests
+// TODO: Fully replace this test with table driven tests.
 func TestThresholdMultisigDuplicateSignatures(t *testing.T) {
 	msg := []byte{1, 2, 3, 4, 5}
 	pubkeys, sigs := generatePubKeysAndSignatures(5, msg)
@@ -116,7 +115,7 @@ func TestThresholdMultisigDuplicateSignatures(t *testing.T) {
 	require.False(t, multisigKey.VerifyBytes(msg, amino.MustMarshal(multisignature)))
 }
 
-// TODO: Fully replace this test with table driven tests
+// TODO: Fully replace this test with table driven tests.
 func TestMultiSigPubKeyEquality(t *testing.T) {
 	msg := []byte{1, 2, 3, 4}
 	pubkeys, _ := generatePubKeysAndSignatures(5, msg)

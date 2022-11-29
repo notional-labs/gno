@@ -7,10 +7,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stretchr/testify/assert"
-
 	amino "github.com/gnolang/gno/pkgs/amino"
 	"github.com/gnolang/gno/pkgs/amino/tests"
+	"github.com/stretchr/testify/assert"
 )
 
 type SimpleStruct struct {

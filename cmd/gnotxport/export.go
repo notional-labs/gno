@@ -11,12 +11,11 @@ import (
 	"github.com/gnolang/gno/pkgs/amino"
 	"github.com/gnolang/gno/pkgs/bft/rpc/client"
 	"github.com/gnolang/gno/pkgs/command"
-	"github.com/gnolang/gno/pkgs/std"
-
 	// XXX better way?
 	_ "github.com/gnolang/gno/pkgs/sdk/auth"
 	_ "github.com/gnolang/gno/pkgs/sdk/bank"
 	_ "github.com/gnolang/gno/pkgs/sdk/vm"
+	"github.com/gnolang/gno/pkgs/std"
 )
 
 type txExportOptions struct {
@@ -95,7 +94,7 @@ func txExportApp(cmd *command.Command, args []string, iopts interface{}) error {
 		}
 		for i := 0; i < len(txs); i++ {
 			// need to include error'd txs, to keep sequence alignment.
-			//if bres.Results.DeliverTxs[i].Error != nil {
+			// if bres.Results.DeliverTxs[i].Error != nil {
 			//	continue
 			//}
 			tx := txs[i]

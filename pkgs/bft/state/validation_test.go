@@ -4,8 +4,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stretchr/testify/require"
-
 	"github.com/gnolang/gno/pkgs/bft/mempool/mock"
 	sm "github.com/gnolang/gno/pkgs/bft/state"
 	"github.com/gnolang/gno/pkgs/bft/types"
@@ -14,6 +12,7 @@ import (
 	"github.com/gnolang/gno/pkgs/crypto/ed25519"
 	"github.com/gnolang/gno/pkgs/crypto/tmhash"
 	"github.com/gnolang/gno/pkgs/log"
+	"github.com/stretchr/testify/require"
 )
 
 const validationTestsStopHeight int64 = 10

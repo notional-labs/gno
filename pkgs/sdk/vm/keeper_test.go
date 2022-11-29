@@ -5,10 +5,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/jaekwon/testify/assert"
-
 	"github.com/gnolang/gno/pkgs/crypto"
 	"github.com/gnolang/gno/pkgs/std"
+	"github.com/jaekwon/testify/assert"
 )
 
 // Sending total send amount succeeds.
@@ -56,7 +55,7 @@ func Echo(msg string) string {
 	// t.Log("result:", res)
 }
 
-// Sending too much fails
+// Sending too much fails.
 func TestVMKeeperOrigSend2(t *testing.T) {
 	env := setupTestEnv()
 	ctx := env.ctx

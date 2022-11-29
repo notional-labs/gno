@@ -2,14 +2,11 @@ package types
 
 import (
 	// it is ok to use math/rand here: we do not need a cryptographically secure random
-	// number generator here and we can run the tests a bit faster
+	// number generator here and we can run the tests a bit faster.
 	"crypto/rand"
 	"math"
 	"testing"
 	"time"
-
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 
 	"github.com/gnolang/gno/pkgs/amino"
 	tmtime "github.com/gnolang/gno/pkgs/bft/types/time"
@@ -18,6 +15,8 @@ import (
 	"github.com/gnolang/gno/pkgs/crypto"
 	"github.com/gnolang/gno/pkgs/crypto/tmhash"
 	"github.com/gnolang/gno/pkgs/random"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestBlockValidateBasic(t *testing.T) {
@@ -116,8 +115,8 @@ func TestBlockString(t *testing.T) {
 func makeBlockIDRandom() BlockID {
 	blockHash := make([]byte, tmhash.Size)
 	partSetHash := make([]byte, tmhash.Size)
-	rand.Read(blockHash)   //nolint: gosec
-	rand.Read(partSetHash) //nolint: gosec
+	rand.Read(blockHash)   
+	rand.Read(partSetHash) 
 	blockPartsHeader := PartSetHeader{123, partSetHash}
 	return BlockID{blockHash, blockPartsHeader}
 }

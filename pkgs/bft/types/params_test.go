@@ -5,9 +5,8 @@ import (
 	"sort"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
-
 	abci "github.com/gnolang/gno/pkgs/bft/abci/types"
+	"github.com/stretchr/testify/assert"
 )
 
 var (

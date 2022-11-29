@@ -128,12 +128,12 @@ func EncodeBool(w io.Writer, b bool) (err error) {
 	return
 }
 
-// NOTE: UNSAFE
+// NOTE: UNSAFE.
 func EncodeFloat32(w io.Writer, f float32) (err error) {
 	return EncodeUint32(w, math.Float32bits(f))
 }
 
-// NOTE: UNSAFE
+// NOTE: UNSAFE.
 func EncodeFloat64(w io.Writer, f float64) (err error) {
 	return EncodeUint64(w, math.Float64bits(f))
 }
@@ -143,11 +143,11 @@ func EncodeFloat64(w io.Writer, f float64) (err error) {
 
 const (
 	// See https://github.com/protocolbuffers/protobuf/blob/d2980062c859649523d5fd51d6b55ab310e47482/src/google/protobuf/timestamp.proto#L123-L135
-	// seconds of 01-01-0001
+	// seconds of 01-01-0001.
 	minTimeSeconds int64 = -62135596800
-	// seconds of 10000-01-01
+	// seconds of 10000-01-01.
 	maxTimeSeconds int64 = 253402300800 // exclusive
-	// nanos have to be in interval: [0, 999999999]
+	// nanos have to be in interval: [0, 999999999].
 	maxTimeNanos = 999999999 // inclusive
 
 	// See https://github.com/protocolbuffers/protobuf/blob/d2980062c859649523d5fd51d6b55ab310e47482/src/google/protobuf/duration.proto#L105-L116
@@ -187,7 +187,7 @@ type Timestamp struct {
     // inclusive.
     Nanos int32 `protobuf:"varint,2,opt,name=nanos,proto3" json:"nanos,omitempty"`
     // contains filtered or unexported fields
-}
+}.
 */
 func EncodeTimeValue(w io.Writer, s int64, ns int32) (err error) {
 	// Validations
@@ -256,7 +256,7 @@ type Duration struct {
     // to +999,999,999 inclusive.
     Nanos int32 `protobuf:"varint,2,opt,name=nanos,proto3" json:"nanos,omitempty"`
     // contains filtered or unexported fields
-}
+}.
 */
 func EncodeDurationValue(w io.Writer, s int64, ns int32) (err error) {
 	// Validations

@@ -15,7 +15,7 @@ type KVPair struct {
 
 type KVPairs []KVPair
 
-// Sorting
+// Sorting.
 func (kvs KVPairs) Len() int { return len(kvs) }
 
 func (kvs KVPairs) Less(i, j int) bool {
@@ -43,7 +43,7 @@ type KI64Pair struct {
 
 type KI64Pairs []KI64Pair
 
-// Sorting
+// Sorting.
 func (kvs KI64Pairs) Len() int { return len(kvs) }
 
 func (kvs KI64Pairs) Less(i, j int) bool {

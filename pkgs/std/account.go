@@ -46,7 +46,7 @@ type BaseAccount struct {
 	Sequence      uint64         `json:"sequence" yaml:"sequence"`
 }
 
-// NewBaseAccount creates a new BaseAccount object
+// NewBaseAccount creates a new BaseAccount object.
 func NewBaseAccount(address crypto.Address, coins Coins,
 	pubKey crypto.PubKey, accountNumber uint64, sequence uint64,
 ) *BaseAccount {
@@ -59,7 +59,7 @@ func NewBaseAccount(address crypto.Address, coins Coins,
 	}
 }
 
-// String implements fmt.Stringer
+// String implements fmt.Stringer.
 func (acc BaseAccount) String() string {
 	var pubkey string
 
@@ -77,12 +77,12 @@ func (acc BaseAccount) String() string {
 	)
 }
 
-// ProtoBaseAccount - a prototype function for BaseAccount
+// ProtoBaseAccount - a prototype function for BaseAccount.
 func ProtoBaseAccount() Account {
 	return &BaseAccount{}
 }
 
-// NewBaseAccountWithAddress - returns a new base account with a given address
+// NewBaseAccountWithAddress - returns a new base account with a given address.
 func NewBaseAccountWithAddress(addr crypto.Address) BaseAccount {
 	return BaseAccount{
 		Address: addr,
@@ -125,12 +125,12 @@ func (acc *BaseAccount) SetCoins(coins Coins) error {
 	return nil
 }
 
-// GetAccountNumber - Implements Account
+// GetAccountNumber - Implements Account.
 func (acc *BaseAccount) GetAccountNumber() uint64 {
 	return acc.AccountNumber
 }
 
-// SetAccountNumber - Implements Account
+// SetAccountNumber - Implements Account.
 func (acc *BaseAccount) SetAccountNumber(accNumber uint64) error {
 	acc.AccountNumber = accNumber
 	return nil

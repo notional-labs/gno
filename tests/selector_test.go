@@ -12,7 +12,7 @@ different types of selectors.  As can be seen, even a simple selector
 expression can represent a number of different types of selectors.
 */
 
-// S1 struct
+// S1 struct.
 type S1 struct {
 	F0 int
 }
@@ -23,10 +23,10 @@ func (S1) Hello() {
 func (*S1) Bye() {
 }
 
-// Pointer to S1
+// Pointer to S1.
 type S1P *S1
 
-// Like S1 but pointer struct
+// Like S1 but pointer struct.
 type PS1 *struct {
 	F0 int
 }

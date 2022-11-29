@@ -69,7 +69,6 @@ func (cdc *Codec) encodeReflectJSON(w io.Writer, info *TypeInfo, rv reflect.Valu
 	}
 
 	switch info.Type.Kind() {
-
 	//----------------------------------------
 	// Complex
 
@@ -223,7 +222,6 @@ func (cdc *Codec) encodeReflectJSONList(w io.Writer, info *TypeInfo, rv reflect.
 	length := rv.Len()
 
 	switch ert.Kind() {
-
 	case reflect.Uint8: // Special case: byte array
 		// Write bytes in base64.
 		// NOTE: Base64 encoding preserves the exact original number of bytes.

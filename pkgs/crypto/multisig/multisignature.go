@@ -23,7 +23,7 @@ func NewMultisig(n int) *Multisignature {
 	return &Multisignature{bitarray.NewCompactBitArray(n), make([][]byte, 0, 2)}
 }
 
-// GetIndex returns the index of pk in keys. Returns -1 if not found
+// GetIndex returns the index of pk in keys. Returns -1 if not found.
 func getIndex(pk crypto.PubKey, keys []crypto.PubKey) int {
 	for i := 0; i < len(keys); i++ {
 		if pk.Equals(keys[i]) {
@@ -72,7 +72,7 @@ func (mSig *Multisignature) AddSignatureFromPubKey(sig []byte, pubkey crypto.Pub
 	return nil
 }
 
-// Marshal the multisignature with amino
+// Marshal the multisignature with amino.
 func (mSig *Multisignature) Marshal() []byte {
 	return amino.MustMarshal(mSig)
 }

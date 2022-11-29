@@ -8,7 +8,7 @@ import (
 	"github.com/gnolang/gno/pkgs/amino/libs/press"
 )
 
-// shortcut
+// shortcut.
 var _fmt = fmt.Sprintf
 
 func PrintIntEncoder(p *press.Press, ref string) {

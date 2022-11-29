@@ -5,12 +5,11 @@ import (
 	"io"
 	"os"
 
-	"golang.org/x/term"
-
 	"github.com/gnolang/gno/pkgs/command"
 	"github.com/gnolang/gno/pkgs/errors"
 	gno "github.com/gnolang/gno/pkgs/gnolang"
 	"github.com/gnolang/gno/tests"
+	"golang.org/x/term"
 )
 
 type replOptions struct {
@@ -70,7 +69,7 @@ func runRepl(rootDir string, verbose bool) error {
 	for i := 1; ; i++ {
 		// parse line and execute
 		t.SetPrompt(fmt.Sprintf("gno:%d> ", i))
-		oldState, err := term.MakeRaw(0)
+		oldState, _ := term.MakeRaw(0)
 		input, err := t.ReadLine()
 		if err != nil {
 			term.Restore(0, oldState)

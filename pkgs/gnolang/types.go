@@ -101,7 +101,7 @@ const (
 	BigintType
 	UntypedBigdecType
 	BigdecType
-	// UintptrType
+	// UintptrType.
 )
 
 // Used for converting constant binary expressions.
@@ -110,7 +110,7 @@ const (
 // of different kinds, the result is of the operand's kind that appears later
 // in this list: integer, rune, floating-point, complex. For example, an
 // untyped integer constant divided by an untyped complex constant yields an
-// untyped complex constant."
+// untyped complex constant.".
 func (pt PrimitiveType) Specificity() int {
 	switch pt {
 	case InvalidType:
@@ -1112,7 +1112,7 @@ func (ft *FuncType) BoundType() *FuncType {
 	return ft.bound
 }
 
-// unbound function type
+// unbound function type.
 func (ft *FuncType) UnboundType(rft FieldType) *FuncType {
 	return &FuncType{
 		Params:  append([]FieldType{rft}, ft.Params...),
@@ -1969,7 +1969,7 @@ const (
 	Float64Kind
 	BigintKind // not in go.
 	BigdecKind // not in go.
-	// UintptrKind
+	// UintptrKind.
 	ArrayKind
 	SliceKind
 	PointerKind
@@ -1980,7 +1980,7 @@ const (
 	FuncKind
 	MapKind
 	TypeKind // not in go.
-	// UnsafePointerKind
+	// UnsafePointerKind.
 	BlockKind   // not in go.
 	TupleKind   // not in go.
 	RefTypeKind // not in go.

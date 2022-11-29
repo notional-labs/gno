@@ -13,7 +13,7 @@ import (
 	"golang.org/x/crypto/pbkdf2"
 )
 
-// Some bitwise operands for working with big.Ints
+// Some bitwise operands for working with big.Ints.
 var (
 	Last11BitsMask          = big.NewInt(2047)
 	RightShift11BitsDivider = big.NewInt(2048)
@@ -173,7 +173,7 @@ func NewSeed(mnemonic string, password string) []byte {
 }
 
 // Appends to data the first (len(data) / 32)bits of the result of sha256(data)
-// Currently only supports data up to 32 bytes
+// Currently only supports data up to 32 bytes.
 func addChecksum(data []byte) []byte {
 	// Get first byte of sha256
 	hash := sha256.Sum256(data)

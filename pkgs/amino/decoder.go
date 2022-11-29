@@ -182,7 +182,7 @@ func DecodeBool(bz []byte) (b bool, n int, err error) {
 	return
 }
 
-// NOTE: UNSAFE
+// NOTE: UNSAFE.
 func DecodeFloat32(bz []byte) (f float32, n int, err error) {
 	const size int = 4
 	if len(bz) < size {
@@ -195,7 +195,7 @@ func DecodeFloat32(bz []byte) (f float32, n int, err error) {
 	return
 }
 
-// NOTE: UNSAFE
+// NOTE: UNSAFE.
 func DecodeFloat64(bz []byte) (f float64, n int, err error) {
 	const size int = 8
 	if len(bz) < size {

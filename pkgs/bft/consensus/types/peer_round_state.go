@@ -30,12 +30,12 @@ type PeerRoundState struct {
 	CatchupCommit            *bitarray.BitArray  `json:"catchup_commit"`              // All commit precommits peer has for this height & CatchupCommitRound
 }
 
-// String returns a string representation of the PeerRoundState
+// String returns a string representation of the PeerRoundState.
 func (prs PeerRoundState) String() string {
 	return prs.StringIndented("")
 }
 
-// StringIndented returns a string representation of the PeerRoundState
+// StringIndented returns a string representation of the PeerRoundState.
 func (prs PeerRoundState) StringIndented(indent string) string {
 	return fmt.Sprintf(`PeerRoundState{
 %s  %v/%v/%v @%v

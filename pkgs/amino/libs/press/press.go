@@ -121,12 +121,12 @@ func (p *Press) Lines() (lines []line) {
 	return p.lines
 }
 
-// Convenience
+// Convenience.
 func (p *Press) RandID(prefix string) string {
 	return prefix + "_" + p.RandStr(8)
 }
 
-// Convenience
+// Convenience.
 func (p *Press) RandStr(length int) string {
 	const strChars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" // 62 characters
 	chars := []byte{}
@@ -168,7 +168,7 @@ type EncoderPressFunc func(p *Press, ref string) (code string)
 
 //----------------------------------------
 
-// If the final line is a line with no value, remove it
+// If the final line is a line with no value, remove it.
 func withoutFinalNewline(lines []line) []line {
 	if len(lines) > 0 && lines[len(lines)-1].value == "" {
 		return lines[:len(lines)-1]

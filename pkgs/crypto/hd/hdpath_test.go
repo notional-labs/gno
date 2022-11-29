@@ -12,12 +12,12 @@ import (
 
 var defaultBIP39Passphrase = ""
 
-// return bip39 seed with empty passphrase
+// return bip39 seed with empty passphrase.
 func mnemonicToSeed(mnemonic string) []byte {
 	return bip39.NewSeed(mnemonic, defaultBIP39Passphrase)
 }
 
-// nolint: vet
+//nolint: vet
 func ExampleStringifyPathParams() {
 	path := NewParams(44, 0, 0, false, 0)
 	fmt.Println(path.String())
@@ -28,7 +28,7 @@ func ExampleStringifyPathParams() {
 	// 44'/33'/7'/1/9
 }
 
-// from cosmos-sdk/types/address.go
+// from cosmos-sdk/types/address.go.
 const (
 	testCoinType           = 118
 	testFullFundraiserPath = "44'/118'/0'/0/0"
@@ -104,7 +104,7 @@ func TestParamsFromPath(t *testing.T) {
 	}
 }
 
-// nolint: vet
+//nolint: vet
 func ExampleSomeBIP32TestVecs() {
 	seed := mnemonicToSeed("barrel original fuel morning among eternal " +
 		"filter ball stove pluck matrix mechanic")

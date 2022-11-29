@@ -17,7 +17,7 @@ a request.
 
 It contains a context.Context object inside if you want to use that, but please
 do not over-use it. We try to keep all data structured and standard additions
-here would be better just to add to the Context struct
+here would be better just to add to the Context struct.
 */
 type Context struct {
 	ctx           context.Context
@@ -35,10 +35,10 @@ type Context struct {
 	eventLogger   *EventLogger
 }
 
-// Proposed rename, not done to avoid API breakage
+// Proposed rename, not done to avoid API breakage.
 type Request = Context
 
-// Read-only accessors
+// Read-only accessors.
 func (c Context) Context() context.Context      { return c.ctx }
 func (c Context) Mode() RunTxMode               { return c.mode }
 func (c Context) MultiStore() store.MultiStore  { return c.ms }
@@ -54,7 +54,7 @@ func (c Context) IsCheckTx() bool               { return c.mode == RunTxModeChec
 func (c Context) MinGasPrices() []GasPrice      { return c.minGasPrices }
 func (c Context) EventLogger() *EventLogger     { return c.eventLogger }
 
-// clone the header before returning
+// clone the header before returning.
 func (c Context) BlockHeader() abci.Header {
 	msg := amino.DeepCopy(&c.header).(*abci.Header)
 	return *msg
@@ -64,7 +64,7 @@ func (c Context) ConsensusParams() *abci.ConsensusParams {
 	return amino.DeepCopy(c.consParams).(*abci.ConsensusParams)
 }
 
-// create a new context
+// create a new context.
 func NewContext(mode RunTxMode, ms store.MultiStore, header abci.Header, logger log.Logger) Context {
 	if header.GetChainID() == "" {
 		panic("header chain id cannot be empty")
